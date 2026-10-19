@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Lama Sans — the prototype's face. Self-hosted, one family for both
+   directions: it carries full Arabic and Latin coverage, so the shop never
+   swaps type systems mid-page the way two-font setups do.
+   ========================================================================= */
+
+@font-face {
+  font-family: "Lama Sans";
+  src: url("/fonts/LamaSans-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url("/fonts/LamaSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url("/fonts/LamaSans-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url("/fonts/LamaSans-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url("/fonts/LamaSans-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url("/fonts/LamaSans-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================================
+   Brand palette — lifted verbatim from the prototype's :root so the Next
+   storefront can be styled with the same tokens the approved design uses.
+   ========================================================================= */
+
+:root {
+  --blue: #20438e;
+  --teal: #007d77;
+  --blue-ink: #0c1936;
+  --blue-deep: #162f63;
+  --blue-70: rgba(32, 67, 142, 0.7);
+  --blue-15: #dee3ee;
+  --blue-08: #edf0f6;
+  --teal-deep: #005853;
+  --teal-ink: #002f2d;
+  --teal-15: #d9ecea;
+  --teal-08: #ebf6f5;
+  --paper: #ffffff;
+  --ink: #0c1936;
+  --muted: #5a6480;
+  --line: #e3e7f0;
+  --err: #c0392b;
+}
+
+@theme inline {
+  --color-blue: var(--blue);
+  --color-teal: var(--teal);
+  --color-blue-ink: var(--blue-ink);
+  --color-blue-deep: var(--blue-deep);
+  --color-blue-70: var(--blue-70);
+  --color-blue-15: var(--blue-15);
+  --color-blue-08: var(--blue-08);
+  --color-teal-deep: var(--teal-deep);
+  --color-teal-ink: var(--teal-ink);
+  --color-teal-15: var(--teal-15);
+  --color-teal-08: var(--teal-08);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-err: var(--err);
+  --font-sans: "Lama Sans", "Segoe UI", system-ui, sans-serif;
+  /* The cloned admin kit accents with `gold`; here the accent is the brand teal. */
+  --color-gold: var(--teal);
+  --color-gold-dark: var(--teal-deep);
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Arabic needs a little more line room than Latin metrics assume. */
+[dir="rtl"] {
+  letter-spacing: 0;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
+  text-wrap: balance;
+}
+
+/* Scrollbar for the dark admin sidebar. */
+.scrollbar-dark::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-dark::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}

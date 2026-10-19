@@ -1,0 +1,81 @@
+{
+  "site": {
+    "name": "Dr. Mohsen Mamdouh",
+    "tagline": "Details make the difference in anaesthesia"
+  },
+  "nav": {
+    "about": "About",
+    "procedures": "Procedures",
+    "team": "The anaesthesia team",
+    "booking": "Online booking",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "book": "Book online",
+    "requestTeam": "Request an anaesthesia team"
+  },
+  "hero": {
+    "eyebrow": "Dr. Mohsen Mamdouh — Anaesthetist & pain management",
+    "title1": "Details make",
+    "title2": "the difference in anaesthesia",
+    "lead": "A complete anaesthesia team for any hospital, surgical centre or clinic that needs one at the highest level — plus a network of doctors across every specialty. Book online and upload your labs and scans before the visit."
+  },
+  "booking": {
+    "title": "Book online",
+    "step1": "Your details",
+    "step2": "The visit",
+    "step3": "Labs & scans",
+    "step4": "Confirm",
+    "name": "Full name",
+    "phone": "Phone number",
+    "age": "Age",
+    "complaint": "What is the complaint?",
+    "notes": "Anything else we should know",
+    "date": "Preferred date",
+    "doctor": "Doctor (optional)",
+    "specialty": "Specialty (optional)",
+    "uploadHint": "Upload labs, scans or reports (images or PDFs) so they are reviewed before the visit.",
+    "consent": "I agree to be contacted about this booking.",
+    "submit": "Confirm booking",
+    "success": "Booking received. We will call you to confirm the time.",
+    "errorRequired": "This field is required.",
+    "errorPhone": "Please enter a valid phone number.",
+    "errorConsent": "Please accept to continue."
+  },
+  "teamRequest": {
+    "title": "Request anaesthesia cover",
+    "step1": "The cover",
+    "step2": "The facility",
+    "step3": "The dates",
+    "step4": "Confirm",
+    "facility": "Facility name",
+    "facilityCity": "City",
+    "role": "Role",
+    "name": "Your name",
+    "phone": "Phone number",
+    "from": "From",
+    "to": "To",
+    "cases": "Expected cases per day",
+    "daysPerWeek": "Days per week",
+    "notes": "Notes",
+    "submit": "Send request",
+    "success": "Request received. We will get back to you shortly.",
+    "consent": "I agree to be contacted about this request.",
+    "errorRequired": "This field is required.",
+    "errorPhone": "Please enter a valid phone number.",
+    "errorConsent": "Please accept to continue."
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Message sent. We will get back to you soon."
+  },
+  "newsletter": {
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "success": "Subscribed. Thank you!"
+  }
+}
