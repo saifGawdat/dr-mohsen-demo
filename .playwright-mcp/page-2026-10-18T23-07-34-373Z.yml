@@ -1,0 +1,912 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - generic [ref=f2e3]:
+      - link "د. محسن ممدوح" [ref=f2e4] [cursor=pointer]:
+        - /url: "#top"
+        - img "د. محسن ممدوح" [ref=f2e5]
+      - navigation "أقسام الموقع" [ref=f2e6]:
+        - link "فريق التخدير" [ref=f2e7] [cursor=pointer]:
+          - /url: "#team"
+        - link "التخصصات" [ref=f2e8] [cursor=pointer]:
+          - /url: "#specialties"
+        - link "الأطباء" [ref=f2e9] [cursor=pointer]:
+          - /url: "#doctors"
+        - link "العمليات" [ref=f2e10] [cursor=pointer]:
+          - /url: "#procedures"
+        - link "أسئلة شائعة" [ref=f2e11] [cursor=pointer]:
+          - /url: "#faq"
+        - link "تواصل" [ref=f2e12] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=f2e13]:
+        - link " +20 123 456 7890" [ref=f2e14] [cursor=pointer]:
+          - /url: tel:+201234567890
+          - generic [ref=f2e15]: 
+          - generic [ref=f2e16]: +20 123 456 7890
+        - generic [ref=f2e17]:
+          - button "عربي" [pressed] [ref=f2e18] [cursor=pointer]
+          - generic [aria-hidden] [ref=f2e19]: /
+          - button "EN" [ref=f2e20] [cursor=pointer]
+        - link "احجز أونلاين" [ref=f2e21] [cursor=pointer]:
+          - /url: "#booking"
+        - text: 
+  - main [ref=f2e23]:
+    - generic [ref=f2e26]:
+      - generic [ref=f2e27]:
+        - generic [ref=f2e28]: د. محسن ممدوح — أخصائي تخدير وعلاج ألم
+        - heading "التفاصيل.. بتفرق في التخدير" [level=1] [ref=f2e30]:
+          - generic [ref=f2e31]: التفاصيل..
+          - generic [ref=f2e34]:
+            - text: بتفرق في
+            - emphasis [ref=f2e35]: التخدير
+        - paragraph [ref=f2e36]: "فريق تخدير متكامل لأي مستشفى أو مركز جراحي أو عيادة محتاجة فريق بأعلى مستوى — ومعاه شبكة أطباء في كل التخصصات: أسنان، نساء وتوليد، تجميل، أنف وأذن وغيرها. احجز أونلاين وارفع تحاليلك وأشعتك قبل الكشف."
+        - generic [ref=f2e37]:
+          - link "احجز أونلاين " [ref=f2e38] [cursor=pointer]:
+            - /url: "#booking"
+            - generic [ref=f2e39]: احجز أونلاين
+            - generic [ref=f2e40]: 
+          - button "اطلب فريق تخدير " [ref=f2e41] [cursor=pointer]:
+            - generic [ref=f2e42]: اطلب فريق تخدير
+            - generic [ref=f2e43]: 
+      - generic [ref=f2e44]:
+        - figure [ref=f2e45]:
+          - img "د. محسن ممدوح — أخصائي تخدير وعلاج ألم" [ref=f2e46]
+        - generic [ref=f2e48]:
+          - generic [ref=f2e49]: د. محسن ممدوح
+          - generic [ref=f2e50]: تخدير وعلاج ألم · مستشفى 57357 لسرطان الأطفال
+    - region "لمحة سريعة" [ref=f2e51]:
+      - list [ref=f2e53]:
+        - listitem [ref=f2e54]:
+          - generic [ref=f2e55]: 
+          - generic [ref=f2e56]:
+            - generic [ref=f2e57]: فريق كامل
+            - generic [ref=f2e58]: تغطية للمستشفيات والمراكز والعيادات.
+        - listitem [ref=f2e59]:
+          - generic [ref=f2e60]: 
+          - generic [ref=f2e61]:
+            - generic [ref=f2e62]: تقييم قبل التخدير
+            - generic [ref=f2e63]: مراجعة التحاليل والأشعة قبل الكشف.
+        - listitem [ref=f2e64]:
+          - generic [ref=f2e65]: 
+          - generic [ref=f2e66]:
+            - generic [ref=f2e67]: حجز أونلاين
+            - generic [ref=f2e68]: اختار الميعاد وارفع ملفاتك.
+        - listitem [ref=f2e69]:
+          - generic [ref=f2e70]: 
+          - generic [ref=f2e71]:
+            - generic [ref=f2e72]: متابعة الألم
+            - generic [ref=f2e73]: خطة للألم بعد العملية.
+    - generic [ref=f2e75]:
+      - generic [ref=f2e76]:
+        - generic [ref=f2e77]: "01"
+        - heading "فريق تخدير لمستشفاك أو مركزك." [level=2] [ref=f2e78]
+        - paragraph [ref=f2e79]: لو عندك مستشفى أو مركز جراحي أو عيادة ومحتاج تغطية تخدير بأعلى مستوى، الفريق جاهز — بتجهيزات وبروتوكولات ومراقبة كاملة.
+        - list [ref=f2e80]:
+          - listitem [ref=f2e81]:
+            - generic [ref=f2e82]: 
+            - generic [ref=f2e83]: عمليات مجدولة وطوارئ ٢٤/٧
+          - listitem [ref=f2e84]:
+            - generic [ref=f2e85]: 
+            - generic [ref=f2e86]: تخدير عام ونصفي وموضعي، وتخدير أطفال
+          - listitem [ref=f2e87]:
+            - generic [ref=f2e88]: 
+            - generic [ref=f2e89]: تقييم قبل التخدير وتقرير لكل حالة
+          - listitem [ref=f2e90]:
+            - generic [ref=f2e91]: 
+            - generic [ref=f2e92]: فرد مخصص لكل غرفة عمليات
+        - generic [ref=f2e93]:
+          - button "اطلب فريق تخدير " [ref=f2e94] [cursor=pointer]:
+            - generic [ref=f2e95]: اطلب فريق تخدير
+            - generic [ref=f2e96]: 
+          - link "شوف تفاصيل التغطية " [ref=f2e97] [cursor=pointer]:
+            - /url: "#team"
+            - generic [ref=f2e98]: شوف تفاصيل التغطية
+            - generic [ref=f2e99]: 
+      - generic [ref=f2e100]:
+        - generic [ref=f2e101]: "02"
+        - heading "أطباء في كل التخصصات." [level=2] [ref=f2e102]
+        - paragraph [ref=f2e103]: "شغالين مع نفس الفريق: أسنان، نساء وتوليد، تجميل، أنف وأذن — وباقي التخصصات اللي تحتاجها، في مكان واحد."
+        - list [ref=f2e104]:
+          - listitem [ref=f2e105]:
+            - generic [ref=f2e106]: 
+            - generic [ref=f2e107]: أسنان وجراحة فم وزراعة
+          - listitem [ref=f2e108]:
+            - generic [ref=f2e109]: 
+            - generic [ref=f2e110]: نساء وتوليد وحقن مجهري
+          - listitem [ref=f2e111]:
+            - generic [ref=f2e112]: 
+            - generic [ref=f2e113]: تجميل وجلدية ونحت الجسم
+          - listitem [ref=f2e114]:
+            - generic [ref=f2e115]: 
+            - generic [ref=f2e116]: أنف وأذن وحنجرة وجيوب أنفية
+        - generic [ref=f2e117]:
+          - link "تصفح الأطباء " [ref=f2e118] [cursor=pointer]:
+            - /url: "#doctors"
+            - generic [ref=f2e119]: تصفح الأطباء
+            - generic [ref=f2e120]: 
+          - link "كل التخصصات " [ref=f2e121] [cursor=pointer]:
+            - /url: "#specialties"
+            - generic [ref=f2e122]: كل التخصصات
+            - generic [ref=f2e123]: 
+    - generic [ref=f2e125]:
+      - generic [ref=f2e126]:
+        - generic [ref=f2e127]: فريق التخدير
+        - heading "تخدير بأعلى مستوى، من التقييم لحد ما المريض يفوق بأمان." [level=2] [ref=f2e129]
+        - paragraph [ref=f2e130]: "الفريق بيغطي جدول العمليات بالكامل: تقييم قبل التخدير، التخدير نفسه، مراقبة داخل العمليات، وتسكين الألم بعد العملية — مع تقرير مكتوب لكل حالة."
+      - generic [ref=f2e131]:
+        - generic [ref=f2e132]:
+          - figure "24/7 تغطية على النداء للطوارئ، جنب العمليات المجدولة." [ref=f2e133]:
+            - img "د. محسن ممدوح بالزي الجراحي داخل غرفة العمليات" [ref=f2e134]
+            - generic [ref=f2e135]:
+              - generic [ref=f2e136]: 24/7
+              - generic [ref=f2e137]: تغطية على النداء للطوارئ، جنب العمليات المجدولة.
+          - generic [ref=f2e138]:
+            - generic [ref=f2e139]: كل حالة ليها تقييم قبل التخدير
+            - generic [ref=f2e140]: بنراجع التحاليل والأشعة قبل ما تتكتب خطة التخدير — مش على طاولة العمليات.
+        - generic [ref=f2e141]:
+          - list [ref=f2e142]:
+            - listitem [ref=f2e143]:
+              - generic [ref=f2e144]: 
+              - generic [ref=f2e145]: تخدير عام
+              - generic [ref=f2e146]: تحضير كامل، إدارة مجرى الهواء، ومتابعة لحظية للعلامات الحيوية.
+            - listitem [ref=f2e147]:
+              - generic [ref=f2e148]: 
+              - generic [ref=f2e149]: تخدير نصفي وموضعي
+              - generic [ref=f2e150]: سبينال، إيبيدورال، بلوكات أعصاب، وعمليات الأطراف.
+            - listitem [ref=f2e151]:
+              - generic [ref=f2e152]: 
+              - generic [ref=f2e153]: تخدير الأطفال
+              - generic [ref=f2e154]: بروتوكولات مبنية على الوزن والسن، من الرضع وفوق.
+            - listitem [ref=f2e155]:
+              - generic [ref=f2e156]: 
+              - generic [ref=f2e157]: عمليات اليوم الواحد
+              - generic [ref=f2e158]: فايقان سريع ومريح بحيث المريض يخرج في نفس اليوم.
+            - listitem [ref=f2e159]:
+              - generic [ref=f2e160]: 
+              - generic [ref=f2e161]: المناظير والقسطرة
+              - generic [ref=f2e162]: تخدير خفيف مع تحكم كامل في التنفس خلال الإجراء.
+            - listitem [ref=f2e163]:
+              - generic [ref=f2e164]: 
+              - generic [ref=f2e165]: ألم ما بعد العملية
+              - generic [ref=f2e166]: تسكين متعدد الوسائط يقلل الحاجة للمسكنات القوية.
+            - listitem [ref=f2e167]:
+              - generic [ref=f2e168]: 
+              - generic [ref=f2e169]: متابعة في الإفاقة
+              - generic [ref=f2e170]: الفريق بيفضل مع الحالة لحد ما العلامات الحيوية تستقر.
+            - listitem [ref=f2e171]:
+              - generic [ref=f2e172]: 
+              - generic [ref=f2e173]: جاهزية للطوارئ
+              - generic [ref=f2e174]: تغطية على النداء، وخطة للحالات اللي محدش بيجدولها.
+          - generic [ref=f2e175]:
+            - generic [ref=f2e176]: "بنشتغل في:"
+            - generic [ref=f2e177]: مستشفيات
+            - generic [ref=f2e179]: مراكز جراحية
+            - generic [ref=f2e181]: عيادات أسنان وتجميل
+            - generic [ref=f2e183]: وحدات مناظير
+            - generic [ref=f2e185]: مراكز خصوبة وأطفال أنابيب
+      - list [ref=f2e187]:
+        - listitem [ref=f2e188]:
+          - generic [ref=f2e189]: 
+          - generic [ref=f2e190]: أجهزة مراقبة متقدمة
+          - generic [ref=f2e191]: رسم قلب، أكسجين، ضغط، غازات، وأجهزة تنفس حديثة.
+        - listitem [ref=f2e192]:
+          - generic [ref=f2e193]: 
+          - generic [ref=f2e194]: خطة تخدير لكل حالة
+          - generic [ref=f2e195]: مبنية على التحاليل والأشعة والتاريخ المرضي.
+        - listitem [ref=f2e196]:
+          - generic [ref=f2e197]: 
+          - generic [ref=f2e198]: بروتوكولات أمان
+          - generic [ref=f2e199]: خطة للطوارئ، وأدوية إنعاش جاهزة دائمًا.
+        - listitem [ref=f2e200]:
+          - generic [ref=f2e201]: 
+          - generic [ref=f2e202]: توثيق كامل
+          - generic [ref=f2e203]: تقرير تخدير مفصل بيتسلّم بعد كل عملية.
+      - generic [ref=f2e204]:
+        - button "اطلب فريق تخدير " [ref=f2e205] [cursor=pointer]:
+          - generic [ref=f2e206]: اطلب فريق تخدير
+          - generic [ref=f2e207]: 
+        - link "كلّم الفريق على واتساب" [ref=f2e208] [cursor=pointer]:
+          - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.
+    - generic [ref=f2e211]:
+      - generic [ref=f2e212]:
+        - generic [ref=f2e213]: ليه فريق كامل
+        - heading "الفرق بين تخدير \"بيغطي الفترة\"، وفريق بيتحكم في التفاصيل." [level=2] [ref=f2e215]
+      - generic [ref=f2e216]:
+        - generic [ref=f2e217]:
+          - heading "من غير فريق تخدير متخصص" [level=3] [ref=f2e218]
+          - list [ref=f2e219]:
+            - listitem [ref=f2e220]:
+              - generic [ref=f2e221]: 
+              - generic [ref=f2e222]: عمليات بتتأجل لأن التغطية مش متاحة.
+            - listitem [ref=f2e223]:
+              - generic [ref=f2e224]: 
+              - generic [ref=f2e225]: خطة التخدير بتتحدد في آخر لحظة.
+            - listitem [ref=f2e226]:
+              - generic [ref=f2e227]: 
+              - generic [ref=f2e228]: المسؤولية موزعة على اللي موجود في الشيفت.
+            - listitem [ref=f2e229]:
+              - generic [ref=f2e230]: 
+              - generic [ref=f2e231]: تسكين الألم بيعتمد على المتاح ساعتها.
+            - listitem [ref=f2e232]:
+              - generic [ref=f2e233]: 
+              - generic [ref=f2e234]: تقرير تخدير مختصر أو مش موجود.
+        - generic [ref=f2e235]:
+          - heading "مع فريق د. محسن ممدوح" [level=3] [ref=f2e236]
+          - list [ref=f2e237]:
+            - listitem [ref=f2e238]:
+              - generic [ref=f2e239]: 
+              - generic [ref=f2e240]: تغطية مجدولة وطوارئ ٢٤/٧.
+            - listitem [ref=f2e241]:
+              - generic [ref=f2e242]: 
+              - generic [ref=f2e243]: تقييم وتحضير قبل يوم العملية.
+            - listitem [ref=f2e244]:
+              - generic [ref=f2e245]: 
+              - generic [ref=f2e246]: فرد مسؤول بالاسم لكل غرفة عمليات.
+            - listitem [ref=f2e247]:
+              - generic [ref=f2e248]: 
+              - generic [ref=f2e249]: خطة تسكين متعددة الوسائط، مكتوبة مقدمًا.
+            - listitem [ref=f2e250]:
+              - generic [ref=f2e251]: 
+              - generic [ref=f2e252]: تقرير موثق لكل حالة، محفوظ للمتابعة.
+    - generic [ref=f2e254]:
+      - generic [ref=f2e255]:
+        - generic [ref=f2e256]:
+          - generic [ref=f2e257]: التخصصات
+          - heading "اختار التخصص.. وعندنا دكاترة فيه." [level=2] [ref=f2e259]
+        - paragraph [ref=f2e260]: الفريق شغال مع بعض، يعني طبيب التخدير والجراح عارفين بروتوكول بعض قبل ما حالتك تبدأ.
+      - generic [ref=f2e261]:
+        - button "٠١ أسنان Dentistry & oral surgery ٣ أطباء " [ref=f2e262] [cursor=pointer]:
+          - generic [ref=f2e263]: ٠١
+          - generic [ref=f2e264]:
+            - generic [ref=f2e265]: أسنان
+            - generic [ref=f2e266]: Dentistry & oral surgery
+          - generic [ref=f2e267]: ٣ أطباء
+          - generic [ref=f2e268]: 
+        - button "٠٢ نساء وتوليد Gynaecology & fertility طبيبان " [ref=f2e269] [cursor=pointer]:
+          - generic [ref=f2e270]: ٠٢
+          - generic [ref=f2e271]:
+            - generic [ref=f2e272]: نساء وتوليد
+            - generic [ref=f2e273]: Gynaecology & fertility
+          - generic [ref=f2e274]: طبيبان
+          - generic [ref=f2e275]: 
+        - button "٠٣ تجميل Aesthetic medicine & surgery طبيبان " [ref=f2e276] [cursor=pointer]:
+          - generic [ref=f2e277]: ٠٣
+          - generic [ref=f2e278]:
+            - generic [ref=f2e279]: تجميل
+            - generic [ref=f2e280]: Aesthetic medicine & surgery
+          - generic [ref=f2e281]: طبيبان
+          - generic [ref=f2e282]: 
+        - button "٠٤ أنف وأذن ENT & sinus surgery طبيبان " [ref=f2e283] [cursor=pointer]:
+          - generic [ref=f2e284]: ٠٤
+          - generic [ref=f2e285]:
+            - generic [ref=f2e286]: أنف وأذن
+            - generic [ref=f2e287]: ENT & sinus surgery
+          - generic [ref=f2e288]: طبيبان
+          - generic [ref=f2e289]: 
+        - button "٠٥ جراحة عامة General & laparoscopic طبيب " [ref=f2e290] [cursor=pointer]:
+          - generic [ref=f2e291]: ٠٥
+          - generic [ref=f2e292]:
+            - generic [ref=f2e293]: جراحة عامة
+            - generic [ref=f2e294]: General & laparoscopic
+          - generic [ref=f2e295]: طبيب
+          - generic [ref=f2e296]: 
+        - button "٠٦ عظام Orthopaedics & joints طبيب " [ref=f2e297] [cursor=pointer]:
+          - generic [ref=f2e298]: ٠٦
+          - generic [ref=f2e299]:
+            - generic [ref=f2e300]: عظام
+            - generic [ref=f2e301]: Orthopaedics & joints
+          - generic [ref=f2e302]: طبيب
+          - generic [ref=f2e303]: 
+        - button "٠٧ عيون Ophthalmology طبيب " [ref=f2e304] [cursor=pointer]:
+          - generic [ref=f2e305]: ٠٧
+          - generic [ref=f2e306]:
+            - generic [ref=f2e307]: عيون
+            - generic [ref=f2e308]: Ophthalmology
+          - generic [ref=f2e309]: طبيب
+          - generic [ref=f2e310]: 
+        - button "٠٨ جلدية وليزر Dermatology & laser طبيب " [ref=f2e311] [cursor=pointer]:
+          - generic [ref=f2e312]: ٠٨
+          - generic [ref=f2e313]:
+            - generic [ref=f2e314]: جلدية وليزر
+            - generic [ref=f2e315]: Dermatology & laser
+          - generic [ref=f2e316]: طبيب
+          - generic [ref=f2e317]: 
+        - button "٠٩ أطفال Paediatrics & neonatology طبيب " [ref=f2e318] [cursor=pointer]:
+          - generic [ref=f2e319]: ٠٩
+          - generic [ref=f2e320]:
+            - generic [ref=f2e321]: أطفال
+            - generic [ref=f2e322]: Paediatrics & neonatology
+          - generic [ref=f2e323]: طبيب
+          - generic [ref=f2e324]: 
+        - button "١٠ مسالك بولية Urology & lithotripsy طبيب " [ref=f2e325] [cursor=pointer]:
+          - generic [ref=f2e326]: ١٠
+          - generic [ref=f2e327]:
+            - generic [ref=f2e328]: مسالك بولية
+            - generic [ref=f2e329]: Urology & lithotripsy
+          - generic [ref=f2e330]: طبيب
+          - generic [ref=f2e331]: 
+        - button "١١ مناظير وجهاز هضمي Gastroenterology & endoscopy طبيب " [ref=f2e332] [cursor=pointer]:
+          - generic [ref=f2e333]: ١١
+          - generic [ref=f2e334]:
+            - generic [ref=f2e335]: مناظير وجهاز هضمي
+            - generic [ref=f2e336]: Gastroenterology & endoscopy
+          - generic [ref=f2e337]: طبيب
+          - generic [ref=f2e338]: 
+        - button "١٢ عيادة علاج الألم Pain management clinic د. محسن ممدوح " [ref=f2e339] [cursor=pointer]:
+          - generic [ref=f2e340]: ١٢
+          - generic [ref=f2e341]:
+            - generic [ref=f2e342]: عيادة علاج الألم
+            - generic [ref=f2e343]: Pain management clinic
+          - generic [ref=f2e344]: د. محسن ممدوح
+          - generic [ref=f2e345]: 
+    - generic [ref=f2e347]:
+      - generic [ref=f2e348]:
+        - generic [ref=f2e349]:
+          - generic [ref=f2e350]: الأطباء
+          - heading "فلتر بالتخصص واحجز." [level=2] [ref=f2e352]
+        - paragraph [ref=f2e353]: أكثر من دكتور في نفس التخصص، يعني بتاخد أقرب ميعاد مش الميعاد الوحيد المتاح.
+      - group "فلتر التخصصات" [ref=f2e354]:
+        - button "كل التخصصات" [pressed] [ref=f2e355] [cursor=pointer]
+        - button "أسنان" [ref=f2e356] [cursor=pointer]
+        - button "نساء وتوليد" [ref=f2e357] [cursor=pointer]
+        - button "تجميل" [ref=f2e358] [cursor=pointer]
+        - button "أنف وأذن" [ref=f2e359] [cursor=pointer]
+        - button "جراحة عامة" [ref=f2e360] [cursor=pointer]
+        - button "مناظير" [ref=f2e361] [cursor=pointer]
+        - button "أطفال" [ref=f2e362] [cursor=pointer]
+        - button "علاج الألم" [ref=f2e363] [cursor=pointer]
+      - generic [ref=f2e364]:
+        - article [ref=f2e365]:
+          - img "د. محسن ممدوح" [ref=f2e367]
+          - generic [ref=f2e368]:
+            - generic [ref=f2e369]: قائد الفريق · تخدير وعلاج ألم
+            - heading "د. محسن ممدوح" [level=3] [ref=f2e370]
+            - paragraph [ref=f2e371]: قائد الفريق، وبيشرف على عيادة علاج الألم بنفسه — الألم المزمن، الظهر، وألم بعد الجراحة.
+            - generic [ref=f2e372]:
+              - button "احجز أونلاين " [ref=f2e373] [cursor=pointer]:
+                - generic [ref=f2e374]: احجز أونلاين
+                - generic [ref=f2e375]: 
+              - link "فريق التخدير" [ref=f2e376] [cursor=pointer]:
+                - /url: "#team"
+        - article [ref=f2e378]:
+          - generic [ref=f2e379]: أ س
+          - generic [ref=f2e380]:
+            - generic [ref=f2e381]: د. أحمد سالم
+            - generic [ref=f2e382]: جراحة الفم والوجه والفكين
+          - generic [ref=f2e383]:
+            - generic [ref=f2e384]: مركز جراحي، المنصورة
+            - generic [ref=f2e385]: خبرة ١٠ سنوات
+          - button "احجز أونلاين " [ref=f2e387] [cursor=pointer]:
+            - generic [ref=f2e388]: احجز أونلاين
+            - generic [ref=f2e389]: 
+        - article [ref=f2e390]:
+          - generic [ref=f2e391]: ه م
+          - generic [ref=f2e392]:
+            - generic [ref=f2e393]: د. هبة منصور
+            - generic [ref=f2e394]: أسنان وتقويم
+          - generic [ref=f2e395]:
+            - generic [ref=f2e396]: طنطا
+            - generic [ref=f2e397]: خبرة ٧ سنوات
+          - button "احجز أونلاين " [ref=f2e399] [cursor=pointer]:
+            - generic [ref=f2e400]: احجز أونلاين
+            - generic [ref=f2e401]: 
+        - article [ref=f2e402]:
+          - generic [ref=f2e403]: ك ف
+          - generic [ref=f2e404]:
+            - generic [ref=f2e405]: د. كريم فؤاد
+            - generic [ref=f2e406]: زراعة أسنان
+          - generic [ref=f2e407]:
+            - generic [ref=f2e408]: الزقازيق
+            - generic [ref=f2e409]: خبرة ٩ سنوات
+          - button "احجز أونلاين " [ref=f2e411] [cursor=pointer]:
+            - generic [ref=f2e412]: احجز أونلاين
+            - generic [ref=f2e413]: 
+        - article [ref=f2e414]:
+          - generic [ref=f2e415]: ن ع
+          - generic [ref=f2e416]:
+            - generic [ref=f2e417]: د. نورهان علي
+            - generic [ref=f2e418]: نساء وتوليد
+          - generic [ref=f2e419]:
+            - generic [ref=f2e420]: المنصورة
+            - generic [ref=f2e421]: خبرة ١٢ سنة
+          - button "احجز أونلاين " [ref=f2e423] [cursor=pointer]:
+            - generic [ref=f2e424]: احجز أونلاين
+            - generic [ref=f2e425]: 
+        - article [ref=f2e426]:
+          - generic [ref=f2e427]: م س
+          - generic [ref=f2e428]:
+            - generic [ref=f2e429]: د. مها سليم
+            - generic [ref=f2e430]: حقن مجهري وخصوبة
+          - generic [ref=f2e431]:
+            - generic [ref=f2e432]: القاهرة
+            - generic [ref=f2e433]: خبرة ٨ سنوات
+          - button "احجز أونلاين " [ref=f2e435] [cursor=pointer]:
+            - generic [ref=f2e436]: احجز أونلاين
+            - generic [ref=f2e437]: 
+        - article [ref=f2e438]:
+          - generic [ref=f2e439]: س ع
+          - generic [ref=f2e440]:
+            - generic [ref=f2e441]: د. سارة عبد الله
+            - generic [ref=f2e442]: تجميل غير جراحي
+          - generic [ref=f2e443]:
+            - generic [ref=f2e444]: القاهرة
+            - generic [ref=f2e445]: خبرة ٦ سنوات
+          - button "احجز أونلاين " [ref=f2e447] [cursor=pointer]:
+            - generic [ref=f2e448]: احجز أونلاين
+            - generic [ref=f2e449]: 
+        - article [ref=f2e450]:
+          - generic [ref=f2e451]: ع ر
+          - generic [ref=f2e452]:
+            - generic [ref=f2e453]: د. عمر رشدي
+            - generic [ref=f2e454]: جراحة تجميل
+          - generic [ref=f2e455]:
+            - generic [ref=f2e456]: القاهرة
+            - generic [ref=f2e457]: خبرة ١١ سنة
+          - button "احجز أونلاين " [ref=f2e459] [cursor=pointer]:
+            - generic [ref=f2e460]: احجز أونلاين
+            - generic [ref=f2e461]: 
+        - article [ref=f2e462]:
+          - generic [ref=f2e463]: م ك
+          - generic [ref=f2e464]:
+            - generic [ref=f2e465]: د. مصطفى كامل
+            - generic [ref=f2e466]: أنف وجيوب أنفية
+          - generic [ref=f2e467]:
+            - generic [ref=f2e468]: المنصورة
+            - generic [ref=f2e469]: خبرة ١٤ سنة
+          - button "احجز أونلاين " [ref=f2e471] [cursor=pointer]:
+            - generic [ref=f2e472]: احجز أونلاين
+            - generic [ref=f2e473]: 
+        - article [ref=f2e474]:
+          - generic [ref=f2e475]: ر ف
+          - generic [ref=f2e476]:
+            - generic [ref=f2e477]: د. رانيا فتحي
+            - generic [ref=f2e478]: أنف وأذن للأطفال
+          - generic [ref=f2e479]:
+            - generic [ref=f2e480]: طنطا
+            - generic [ref=f2e481]: خبرة ٧ سنوات
+          - button "احجز أونلاين " [ref=f2e483] [cursor=pointer]:
+            - generic [ref=f2e484]: احجز أونلاين
+            - generic [ref=f2e485]: 
+        - article [ref=f2e486]:
+          - generic [ref=f2e487]: خ إ
+          - generic [ref=f2e488]:
+            - generic [ref=f2e489]: د. خالد إبراهيم
+            - generic [ref=f2e490]: جراحة عامة ومناظير
+          - generic [ref=f2e491]:
+            - generic [ref=f2e492]: المنصورة
+            - generic [ref=f2e493]: خبرة ١٥ سنة
+          - button "احجز أونلاين " [ref=f2e495] [cursor=pointer]:
+            - generic [ref=f2e496]: احجز أونلاين
+            - generic [ref=f2e497]: 
+        - article [ref=f2e498]:
+          - generic [ref=f2e499]: ي ن
+          - generic [ref=f2e500]:
+            - generic [ref=f2e501]: د. ياسر نبيل
+            - generic [ref=f2e502]: جهاز هضمي ومناظير
+          - generic [ref=f2e503]:
+            - generic [ref=f2e504]: القاهرة
+            - generic [ref=f2e505]: خبرة ٩ سنوات
+          - button "احجز أونلاين " [ref=f2e507] [cursor=pointer]:
+            - generic [ref=f2e508]: احجز أونلاين
+            - generic [ref=f2e509]: 
+        - article [ref=f2e510]:
+          - generic [ref=f2e511]: م ح
+          - generic [ref=f2e512]:
+            - generic [ref=f2e513]: د. منى حسن
+            - generic [ref=f2e514]: طب الأطفال
+          - generic [ref=f2e515]:
+            - generic [ref=f2e516]: طنطا
+            - generic [ref=f2e517]: خبرة ١٠ سنوات
+          - button "احجز أونلاين " [ref=f2e519] [cursor=pointer]:
+            - generic [ref=f2e520]: احجز أونلاين
+            - generic [ref=f2e521]: 
+      - paragraph [ref=f2e522]:
+        - generic [ref=f2e523]: 
+        - generic [ref=f2e524]: "بيانات توضيحية للمراجعة: أسماء الأطباء والمدن والمواعيد مبدئية، وبينتحدّث ببيانات الفريق الفعلي."
+    - generic [ref=f2e526]:
+      - generic [ref=f2e527]:
+        - generic [ref=f2e528]:
+          - generic [ref=f2e529]: العمليات اللي بنقدمها
+          - heading "كل التفاصيل مكتوبة.. ومن غير أسعار." [level=2] [ref=f2e531]
+        - paragraph [ref=f2e532]: الإجراء بيمشي إزاي، بياخد وقت قد إيه، نوع التخدير، ومدة التعافي. والتكلفة مش بننشرها — لأنها بتختلف حسب حالتك والمستشفى.
+      - generic [ref=f2e533]:
+        - generic [ref=f2e534]:
+          - generic [ref=f2e535]: 
+          - generic [ref=f2e536]:
+            - generic [ref=f2e537]: بخصوص الأسعار، وبصراحة
+            - paragraph [ref=f2e538]: "سعر العملية والتخدير بيتحدد لكل حالة لوحدها: مدة العملية، نوع التخدير، المستشفى، وحالتك الصحية كلهم بيغيّروا الرقم. علشان كده بنراجع ملفك الأول، وبعدها نقولك التكلفة — مكتوبة، وقبل ما تلتزم بأي حاجة."
+        - link "اعرف التكلفة" [ref=f2e539] [cursor=pointer]:
+          - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.
+      - group "فلتر العمليات" [ref=f2e541]:
+        - button "كل العمليات" [pressed] [ref=f2e542] [cursor=pointer]
+        - button "أسنان" [ref=f2e543] [cursor=pointer]
+        - button "أنف وأذن" [ref=f2e544] [cursor=pointer]
+        - button "نساء وتوليد" [ref=f2e545] [cursor=pointer]
+        - button "تجميل" [ref=f2e546] [cursor=pointer]
+        - button "جراحة عامة" [ref=f2e547] [cursor=pointer]
+        - button "مناظير" [ref=f2e548] [cursor=pointer]
+        - button "أطفال" [ref=f2e549] [cursor=pointer]
+        - button "علاج الألم" [ref=f2e550] [cursor=pointer]
+      - generic [ref=f2e551]:
+        - group [ref=f2e552]:
+          - generic "ضرس العقل المدفون أسنان " [ref=f2e553] [cursor=pointer]:
+            - heading "ضرس العقل المدفون" [level=3] [ref=f2e554]
+            - generic [ref=f2e555]: أسنان
+            - generic [ref=f2e557]: 
+          - text:    
+        - group [ref=f2e559]:
+          - generic "زراعة الأسنان أسنان " [ref=f2e560] [cursor=pointer]:
+            - heading "زراعة الأسنان" [level=3] [ref=f2e561]
+            - generic [ref=f2e562]: أسنان
+            - generic [ref=f2e564]: 
+          - text:    
+        - group [ref=f2e566]:
+          - generic "تجميل الأنف أنف وأذن " [ref=f2e567] [cursor=pointer]:
+            - heading "تجميل الأنف" [level=3] [ref=f2e568]
+            - generic [ref=f2e569]: أنف وأذن
+            - generic [ref=f2e571]: 
+          - text:    
+        - group [ref=f2e573]:
+          - generic "منظار الجيوب الأنفية أنف وأذن " [ref=f2e574] [cursor=pointer]:
+            - heading "منظار الجيوب الأنفية" [level=3] [ref=f2e575]
+            - generic [ref=f2e576]: أنف وأذن
+            - generic [ref=f2e578]: 
+          - text:    
+        - group [ref=f2e580]:
+          - generic "منظار الرحم التشخيصي نساء " [ref=f2e581] [cursor=pointer]:
+            - heading "منظار الرحم التشخيصي" [level=3] [ref=f2e582]
+            - generic [ref=f2e583]: نساء
+            - generic [ref=f2e585]: 
+          - text:    
+        - group [ref=f2e587]:
+          - generic "شفط الدهون ونحت الجسم تجميل " [ref=f2e588] [cursor=pointer]:
+            - heading "شفط الدهون ونحت الجسم" [level=3] [ref=f2e589]
+            - generic [ref=f2e590]: تجميل
+            - generic [ref=f2e592]: 
+          - text:    
+        - group [ref=f2e594]:
+          - generic "عملية الفتق بالمنظار جراحة عامة " [ref=f2e595] [cursor=pointer]:
+            - heading "عملية الفتق بالمنظار" [level=3] [ref=f2e596]
+            - generic [ref=f2e597]: جراحة عامة
+            - generic [ref=f2e599]: 
+          - text:    
+        - group [ref=f2e601]:
+          - generic "منظار المعدة والقولون مناظير " [ref=f2e602] [cursor=pointer]:
+            - heading "منظار المعدة والقولون" [level=3] [ref=f2e603]
+            - generic [ref=f2e604]: مناظير
+            - generic [ref=f2e606]: 
+          - text:    
+        - group [ref=f2e608]:
+          - generic "اللوز واللحمية للأطفال أطفال " [ref=f2e609] [cursor=pointer]:
+            - heading "اللوز واللحمية للأطفال" [level=3] [ref=f2e610]
+            - generic [ref=f2e611]: أطفال
+            - generic [ref=f2e613]: 
+          - text:    
+        - group [ref=f2e615]:
+          - generic "حقن موجهة بالأشعة لعلاج الألم علاج ألم " [ref=f2e616] [cursor=pointer]:
+            - heading "حقن موجهة بالأشعة لعلاج الألم" [level=3] [ref=f2e617]
+            - generic [ref=f2e618]: علاج ألم
+            - generic [ref=f2e620]: 
+          - text:    
+    - generic [ref=f2e623]:
+      - generic [ref=f2e624]:
+        - generic [ref=f2e625]:
+          - generic [ref=f2e626]: احجز أونلاين
+          - 'heading "ست خطوات: الطلب، التخصص، الموعد، بياناتك، ملفاتك، وبعدين التأكيد." [level=2] [ref=f2e628]'
+        - paragraph [ref=f2e629]: ارفع تحاليلك وأشعتك من هنا. الفريق بيراجع الملف قبل الزيارة، فالكشف يبدأ من عند حالتك الحقيقية — مش من الصفر.
+      - generic [ref=f2e630]:
+        - generic [ref=f2e631]:
+          - generic [ref=f2e632]:
+            - list [ref=f2e633]:
+              - listitem [ref=f2e634]:
+                - generic [ref=f2e635]: الطلب
+              - listitem [ref=f2e636]:
+                - generic [ref=f2e637]: التخصص
+              - listitem [ref=f2e638]:
+                - generic [ref=f2e639]: الموعد
+              - listitem [ref=f2e640]:
+                - generic [ref=f2e641]: بياناتك
+              - listitem [ref=f2e642]:
+                - generic [ref=f2e643]: الملفات
+              - listitem [ref=f2e644]:
+                - generic [ref=f2e645]: التأكيد
+            - generic [ref=f2e646]: الخطوة ١ من ٦
+          - generic [ref=f2e647]:
+            - generic [ref=f2e648]:
+              - heading "محتاج إيه؟" [level=3] [ref=f2e649]
+              - paragraph [ref=f2e650]: اختار واحد — وتقدر تغيّره في أي وقت قبل التأكيد.
+              - generic [ref=f2e651]:
+                - button " كشف في العيادة كشف مع أحد الأطباء، وملفك بيتراجع قبله." [ref=f2e652] [cursor=pointer]:
+                  - generic [ref=f2e653]:
+                    - generic [ref=f2e654]: 
+                    - generic [ref=f2e655]: كشف في العيادة
+                  - generic [ref=f2e656]: كشف مع أحد الأطباء، وملفك بيتراجع قبله.
+                - button " عملية أو إجراء بتخطط لعملية أو محتاج تقييم تخدير قبلها." [ref=f2e657] [cursor=pointer]:
+                  - generic [ref=f2e658]:
+                    - generic [ref=f2e659]: 
+                    - generic [ref=f2e660]: عملية أو إجراء
+                  - generic [ref=f2e661]: بتخطط لعملية أو محتاج تقييم تخدير قبلها.
+                - button " فريق لمنشأتي مستشفى أو مركز أو عيادة محتاجة تغطية تخدير." [ref=f2e662] [cursor=pointer]:
+                  - generic [ref=f2e663]:
+                    - generic [ref=f2e664]: 
+                    - generic [ref=f2e665]: فريق لمنشأتي
+                  - generic [ref=f2e666]: مستشفى أو مركز أو عيادة محتاجة تغطية تخدير.
+              - button "متابعة " [ref=f2e668] [cursor=pointer]:
+                - generic [ref=f2e669]: متابعة
+                - generic [ref=f2e670]: 
+            - text:             
+          - text:     
+        - complementary [ref=f2e671]:
+          - heading " ملخص طلبك" [level=3] [ref=f2e672]:
+            - generic [ref=f2e673]: 
+            - generic [ref=f2e674]: ملخص طلبك
+          - generic [ref=f2e675]:
+            - generic [ref=f2e676]:
+              - term [ref=f2e677]: نوع الطلب
+              - definition [ref=f2e678]: لم يُحدَّد بعد
+            - generic [ref=f2e679]:
+              - term [ref=f2e680]: التخصص
+              - definition [ref=f2e681]: لم يُحدَّد بعد
+            - generic [ref=f2e682]:
+              - term [ref=f2e683]: الطبيب
+              - definition [ref=f2e684]: لم يُحدَّد بعد
+            - generic [ref=f2e685]:
+              - term [ref=f2e686]: العيادة / المستشفى
+              - definition [ref=f2e687]: لم يُحدَّد بعد
+            - generic [ref=f2e688]:
+              - term [ref=f2e689]: الموعد المفضل
+              - definition [ref=f2e690]: لم يُحدَّد بعد
+            - generic [ref=f2e691]:
+              - term [ref=f2e692]: الاسم
+              - definition [ref=f2e693]: لم يُحدَّد بعد
+            - generic [ref=f2e694]:
+              - term [ref=f2e695]: الموبايل
+              - definition [ref=f2e696]: لم يُحدَّد بعد
+            - generic [ref=f2e697]:
+              - term [ref=f2e698]: السن
+              - definition [ref=f2e699]: لم يُحدَّد بعد
+            - generic [ref=f2e700]:
+              - term [ref=f2e701]: المدينة
+              - definition [ref=f2e702]: لم يُحدَّد بعد
+            - generic [ref=f2e703]:
+              - term [ref=f2e704]: الشكوى الحالية
+              - definition [ref=f2e705]: لم يُحدَّد بعد
+            - generic [ref=f2e706]:
+              - term [ref=f2e707]: أمراض مزمنة
+              - definition [ref=f2e708]: لم يُحدَّد بعد
+            - generic [ref=f2e709]:
+              - term [ref=f2e710]: الملفات المرفوعة
+              - definition [ref=f2e711]: لم يُحدَّد بعد
+            - generic [ref=f2e712]:
+              - term [ref=f2e713]: ملاحظات
+              - definition [ref=f2e714]: لم يُحدَّد بعد
+          - paragraph [ref=f2e715]:
+            - generic [ref=f2e716]: 
+            - generic [ref=f2e717]: مفيش أسعار معروضة في أي مكان في الصفحة، ومفيش دفع أونلاين. الفريق يأكد الموعد، وبعدها يتكلم معاك في التكلفة مباشرة.
+          - generic [ref=f2e718]:
+            - link "كلّمنا واتساب" [ref=f2e719] [cursor=pointer]:
+              - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.
+            - link " +20 123 456 7890" [ref=f2e721] [cursor=pointer]:
+              - /url: tel:+201234567890
+              - generic [ref=f2e722]: 
+              - generic [ref=f2e723]: +20 123 456 7890
+    - generic [ref=f2e726]:
+      - generic [ref=f2e727]:
+        - generic [ref=f2e728]: بيحصل إزاي؟
+        - heading "من الطلب لحد المتابعة." [level=2] [ref=f2e730]
+        - paragraph [ref=f2e731]: نفس الطريق سواء بتحجز كشف في العيادة أو بتطلب تغطية لمستشفى — مفيش حاجة مهمة بتتحصل في يوم الزيارة نفسه.
+        - link "ابدأ الطلب " [ref=f2e732] [cursor=pointer]:
+          - /url: "#booking"
+          - generic [ref=f2e733]: ابدأ الطلب
+          - generic [ref=f2e734]: 
+      - generic [ref=f2e735]:
+        - generic [ref=f2e736]:
+          - generic [ref=f2e737]: "01"
+          - generic [ref=f2e738]:
+            - heading "تبعت الطلب أونلاين" [level=3] [ref=f2e739]
+            - paragraph [ref=f2e740]: اختار التخصص والطبيب والوقت اللي يناسبك — أو اطلب الفريق كامل يغطي منشأتك. الموضوع دقيقتين.
+            - list [ref=f2e741]:
+              - listitem [ref=f2e742]: كشف، عملية، أو تغطية فريق
+              - listitem [ref=f2e743]: مواعيد متاحة فعليًا
+        - generic [ref=f2e744]:
+          - generic [ref=f2e745]: "02"
+          - generic [ref=f2e746]:
+            - heading "ترفع تحاليلك وأشعتك" [level=3] [ref=f2e747]
+            - paragraph [ref=f2e748]: ارفع اللي عندك PDF أو صورة. الفريق بيشتغل على الأرقام الحقيقية، مش على وصف في التليفون.
+            - list [ref=f2e749]:
+              - listitem [ref=f2e750]: لحد ١٠ ملفات
+              - listitem [ref=f2e751]: بيقرأه الفريق المعالج بس
+        - generic [ref=f2e752]:
+          - generic [ref=f2e753]: "03"
+          - generic [ref=f2e754]:
+            - heading "الملف بيتراجع قبل الزيارة" [level=3] [ref=f2e755]
+            - paragraph [ref=f2e756]: الفريق يقرأ الملف الأول ويرجعلك بتأكيد الموعد — وللعمليات، خطة تخدير مبنية على تاريخك المرضي.
+            - list [ref=f2e757]:
+              - listitem [ref=f2e758]: تأكيد على واتساب
+              - listitem [ref=f2e759]: خطة مكتوبة لكل حالة
+        - generic [ref=f2e760]:
+          - generic [ref=f2e761]: "04"
+          - generic [ref=f2e762]:
+            - heading "الكشف، أو التخدير" [level=3] [ref=f2e763]
+            - paragraph [ref=f2e764]: في الكشف، الطبيب بيكشف عليك. وفي العمليات، الفريق يدّي التخدير بمراقبة كاملة — في منشأتك أو عندنا.
+            - list [ref=f2e765]:
+              - listitem [ref=f2e766]: مراقبة لحظية
+              - listitem [ref=f2e767]: خطة طوارئ جاهزة
+        - generic [ref=f2e768]:
+          - generic [ref=f2e769]: "05"
+          - generic [ref=f2e770]:
+            - heading "متابعة وخطة تسكين" [level=3] [ref=f2e771]
+            - paragraph [ref=f2e772]: بعد العملية الفريق يفضل معاك لحد ما تستقر، ويسلّم تقرير مكتوب، ويسيب خطة تخلي الألم تحت السيطرة في البيت.
+            - list [ref=f2e773]:
+              - listitem [ref=f2e774]: تسكين متعدد الوسائط
+              - listitem [ref=f2e775]: زيارة متابعة لقياس الاستجابة
+    - generic [ref=f2e777]:
+      - generic [ref=f2e778]:
+        - generic [ref=f2e779]: الألم المزمن
+        - heading "لما الألم يفضل بعد ما الإصابة خفت، ده تخصص لوحده." [level=2] [ref=f2e781]
+        - paragraph [ref=f2e782]: ألم الظهر والرقبة والأعصاب اللي مجابش نتيجة مع العلاج العادي، بيتقيّم بجدية، ويتعالج بحقن موجهة لو هي اللي هتفيد، ويتابع لحد ما النتيجة تتحسن.
+        - list [ref=f2e783]:
+          - listitem [ref=f2e784]:
+            - generic [ref=f2e785]: 
+            - generic [ref=f2e786]: تقييم كامل قبل أي حقن
+          - listitem [ref=f2e787]:
+            - generic [ref=f2e788]: 
+            - generic [ref=f2e789]: موجهة بالأشعة، فالإبرة تروح لمكانها الصح
+          - listitem [ref=f2e790]:
+            - generic [ref=f2e791]: 
+            - generic [ref=f2e792]: خطة تقلل المسكنات القوية، مش تزيدها
+          - listitem [ref=f2e793]:
+            - generic [ref=f2e794]: 
+            - generic [ref=f2e795]: متابعة لقياس الاستجابة بصراحة
+        - generic [ref=f2e796]:
+          - link "احجز تقييم ألم " [ref=f2e797] [cursor=pointer]:
+            - /url: "#booking"
+            - generic [ref=f2e798]: احجز تقييم ألم
+            - generic [ref=f2e799]: 
+          - link "اسأل الأول " [ref=f2e800] [cursor=pointer]:
+            - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.
+            - generic [ref=f2e801]: اسأل الأول
+            - generic [ref=f2e802]: 
+      - figure [ref=f2e803]:
+        - img "د. محسن ممدوح — عيادة علاج الألم" [ref=f2e804]
+    - generic [ref=f2e807]:
+      - generic [ref=f2e808]:
+        - generic [ref=f2e809]: أسئلة
+        - heading "الحاجات اللي بتتسأل قبل الحجز." [level=2] [ref=f2e811]
+        - paragraph [ref=f2e812]: لو سؤالك مش هنا، كلّم الفريق على واتساب — حد حقيقي بيرد خلال ساعات العمل.
+      - generic [ref=f2e813]:
+        - group [ref=f2e814]:
+          - generic "ليه مفيش أسعار في الصفحة؟ " [ref=f2e815] [cursor=pointer]:
+            - generic [ref=f2e816]: ليه مفيش أسعار في الصفحة؟
+            - generic [ref=f2e817]: 
+          - paragraph [ref=f2e819]: لأن السعر من غير معرفة الحالة يبقى تخمين. مدة العملية، نوع التخدير، المستشفى، وتاريخك المرضي كلهم بيغيّروا الرقم — علشان كده الفريق يراجع ملفك ويكتبلك التكلفة قبل ما تلتزم بأي حاجة.
+        - group [ref=f2e820]:
+          - generic "محتاج ورقة تحويل عشان أحجز؟ " [ref=f2e821] [cursor=pointer]:
+            - generic [ref=f2e822]: محتاج ورقة تحويل عشان أحجز؟
+            - generic [ref=f2e823]: 
+        - group [ref=f2e824]:
+          - generic "أرفع إيه، وأد إيه؟ " [ref=f2e825] [cursor=pointer]:
+            - generic [ref=f2e826]: أرفع إيه، وأد إيه؟
+            - generic [ref=f2e827]: 
+        - group [ref=f2e828]:
+          - generic "الطلب بيتأكد في مدة قد إيه؟ " [ref=f2e829] [cursor=pointer]:
+            - generic [ref=f2e830]: الطلب بيتأكد في مدة قد إيه؟
+            - generic [ref=f2e831]: 
+        - group [ref=f2e832]:
+          - generic "إحنا مستشفى — تغطية الفريق بتمشي إزاي؟ " [ref=f2e833] [cursor=pointer]:
+            - generic [ref=f2e834]: إحنا مستشفى — تغطية الفريق بتمشي إزاي؟
+            - generic [ref=f2e835]: 
+        - group [ref=f2e836]:
+          - generic "التسكين آمن لابني؟ " [ref=f2e837] [cursor=pointer]:
+            - generic [ref=f2e838]: التسكين آمن لابني؟
+            - generic [ref=f2e839]: 
+        - group [ref=f2e840]:
+          - generic "أقدر أغير أو ألغي الطلب؟ " [ref=f2e841] [cursor=pointer]:
+            - generic [ref=f2e842]: أقدر أغير أو ألغي الطلب؟
+            - generic [ref=f2e843]: 
+    - generic [ref=f2e845]:
+      - generic [ref=f2e846]:
+        - generic [ref=f2e847]:
+          - generic [ref=f2e848]: تواصل معانا
+          - heading "احجز أونلاين، أو اتصل ببساطة." [level=2] [ref=f2e850]
+        - paragraph [ref=f2e851]: أسرع طريق هو الطلب الأونلاين اللي فوق، لأن الملف بيوصل معاه. ولو في حاجة مستعجلة، التليفون دايمًا بيترد عليه الأول.
+      - generic [ref=f2e852]:
+        - generic [ref=f2e853]:
+          - generic [ref=f2e854]: 
+          - generic [ref=f2e855]: التليفون
+          - paragraph [ref=f2e856]: الحالات المستعجلة وأسئلة نفس اليوم.
+          - link "+20 123 456 7890" [ref=f2e857] [cursor=pointer]:
+            - /url: tel:+201234567890
+        - generic [ref=f2e859]:
+          - generic [ref=f2e860]: واتساب
+          - paragraph [ref=f2e861]: ابعت صورة تحاليلك واستلم الرد.
+          - link "افتح واتساب" [ref=f2e862] [cursor=pointer]:
+            - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.
+        - generic [ref=f2e864]:
+          - generic [ref=f2e865]: 
+          - generic [ref=f2e866]: أماكن العمل
+          - paragraph [ref=f2e867]: المنصورة وطنطا والقاهرة والإسكندرية — وتغطية تخدير في منشأتك.
+          - link "شوف الأطباء والمدن" [ref=f2e868] [cursor=pointer]:
+            - /url: "#doctors"
+        - generic [ref=f2e870]:
+          - generic [ref=f2e871]: 
+          - generic [ref=f2e872]: المواعيد
+          - paragraph [ref=f2e873]: السبت للخميس، ١٠ صباحًا – ٨ مساءً. وتغطية التخدير للطوارئ ٢٤/٧.
+          - link "احجز ميعاد" [ref=f2e874] [cursor=pointer]:
+            - /url: "#booking"
+  - contentinfo [ref=f2e876]:
+    - generic [ref=f2e877]:
+      - generic [ref=f2e878]:
+        - generic [ref=f2e879]:
+          - img "د. محسن ممدوح" [ref=f2e880]
+          - paragraph [ref=f2e881]: فريق تخدير متكامل لأي مستشفى أو مركز أو عيادة — وشبكة أطباء في كل التخصصات، بملف واحد وحجز واحد ونفس مستوى الرعاية.
+          - generic [ref=f2e882]:
+            - generic [ref=f2e883]: تخدير
+            - generic [ref=f2e884]: علاج ألم
+            - generic [ref=f2e885]: كل التخصصات
+        - generic [ref=f2e886]:
+          - heading "تصفح" [level=4] [ref=f2e887]
+          - list [ref=f2e888]:
+            - listitem [ref=f2e889]:
+              - link "فريق التخدير" [ref=f2e890] [cursor=pointer]:
+                - /url: "#team"
+            - listitem [ref=f2e891]:
+              - link "التخصصات" [ref=f2e892] [cursor=pointer]:
+                - /url: "#specialties"
+            - listitem [ref=f2e893]:
+              - link "الأطباء" [ref=f2e894] [cursor=pointer]:
+                - /url: "#doctors"
+            - listitem [ref=f2e895]:
+              - link "العمليات" [ref=f2e896] [cursor=pointer]:
+                - /url: "#procedures"
+            - listitem [ref=f2e897]:
+              - link "بيحصل إزاي" [ref=f2e898] [cursor=pointer]:
+                - /url: "#process"
+        - generic [ref=f2e899]:
+          - heading "تخصصات" [level=4] [ref=f2e900]
+          - list [ref=f2e901]:
+            - listitem [ref=f2e902]:
+              - link "أسنان" [ref=f2e903] [cursor=pointer]:
+                - /url: "#doctors"
+            - listitem [ref=f2e904]:
+              - link "نساء وتوليد" [ref=f2e905] [cursor=pointer]:
+                - /url: "#doctors"
+            - listitem [ref=f2e906]:
+              - link "تجميل" [ref=f2e907] [cursor=pointer]:
+                - /url: "#doctors"
+            - listitem [ref=f2e908]:
+              - link "أنف وأذن" [ref=f2e909] [cursor=pointer]:
+                - /url: "#doctors"
+            - listitem [ref=f2e910]:
+              - link "علاج الألم" [ref=f2e911] [cursor=pointer]:
+                - /url: "#doctors"
+        - generic [ref=f2e912]:
+          - heading "تواصل" [level=4] [ref=f2e913]
+          - generic [ref=f2e914]:
+            - link " +20 123 456 7890" [ref=f2e915] [cursor=pointer]:
+              - /url: tel:+201234567890
+              - generic [ref=f2e916]: 
+              - text: +20 123 456 7890
+            - link "واتساب" [ref=f2e917] [cursor=pointer]:
+              - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.
+            - link " hello@example.com" [ref=f2e919] [cursor=pointer]:
+              - /url: mailto:hello@example.com
+              - generic [ref=f2e920]: 
+              - text: hello@example.com
+            - link " احجز أونلاين" [ref=f2e921] [cursor=pointer]:
+              - /url: "#booking"
+              - generic [ref=f2e922]: 
+              - generic [ref=f2e923]: احجز أونلاين
+      - paragraph [ref=f2e924]:
+        - generic [ref=f2e925]: 
+        - text: "نسخة مراجعة: أسماء الأطباء والمدن وأرقام التليفون والمواعيد في الصفحة دي بيانات توضيحية لمرحلة التصميم، وبتتغيّر بالبيانات الحقيقية قبل النشر."
+      - generic [ref=f2e926]:
+        - generic [ref=f2e927]: © 2026 د. محسن ممدوح. جميع الحقوق محفوظة.
+        - navigation "تذييل" [ref=f2e928]:
+          - link "لأعلى الصفحة" [ref=f2e929] [cursor=pointer]:
+            - /url: "#top"
+          - link "أسئلة شائعة" [ref=f2e930] [cursor=pointer]:
+            - /url: "#faq"
+          - link "تواصل" [ref=f2e931] [cursor=pointer]:
+            - /url: "#contact"
+  - link "تواصل على واتساب":
+    - /url: https://wa.me/201234567890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%AF.%20%D9%85%D8%AD%D8%B3%D9%86%20%D9%85%D9%85%D8%AF%D9%88%D8%AD.%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AD%D8%A7%D9%84%D8%A9.

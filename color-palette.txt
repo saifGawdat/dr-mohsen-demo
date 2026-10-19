@@ -1,0 +1,3 @@
+Color Palette:
+#20438e (blue)
+#007d77 (deep teal)

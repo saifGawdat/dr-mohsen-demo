@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>معاينة الاتجاهات — التخصصات / الأطباء / العمليات</title>
+<meta name="theme-color" content="#20438E">
+<link rel="icon" href="assets/logo-mark-64.png" type="image/png">
+
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
+
+<style>
+@font-face { font-family: "Lama Sans"; src: url("assets/fonts/LamaSans-Light.woff") format("woff");    font-weight: 300; font-display: swap; }
+@font-face { font-family: "Lama Sans"; src: url("assets/fonts/LamaSans-Regular.woff") format("woff");  font-weight: 400; font-display: swap; }
+@font-face { font-family: "Lama Sans"; src: url("assets/fonts/LamaSans-Medium.woff") format("woff");   font-weight: 500; font-display: swap; }
+@font-face { font-family: "Lama Sans"; src: url("assets/fonts/LamaSans-SemiBold.woff") format("woff"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Lama Sans"; src: url("assets/fonts/LamaSans-Bold.woff") format("woff");     font-weight: 700; font-display: swap; }
+
+:root {
+  --blue: #20438E; --teal: #007D77; --paper: #FFFFFF; --mist: #F4F7FC;
+  --ink: #0C1936; --muted: rgba(12,25,54,.62); --line: #E1E7F0;
+  --blue-ink: #0C1936; --blue-deep: #162F63; --blue-15: #DEE3EE; --blue-08: #EDF0F6;
+  --teal-deep: #005853; --teal-15: #D9ECEA; --teal-08: #EBF6F5;
+  --brand-diagonal: linear-gradient(118deg, #20438E 0%, #007D77 100%);
+  --shadow: 0 18px 45px -28px rgba(32,67,142,.45);
+  --font: "Lama Sans", "Segoe UI", system-ui, sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --pad: clamp(20px, 5vw, 64px);
+}
+*,*::before,*::after { box-sizing: border-box; }
+body { margin:0; font-family:var(--font); font-size:17px; line-height:1.8; color:var(--ink); background:var(--mist); -webkit-font-smoothing:antialiased; }
+img { display:block; max-width:100%; }
+button { font:inherit; cursor:pointer; background:none; border:0; padding:0; }
+a { color:inherit; text-decoration:none; }
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd { margin:0; padding:0; }
+ul,ol { list-style:none; }
+summary { list-style:none; cursor:pointer; }
+summary::-webkit-details-marker { display:none; }
+.ltr { direction:ltr; unicode-bidi:isolate; }
+
+.wrap { max-width:1320px; margin:0 auto; padding-inline:var(--pad); }
+.eyebrow { display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--teal); }
+.eyebrow::before { content:""; width:26px; height:1px; background:currentColor; }
+h1,h2,h3 { font-weight:400; letter-spacing:-.02em; color:var(--blue); }
+h1 { font-size:clamp(30px,3.6vw,50px); line-height:1.35; }
+h2 { font-size:clamp(24px,2.6vw,38px); line-height:1.4; }
+.lead { font-size:clamp(16px,1.25vw,19px); font-weight:300; line-height:1.8; color:var(--ink); }
+.muted { color:var(--muted); }
+
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:12px; height:52px; padding:0 24px; border-radius:2px; background:var(--blue); color:#fff; font-size:16px; font-weight:500; white-space:nowrap; transition:background .35s var(--ease); }
+.btn:hover { background:var(--blue-deep); }
+.btn--ghost { background:transparent; color:var(--blue); border:1px solid var(--blue-15); }
+.btn--ghost:hover { background:var(--blue-08); border-color:var(--teal); }
+.btn--light { background:#fff; color:var(--blue-ink); }
+.btn--sm { height:44px; padding:0 18px; font-size:15px; }
+.link { position:relative; display:inline-flex; align-items:center; gap:9px; font-size:15px; font-weight:500; padding-block:5px; color:var(--blue); }
+.link::after { content:""; position:absolute; inset-inline:0; bottom:0; height:1px; background:currentColor; transform-origin:inset-inline-start; transition:transform .5s var(--ease); }
+.link:hover::after { transform:scaleX(.35); }
+.link i { color:var(--teal); }
+.chip { height:44px; padding:0 18px; border:1px solid var(--line); border-radius:999px; font-size:15px; color:var(--blue); background:#fff; white-space:nowrap; transition:background .3s,color .3s,border-color .3s; }
+.chip:hover { border-color:var(--teal); }
+.chip[aria-pressed="true"] { background:var(--blue); border-color:var(--blue); color:#fff; }
+.tag { display:inline-flex; align-items:center; gap:6px; padding:5px 11px; border-radius:999px; background:var(--teal-08); color:var(--teal-deep); font-size:12.5px; font-weight:600; white-space:nowrap; }
+.tag--blue { background:var(--blue-08); color:var(--blue); }
+
+/* ---------- preview shell ---------- */
+.pv-head { background:var(--blue-ink); color:#fff; padding:56px 0 46px; }
+.pv-head h1 { color:#fff; margin-top:16px; }
+.pv-head .lead { color:rgba(255,255,255,.82); max-width:70ch; margin-top:14px; }
+.pv-nav { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+.pv-nav a { height:46px; display:inline-flex; align-items:center; gap:10px; padding:0 18px; border-radius:999px; border:1px solid rgba(255,255,255,.28); color:#fff; font-size:15px; transition:background .3s,border-color .3s; }
+.pv-nav a:hover { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.5); }
+.pv-note { margin-top:26px; font-size:14px; color:rgba(255,255,255,.6); }
+
+.opt { padding-block: clamp(48px, 7vw, 86px); }
+.opt--a { background:#fff; }
+.opt--b { background:var(--mist); }
+.opt--c { background:#fff; }
+.opt-label { display:flex; flex-wrap:wrap; align-items:baseline; gap:14px 18px; padding-bottom:22px; border-bottom:1px solid var(--line); margin-bottom:40px; }
+.opt-label b { font-size:clamp(20px,2vw,28px); font-weight:600; color:var(--blue); }
+.opt-label .num { font-size:13px; font-weight:600; letter-spacing:.16em; color:#fff; background:var(--teal); padding:5px 12px; border-radius:999px; }
+.opt-label p { flex:1 1 320px; font-size:14.5px; line-height:1.75; color:var(--muted); }
+
+.blocknote { display:flex; align-items:center; gap:12px; margin:0 0 18px; font-size:13.5px; font-weight:600; letter-spacing:.02em; color:var(--teal); }
+.blocknote::after { content:""; flex:1; height:1px; background:var(--line); }
+.sub { margin-top:56px; }
+
+/* ---------- OPTION 1 — editorial index + directory + accordion ---------- */
+.idx { display:grid; grid-template-columns:1fr 1fr; column-gap:clamp(24px,4vw,64px); border-top:1px solid var(--line); }
+.idx__row { display:flex; align-items:center; gap:18px; width:100%; padding:19px 6px; border-bottom:1px solid var(--line); text-align:start; transition:background .3s var(--ease), padding .3s var(--ease); }
+.idx__row:hover { background:var(--blue-08); padding-inline-start:18px; }
+.idx__n { flex:none; width:26px; font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.idx__name { flex:1; display:flex; flex-direction:column; gap:2px; }
+.idx__name b { font-size:19.5px; font-weight:600; color:var(--blue); line-height:1.4; }
+.idx__en { font-size:12.5px; color:var(--muted); }
+.idx__count { flex:none; font-size:13px; font-weight:600; color:var(--teal-deep); background:var(--teal-08); padding:4px 12px; border-radius:999px; }
+.idx__row > i { flex:none; font-size:18px; color:var(--blue); opacity:.28; transition:opacity .3s, transform .3s var(--ease); }
+.idx__row:hover > i { opacity:1; transform:translateX(-4px); }
+@media (max-width:820px){ .idx { grid-template-columns:1fr; } }
+
+/* featured doctor */
+.feat { display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); background:var(--blue-ink); border-radius:6px; overflow:hidden; margin-bottom:10px; }
+.feat__media { position:relative; min-height:290px; }
+.feat__media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 14%; }
+.feat__body { padding:clamp(28px,3.4vw,48px); color:#fff; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+.feat__body h3 { color:#fff; font-size:clamp(24px,2.4vw,34px); font-weight:400; }
+.feat__role { font-size:13.5px; font-weight:600; letter-spacing:.04em; color:#7FD8D2; }
+.feat__body p { color:rgba(255,255,255,.8); font-size:15.5px; line-height:1.8; max-width:52ch; }
+.feat__cta { display:flex; flex-wrap:wrap; gap:14px 22px; align-items:center; margin-top:6px; }
+@media (max-width:820px){ .feat { grid-template-columns:1fr; } .feat__media { min-height:240px; } }
+
+/* directory rows */
+.drow { display:grid; grid-template-columns:56px minmax(0,1.5fr) minmax(0,1fr) auto; gap:20px; align-items:center; padding:18px 6px; border-bottom:1px solid var(--line); }
+.drow__ava { width:56px; height:56px; border-radius:50%; background:var(--brand-diagonal); color:#fff; display:grid; place-items:center; font-size:17px; font-weight:600; overflow:hidden; }
+.drow__ava img { width:100%; height:100%; object-fit:cover; }
+.drow__id b { display:block; font-size:16.5px; font-weight:600; color:var(--blue); line-height:1.5; }
+.drow__id span { font-size:13.5px; color:var(--muted); }
+.drow__meta { font-size:13.5px; color:var(--muted); }
+.drow__meta b { display:block; font-weight:500; color:var(--blue); }
+@media (max-width:820px){ .drow { grid-template-columns:56px 1fr; row-gap:10px; } .drow__meta, .drow__foot { grid-column:2; } }
+
+/* accordion */
+.acc { border-top:1px solid var(--line); }
+.acc details { border-bottom:1px solid var(--line); }
+.acc summary { display:flex; align-items:center; gap:20px; padding:24px 6px; }
+.acc summary h3 { flex:1; font-weight:300; font-size:clamp(21px,2.1vw,32px); color:var(--blue); line-height:1.4; }
+.acc__plus { flex:none; width:42px; height:42px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; color:var(--blue); font-size:20px; transition:transform .45s var(--ease), background .3s, color .3s, border-color .3s; }
+.acc details[open] .acc__plus { transform:rotate(135deg); background:var(--blue); border-color:var(--blue); color:#fff; }
+.acc summary:hover .acc__plus { border-color:var(--teal); color:var(--teal); }
+.acc__body { padding:2px 6px 34px; display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(24px,4vw,56px); }
+.acc__body > p { font-size:15.5px; line-height:1.85; color:var(--muted); max-width:60ch; }
+.acc__specs { display:grid; grid-template-columns:repeat(3,1fr); gap:0 24px; border-top:1px solid var(--line); margin-top:22px; }
+.acc__specs div { padding:16px 0; }
+.acc__specs dt { font-size:12px; font-weight:600; letter-spacing:.1em; color:var(--muted); }
+.acc__specs dd { font-size:16px; font-weight:500; color:var(--blue); margin-top:5px; }
+.acc__inc { display:grid; gap:9px; font-size:14.5px; color:var(--muted); }
+.acc__inc li { display:flex; gap:9px; }
+.acc__inc i { color:var(--teal); flex:none; margin-top:5px; font-size:15px; }
+.acc__cta { display:flex; flex-wrap:wrap; gap:16px 22px; align-items:center; margin-top:22px; }
+@media (max-width:820px){ .acc__body { grid-template-columns:1fr; } .acc__specs { grid-template-columns:1fr; } .acc__specs div { border-bottom:1px solid var(--line); } }
+
+/* ---------- OPTION 2 — bento / asymmetric, no boxes ---------- */
+.bento { display:grid; grid-template-columns:repeat(6,1fr); gap:16px; }
+.tile { background:#fff; border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:12px; transition:transform .45s var(--ease), box-shadow .45s var(--ease); }
+.tile:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+.tile i { font-size:30px; color:var(--teal); }
+.tile b { font-size:18px; font-weight:600; color:var(--blue); }
+.tile small { font-size:13px; color:var(--muted); margin-top:auto; }
+.tile--hero { grid-column:span 3; grid-row:span 2; background:var(--brand-diagonal); color:#fff; justify-content:flex-end; min-height:230px; }
+.tile--hero i { color:#fff; font-size:40px; }
+.tile--hero b { color:#fff; font-size:clamp(24px,2.4vw,32px); }
+.tile--hero small { color:rgba(255,255,255,.85); }
+.tile--wide { grid-column:span 3; }
+.tile--sm { grid-column:span 3; }
+@media (max-width:900px){ .bento { grid-template-columns:1fr 1fr; } .tile--hero { grid-column:span 2; grid-row:auto; } .tile--wide, .tile--sm { grid-column:span 1; } }
+
+.dcards { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.dcard { display:flex; flex-direction:column; gap:12px; padding:24px; border-radius:20px; background:var(--mist); }
+.dcard--feature { grid-column:span 2; grid-row:span 2; background:var(--blue-ink); color:#fff; }
+.dcard__ava { width:64px; height:64px; border-radius:50%; background:var(--brand-diagonal); color:#fff; display:grid; place-items:center; font-size:18px; font-weight:600; overflow:hidden; }
+.dcard--feature .dcard__ava { width:100%; flex:1; min-height:230px; border-radius:14px; }
+.dcard__ava img { width:100%; height:100%; object-fit:cover; object-position:50% 16%; }
+.dcard b { font-size:17px; font-weight:600; color:var(--blue); }
+.dcard--feature b { color:#fff; font-size:clamp(20px,2vw,26px); }
+.dcard span { font-size:13.5px; color:var(--muted); }
+.dcard--feature span { color:rgba(255,255,255,.78); }
+.dcard small { font-size:13px; color:var(--muted); margin-top:auto; }
+.dcard--feature small { color:rgba(255,255,255,.72); }
+@media (max-width:1000px){ .dcards { grid-template-columns:1fr 1fr; } .dcard--feature { grid-column:span 2; grid-row:auto; } }
+
+.ocards { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.ocard { padding:26px; border-radius:20px; background:var(--mist); display:flex; flex-direction:column; gap:14px; }
+.ocard .tag, .dcard .tag { align-self:flex-start; }
+.ocard--feature { grid-column:span 2; background:var(--teal-08); }
+.ocard h3 { font-size:19px; font-weight:600; color:var(--blue); }
+.ocard__specs { display:flex; flex-wrap:wrap; gap:10px 26px; font-size:13.5px; color:var(--muted); }
+.ocard__specs b { color:var(--blue); font-weight:500; }
+@media (max-width:900px){ .ocards { grid-template-columns:1fr; } .ocard--feature { grid-column:span 1; } }
+
+/* ---------- OPTION 3 — tabs, one specialty at a time ---------- */
+.tabs { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin; }
+.tpanel { margin-top:30px; display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(24px,4vw,54px); }
+.tpanel__col h4 { font-size:13.5px; font-weight:600; letter-spacing:.04em; color:var(--muted); margin-bottom:14px; }
+.tdoc { display:flex; align-items:center; gap:16px; padding:16px 4px; border-bottom:1px solid var(--line); }
+.tdoc__ava { width:48px; height:48px; border-radius:50%; background:var(--brand-diagonal); color:#fff; display:grid; place-items:center; font-size:15px; font-weight:600; flex:none; }
+.tdoc__id { flex:1; }
+.tdoc__id b { display:block; font-size:16px; font-weight:600; color:var(--blue); }
+.tdoc__id span { font-size:13px; color:var(--muted); }
+.toprow { padding:18px 4px; border-bottom:1px solid var(--line); }
+.toprow b { display:block; font-size:17px; font-weight:600; color:var(--blue); }
+.toprow span { font-size:13.5px; color:var(--muted); }
+.toprow .tag { margin-top:10px; }
+@media (max-width:900px){ .tpanel { grid-template-columns:1fr; } }
+
+.pv-foot { background:var(--blue-ink); color:rgba(255,255,255,.7); padding:36px 0; font-size:14px; }
+.pv-foot b { color:#fff; }
+
+/* section head used inside options */
+.opt-head { max-width:70ch; display:flex; flex-direction:column; gap:14px; margin-bottom:34px; }
+</style>
+</head>
+<body>
+
+<header class="pv-head">
+  <div class="wrap">
+    <span class="eyebrow">معاينة فقط — Preview</span>
+    <h1>٣ اتجاهات لأقسام: التخصصات · الأطباء · العمليات</h1>
+    <p class="lead">نفس المحتوى الحقيقي، بس بثلاث معالجات مختلفة. كل واحدة معروضة على جزء من البيانات علشان تشوف الفرق بسرعة — مش الصفحة كاملة.</p>
+    <nav class="pv-nav">
+      <a href="#opt1"><i class="ph-light ph-list-dashes"></i> خيار ١ — قوائم تحريرية + أكورديون</a>
+      <a href="#opt2"><i class="ph-light ph-squares-four"></i> خيار ٢ — بطاقات غير متماثلة</a>
+      <a href="#opt3"><i class="ph-light ph-tabs"></i> خيار ٣ — تابس: تخصص واحد في المرة</a>
+    </nav>
+    <p class="pv-note">الصفحة الأساسية <span class="ltr">index.html</span> لم تتغيّر. دي مجرد معاينة للمقارنة.</p>
+  </div>
+</header>
+
+
+<!-- ================= OPTION 1 ================= -->
+<section class="opt opt--a" id="opt1">
+  <div class="wrap">
+    <div class="opt-label">
+      <span class="num">خيار ١</span>
+      <b>قوائم تحريرية + أكورديون</b>
+      <p>مفيش مربعات ولا شبكة خلايا. التخصصات بقت فهرس بسطور وخط رفيع. الأطباء بقوا دليل: د. محسن في بطاقة كبيرة، والبقية في سطور. العمليات بقت صفوف أكورديون بعنوان كبير وعلامة + تفتح التفاصيل.</p>
+    </div>
+
+    <div class="blocknote">التخصصات — فهرس</div>
+    <ul class="idx">
+      <li><button class="idx__row" type="button"><span class="idx__n">٠١</span><span class="idx__name"><b>أسنان</b><span class="idx__en ltr">Dentistry &amp; oral surgery</span></span><span class="idx__count">٣ أطباء</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٢</span><span class="idx__name"><b>نساء وتوليد</b><span class="idx__en ltr">Gynaecology &amp; fertility</span></span><span class="idx__count">طبيبان</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٣</span><span class="idx__name"><b>تجميل</b><span class="idx__en ltr">Aesthetic medicine &amp; surgery</span></span><span class="idx__count">طبيبان</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٤</span><span class="idx__name"><b>أنف وأذن</b><span class="idx__en ltr">ENT &amp; sinus surgery</span></span><span class="idx__count">طبيبان</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٥</span><span class="idx__name"><b>جراحة عامة</b><span class="idx__en ltr">General &amp; laparoscopic</span></span><span class="idx__count">طبيب</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٦</span><span class="idx__name"><b>مناظير وجهاز هضمي</b><span class="idx__en ltr">Gastroenterology &amp; endoscopy</span></span><span class="idx__count">طبيب</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٧</span><span class="idx__name"><b>أطفال</b><span class="idx__en ltr">Paediatrics &amp; neonatology</span></span><span class="idx__count">طبيب</span><i class="ph-light ph-arrow-left"></i></button></li>
+      <li><button class="idx__row" type="button"><span class="idx__n">٠٨</span><span class="idx__name"><b>عيادة علاج الألم</b><span class="idx__en ltr">Pain management clinic</span></span><span class="idx__count">د. محسن ممدوح</span><i class="ph-light ph-arrow-left"></i></button></li>
+    </ul>
+    <p class="muted" style="margin-top:14px;font-size:13.5px">(المعاينة بتعرض ٨ من ١٢ — الباقي نفس الشكل.)</p>
+
+    <div class="sub">
+      <div class="blocknote">الأطباء — دليل</div>
+      <article class="feat">
+        <div class="feat__media"><img src="assets/dr-mohsen-suit.png" alt="د. محسن ممدوح"></div>
+        <div class="feat__body">
+          <span class="feat__role">قائد الفريق · تخدير وعلاج ألم</span>
+          <h3>د. محسن ممدوح</h3>
+          <p>بيشرف على عيادة علاج الألم بنفسه — الألم المزمن، الظهر، وألم بعد الجراحة — وبيغطي المستشفيات بفريق التخدير.</p>
+          <div class="feat__cta">
+            <button class="btn btn--light btn--sm" type="button">احجز أونلاين <i class="ph-light ph-arrow-left"></i></button>
+            <a class="link" href="#" style="color:#fff">كل الأطباء</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="drow">
+        <span class="drow__ava">أ س</span>
+        <span class="drow__id"><b>د. أحمد سالم</b><span>جراحة الفم والوجه والفكين</span></span>
+        <span class="drow__meta"><b>مركز جراحي، المنصورة</b>خبرة ١٠ سنوات</span>
+        <span class="drow__foot"><a class="link" href="#">احجز أونلاين</a></span>
+      </div>
+      <div class="drow">
+        <span class="drow__ava">ه م</span>
+        <span class="drow__id"><b>د. هبة منصور</b><span>أسنان وتقويم</span></span>
+        <span class="drow__meta"><b>طنطا</b>خبرة ٧ سنوات</span>
+        <span class="drow__foot"><a class="link" href="#">احجز أونلاين</a></span>
+      </div>
+      <div class="drow">
+        <span class="drow__ava">ك ف</span>
+        <span class="drow__id"><b>د. كريم فؤاد</b><span>زراعة أسنان</span></span>
+        <span class="drow__meta"><b>الزقازيق</b>خبرة ٩ سنوات</span>
+        <span class="drow__foot"><a class="link" href="#">احجز أونلاين</a></span>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="blocknote">العمليات — أكورديون</div>
+      <div class="acc">
+        <details open>
+          <summary>
+            <h3>ضرس العقل المدفون</h3>
+            <span class="tag tag--blue">أسنان</span>
+            <span class="acc__plus"><i class="ph-light ph-plus"></i></span>
+          </summary>
+          <div class="acc__body">
+            <div>
+              <p>خلع جراحي لضرس العقل المدفون أو المطمور جزئيًا، مع تسكين للحالات اللي بتخاف.</p>
+              <dl class="acc__specs">
+                <div><dt>المدة</dt><dd>٣٠–٦٠ دقيقة</dd></div>
+                <div><dt>التخدير</dt><dd>موضعي أو عام بسيط</dd></div>
+                <div><dt>الإقامة</dt><dd>بدون إقامة</dd></div>
+              </dl>
+              <div class="acc__cta">
+                <a class="btn btn--sm" href="#">احجز تقييم <i class="ph-light ph-arrow-left"></i></a>
+                <span class="muted" style="font-size:13.5px">السعر بالتواصل</span>
+              </div>
+            </div>
+            <ul class="acc__inc">
+              <li><i class="ph-light ph-check"></i> تقييم وأشعة قبل العملية</li>
+              <li><i class="ph-light ph-check"></i> خطة تسكين للأيام اللي بعدها</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <h3>زراعة الأسنان</h3>
+            <span class="tag tag--blue">أسنان</span>
+            <span class="acc__plus"><i class="ph-light ph-plus"></i></span>
+          </summary>
+          <div class="acc__body">
+            <div>
+              <p>زراعة سن واحد أو الفك بالكامل، بخطة مبنية على أشعة مقطعية قبل يوم العملية.</p>
+              <dl class="acc__specs">
+                <div><dt>المدة</dt><dd>٤٥–٩٠ دقيقة للمرحلة</dd></div>
+                <div><dt>التخدير</dt><dd>موضعي + تسكين</dd></div>
+                <div><dt>الإقامة</dt><dd>بدون إقامة</dd></div>
+              </dl>
+              <div class="acc__cta">
+                <a class="btn btn--sm" href="#">احجز تقييم <i class="ph-light ph-arrow-left"></i></a>
+                <span class="muted" style="font-size:13.5px">السعر بالتواصل</span>
+              </div>
+            </div>
+            <ul class="acc__inc">
+              <li><i class="ph-light ph-check"></i> تخطيط جراحي على الأشعة</li>
+              <li><i class="ph-light ph-check"></i> تقييم تخدير قبل كل مرحلة</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <h3>تجميل الأنف</h3>
+            <span class="tag tag--blue">أنف وأذن</span>
+            <span class="acc__plus"><i class="ph-light ph-plus"></i></span>
+          </summary>
+          <div class="acc__body">
+            <div>
+              <p>تعديل شكل الأنف أو تحسين التنفس، بتخدير عام ومراقبة كاملة خلال العملية.</p>
+              <dl class="acc__specs">
+                <div><dt>المدة</dt><dd>٢–٣ ساعات</dd></div>
+                <div><dt>التخدير</dt><dd>عام</dd></div>
+                <div><dt>الإقامة</dt><dd>ليلة واحدة</dd></div>
+              </dl>
+              <div class="acc__cta">
+                <a class="btn btn--sm" href="#">احجز تقييم <i class="ph-light ph-arrow-left"></i></a>
+                <span class="muted" style="font-size:13.5px">السعر بالتواصل</span>
+              </div>
+            </div>
+            <ul class="acc__inc">
+              <li><i class="ph-light ph-check"></i> تقييم تخدير وتحاليل قبل العملية</li>
+              <li><i class="ph-light ph-check"></i> متابعة الألم ومجرى التنفس بعد العملية</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= OPTION 2 ================= -->
+<section class="opt opt--b" id="opt2">
+  <div class="wrap">
+    <div class="opt-label">
+      <span class="num">خيار ٢</span>
+      <b>بطاقات غير متماثلة</b>
+      <p>لسه في شبكة، بس مكسورة: من غير حدود، وكل قسم فيه عنصر كبير مميّز (Hero) والباقي بأحجام مختلفة. الشكل منظم لكن مش صفوف وخلايا متساوية.</p>
+    </div>
+
+    <div class="blocknote">التخصصات — بنتو</div>
+    <div class="bento">
+      <div class="tile tile--hero">
+        <i class="ph-light ph-tooth"></i>
+        <b>أسنان</b>
+        <small>Dentistry &amp; oral surgery · ٣ أطباء</small>
+      </div>
+      <div class="tile tile--sm"><i class="ph-light ph-baby"></i><b>نساء وتوليد</b><small>طبيبان</small></div>
+      <div class="tile tile--sm"><i class="ph-light ph-sparkle"></i><b>تجميل</b><small>طبيبان</small></div>
+      <div class="tile tile--wide"><i class="ph-light ph-ear"></i><b>أنف وأذن</b><small>ENT &amp; sinus surgery · طبيبان</small></div>
+      <div class="tile tile--wide"><i class="ph-light ph-heartbeat"></i><b>عيادة علاج الألم</b><small>د. محسن ممدوح</small></div>
+    </div>
+
+    <div class="sub">
+      <div class="blocknote">الأطباء — بطاقات متفاوتة</div>
+      <div class="dcards">
+        <article class="dcard dcard--feature">
+          <span class="dcard__ava"><img src="assets/dr-mohsen-suit.png" alt=""></span>
+          <b>د. محسن ممدوح</b>
+          <span>تخدير وعلاج ألم · قائد الفريق</span>
+          <small>عيادة الألم وتغطية المستشفيات</small>
+        </article>
+        <article class="dcard"><span class="dcard__ava">أ س</span><b>د. أحمد سالم</b><span>جراحة الفم والوجه</span><small>المنصورة · ١٠ سنوات</small></article>
+        <article class="dcard"><span class="dcard__ava">ه م</span><b>د. هبة منصور</b><span>أسنان وتقويم</span><small>طنطا · ٧ سنوات</small></article>
+        <article class="dcard"><span class="dcard__ava">ك ف</span><b>د. كريم فؤاد</b><span>زراعة أسنان</span><small>الزقازيق · ٩ سنوات</small></article>
+        <article class="dcard"><span class="dcard__ava">ن ع</span><b>د. نورهان علي</b><span>نساء وتوليد</span><small>المنصورة · ١٢ سنة</small></article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="blocknote">العمليات — بطاقات متفاوتة</div>
+      <div class="ocards">
+        <article class="ocard ocard--feature">
+          <span class="tag tag--blue">أسنان</span>
+          <h3>ضرس العقل المدفون</h3>
+          <p class="muted" style="font-size:14.5px">خلع جراحي لضرس العقل المدفون أو المطمور جزئيًا، مع تسكين للحالات اللي بتخاف.</p>
+          <div class="ocard__specs"><span>المدة: <b>٣٠–٦٠ دقيقة</b></span><span>التخدير: <b>موضعي أو عام بسيط</b></span><span>الإقامة: <b>بدون</b></span></div>
+        </article>
+        <article class="ocard">
+          <span class="tag tag--blue">أسنان</span>
+          <h3>زراعة الأسنان</h3>
+          <div class="ocard__specs"><span>المدة: <b>٤٥–٩٠ د</b></span><span>الإقامة: <b>بدون</b></span></div>
+        </article>
+        <article class="ocard">
+          <span class="tag tag--blue">أنف وأذن</span>
+          <h3>تجميل الأنف</h3>
+          <div class="ocard__specs"><span>المدة: <b>٢–٣ ساعات</b></span><span>الإقامة: <b>ليلة</b></span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= OPTION 3 ================= -->
+<section class="opt opt--c" id="opt3">
+  <div class="wrap">
+    <div class="opt-label">
+      <span class="num">خيار ٣</span>
+      <b>تابس — تخصص واحد في المرة</b>
+      <p>بدل ما ١٢ تخصص و١٣ دكتور و١٠ عمليات يظهروا كلهم مرة واحدة، بتختار تخصص من فوق فيبان أطباؤه وعملياته بس. أقل حاجة على الشاشة، بس المستخدم لازم يدوس تخصص الأول.</p>
+    </div>
+
+    <div class="blocknote">التخصصات كـ pivots</div>
+    <div class="tabs">
+      <button class="chip" type="button" aria-pressed="true">أسنان</button>
+      <button class="chip" type="button">نساء وتوليد</button>
+      <button class="chip" type="button">تجميل</button>
+      <button class="chip" type="button">أنف وأذن</button>
+      <button class="chip" type="button">جراحة عامة</button>
+      <button class="chip" type="button">مناظير</button>
+      <button class="chip" type="button">أطفال</button>
+      <button class="chip" type="button">علاج الألم</button>
+    </div>
+
+    <div class="tpanel">
+      <div class="tpanel__col">
+        <h4>أطباء أسنان (٣)</h4>
+        <div class="tdoc"><span class="tdoc__ava">أ س</span><span class="tdoc__id"><b>د. أحمد سالم</b><span>جراحة الفم والوجه والفكين · المنصورة</span></span><a class="link" href="#">احجز</a></div>
+        <div class="tdoc"><span class="tdoc__ava">ه م</span><span class="tdoc__id"><b>د. هبة منصور</b><span>أسنان وتقويم · طنطا</span></span><a class="link" href="#">احجز</a></div>
+        <div class="tdoc"><span class="tdoc__ava">ك ف</span><span class="tdoc__id"><b>د. كريم فؤاد</b><span>زراعة أسنان · الزقازيق</span></span><a class="link" href="#">احجز</a></div>
+      </div>
+      <div class="tpanel__col">
+        <h4>عمليات أسنان (٢)</h4>
+        <div class="toprow"><b>ضرس العقل المدفون</b><span>٣٠–٦٠ دقيقة · موضعي أو عام بسيط</span><br><span class="tag tag--blue" style="margin-top:10px">أسنان</span></div>
+        <div class="toprow"><b>زراعة الأسنان</b><span>٤٥–٩٠ دقيقة للمرحلة · موضعي + تسكين</span><br><span class="tag tag--blue" style="margin-top:10px">أسنان</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pv-foot">
+  <div class="wrap">معاينة الاتجاهات — <b>index.html</b> الأساسية لم تتغيّر. اختار رقم وأنا أطبّقه على الصفحة الحقيقية.</div>
+</footer>
+
+</body>
+</html>
