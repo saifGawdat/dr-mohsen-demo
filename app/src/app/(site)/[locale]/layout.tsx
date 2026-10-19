@@ -47,6 +47,11 @@ export default async function SiteLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
+    // `dir` has to be correct in the server-rendered HTML — the
+    // `[dir=ltr]` / `[dir=rtl]` rules in globals.css key off the attribute,
+    // and a client-side flip would repaint the whole page after paint. The
+    // root layout stays locale-blind (it is also the shell for Next's
+    // request-less /_not-found prerender), so the locale is applied here.
     <div dir={dir} lang={locale} className="flex min-h-screen flex-col">
       <NextIntlClientProvider messages={messages}>
         <SiteHeader locale={locale} logoUrl={settings.logoUrl} siteName={settings.siteName} phone={settings.contactPhone} whatsapp={settings.whatsappNumber} />

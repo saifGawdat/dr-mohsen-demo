@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, unauthorized } from "@/lib/auth";
-import { faqSchema } from "../route";
+import { faqSchema } from "@/lib/admin-schemas";
 
 export const runtime = "nodejs";
 

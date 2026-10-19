@@ -1,18 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, unauthorized } from "@/lib/auth";
+import { faqSchema } from "@/lib/admin-schemas";
 
 export const runtime = "nodejs";
-
-export const faqSchema = z.object({
-  questionEn: z.string().trim().min(2).max(500),
-  questionAr: z.string().trim().min(2).max(500),
-  answerEn: z.string().trim().min(2).max(5000),
-  answerAr: z.string().trim().min(2).max(5000),
-  order: z.coerce.number().int().min(0).max(9999).optional(),
-  active: z.boolean().optional(),
-});
 
 export async function GET() {
   const authUser = await getCurrentUser();

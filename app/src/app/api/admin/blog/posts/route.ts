@@ -1,31 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { customAlphabet } from "nanoid";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, unauthorized } from "@/lib/auth";
+import { postSchema } from "@/lib/admin-schemas";
 
 export const runtime = "nodejs";
 
 const nano = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 8);
-
-export const postSchema = z.object({
-  slug: z
-    .string()
-    .trim()
-    .max(200)
-    .regex(/^[a-z0-9-]*$/, "Slug must be lowercase letters, numbers and dashes")
-    .optional(),
-  titleEn: z.string().trim().min(2).max(300),
-  titleAr: z.string().trim().min(2).max(300),
-  excerptEn: z.string().trim().max(1000).optional().or(z.literal("")),
-  excerptAr: z.string().trim().max(1000).optional().or(z.literal("")),
-  bodyEn: z.string().trim().max(100000).optional().or(z.literal("")),
-  bodyAr: z.string().trim().max(100000).optional().or(z.literal("")),
-  featuredImage: z.string().trim().max(500).optional().or(z.literal("")),
-  ogImage: z.string().trim().max(500).optional().or(z.literal("")),
-  categoryId: z.string().trim().max(64).optional().or(z.literal("")),
-  status: z.enum(["DRAFT", "PUBLISHED"]).optional(),
-});
 
 export async function GET() {
   const authUser = await getCurrentUser();

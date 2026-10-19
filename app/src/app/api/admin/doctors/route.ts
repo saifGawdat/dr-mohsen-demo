@@ -1,27 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { customAlphabet } from "nanoid";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, unauthorized } from "@/lib/auth";
+import { doctorSchema } from "@/lib/admin-schemas";
 
 export const runtime = "nodejs";
 
 const nano = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 6);
-
-export const doctorSchema = z.object({
-  nameEn: z.string().trim().min(2).max(160),
-  nameAr: z.string().trim().min(2).max(160),
-  titleEn: z.string().trim().max(200).optional().or(z.literal("")),
-  titleAr: z.string().trim().max(200).optional().or(z.literal("")),
-  bioEn: z.string().trim().max(5000).optional().or(z.literal("")),
-  bioAr: z.string().trim().max(5000).optional().or(z.literal("")),
-  hospitalEn: z.string().trim().max(200).optional().or(z.literal("")),
-  hospitalAr: z.string().trim().max(200).optional().or(z.literal("")),
-  photoUrl: z.string().trim().max(500).optional().or(z.literal("")),
-  specialtyId: z.string().trim().max(64).optional().or(z.literal("")),
-  order: z.coerce.number().int().min(0).max(9999).optional(),
-  active: z.boolean().optional(),
-});
 
 export async function GET() {
   const authUser = await getCurrentUser();

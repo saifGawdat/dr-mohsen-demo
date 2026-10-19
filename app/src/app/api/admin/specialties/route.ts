@@ -1,24 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, unauthorized } from "@/lib/auth";
+import { specialtySchema } from "@/lib/admin-schemas";
 
 export const runtime = "nodejs";
-
-export const specialtySchema = z.object({
-  slug: z
-    .string()
-    .trim()
-    .min(2)
-    .max(64)
-    .regex(/^[a-z0-9-]+$/, "Slug must be lowercase letters, numbers and dashes"),
-  nameEn: z.string().trim().min(2).max(160),
-  nameAr: z.string().trim().min(2).max(160),
-  descriptionEn: z.string().trim().max(2000).optional().or(z.literal("")),
-  descriptionAr: z.string().trim().max(2000).optional().or(z.literal("")),
-  order: z.coerce.number().int().min(0).max(9999).optional(),
-  active: z.boolean().optional(),
-});
 
 export async function GET() {
   const authUser = await getCurrentUser();

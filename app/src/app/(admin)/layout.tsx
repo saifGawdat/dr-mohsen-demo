@@ -40,9 +40,6 @@ export default async function AdminGroupLayout({
   const user = isLoginPage ? await getCurrentUser() : await requireAdmin();
 
   return (
-    // The dashboard is English-only chrome. Re-asserting dir here also resets the
-    // [dir] custom-property block, so an Arabic visitor session can't leak RTL
-    // type metrics into the admin UI.
     <div dir="ltr" lang="en" className="min-h-screen bg-white text-ink antialiased">
       <AuthProvider user={user}>
         {children}
