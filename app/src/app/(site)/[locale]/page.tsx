@@ -39,7 +39,7 @@ export default async function LandingPage({ params }: Props) {
   const heroTitle = (locale === "ar" ? settings.heroTitleAr : settings.heroTitleEn) || `${t("hero.title1")} ${t("hero.title2")}`;
   const heroLead = (locale === "ar" ? settings.heroLeadAr : settings.heroLeadEn) || t("hero.lead");
   const aboutLead = (locale === "ar" ? settings.aboutLeadAr : settings.aboutLeadEn) || heroLead;
-  const aboutImage = settings.aboutImageUrl || settings.heroImageUrl || "/brand/logo.png";
+  const aboutImage = settings.aboutImageUrl || "/brand/dr-mohsen-scrubs.png";
 
   const doctorOptions = doctors.map((d) => ({
     id: d.id,
@@ -69,11 +69,16 @@ export default async function LandingPage({ params }: Props) {
           </div>
 
           <div className="relative">
-            {settings.heroImageUrl && (
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-                <Image src={settings.heroImageUrl} alt={settings.siteName} fill priority sizes="(max-width: 1024px) 100vw, 560px" className="object-cover" />
-              </div>
-            )}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+              <Image
+                src={settings.heroImageUrl || "/brand/dr-mohsen-suit.png"}
+                alt={settings.siteName}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 560px"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

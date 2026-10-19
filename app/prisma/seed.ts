@@ -97,9 +97,16 @@ async function main() {
     },
   });
 
-  // The single settings row.
+  // The single settings row. The shipped brand photography is the default so a
+  // fresh install does not render the logo as a stand-in hero; an admin can
+  // replace either image from Settings → Hero content.
   if ((await prisma.settings.count()) === 0) {
-    await prisma.settings.create({ data: {} });
+    await prisma.settings.create({
+      data: {
+        heroImageUrl: "/brand/dr-mohsen-suit.png",
+        aboutImageUrl: "/brand/dr-mohsen-scrubs.png",
+      },
+    });
   }
 
   // Specialties (natural key: slug).
