@@ -1,0 +1,370 @@
+// Dr. Mohsen Mamdouh — anaesthesia & pain management practice.
+//
+// Cloned from the zaki-jewelry schema and re-modelled for a medical practice:
+// the commerce domain (products/orders/cart) is replaced by doctors,
+// specialties, patient bookings and facility team-requests. The infrastructure
+// models — User/Session, Settings, Media, ScheduledJobRun, blog, SEO — are
+// kept close to their originals so the cloned libraries drop in unchanged.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String?
+  name      String?
+  phone     String?
+  role      Role     @default(CUSTOMER)
+  image     String?
+  blogPosts BlogPost[]
+  sessions  Session[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// The id is the SHA-256 digest of the cookie token — the raw token is never
+// stored, so a database leak cannot be replayed as sessions.
+model Session {
+  id        String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ---------------------------------------------------------------------------
+// Media (labs/scans uploads, doctor portraits, CMS imagery)
+// ---------------------------------------------------------------------------
+
+model Media {
+  id         String      @id @default(cuid())
+  status     MediaStatus @default(PENDING)
+  // Key into IMAGE_CONFIG (src/lib/media/shared.ts). Kept as a string rather
+  // than an enum so adding a purpose does not require a schema migration.
+  purpose    String
+  // Path relative to UPLOAD_DIR. Null until the file exists.
+  storageKey String?     @unique
+  mimeType   String?
+  sizeBytes  Int?
+  width      Int?
+  height     Int?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  uploads BookingUpload[]
+
+  @@index([status, createdAt])
+}
+
+enum MediaStatus {
+  PENDING
+  READY
+}
+
+// ---------------------------------------------------------------------------
+// Clinical directory
+// ---------------------------------------------------------------------------
+
+model Specialty {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  nameEn       String
+  nameAr       String
+  descriptionEn String? @db.Text
+  descriptionAr String? @db.Text
+  order        Int      @default(0)
+  active       Boolean  @default(true)
+  doctors      Doctor[]
+  bookings     Booking[]
+
+  @@map("specialties")
+}
+
+model Doctor {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  nameEn      String
+  nameAr      String
+  titleEn     String?
+  titleAr     String?
+  bioEn       String? @db.Text
+  bioAr       String? @db.Text
+  // Hospital affiliation, e.g. "57357 Children's Cancer Hospital".
+  hospitalEn  String?
+  hospitalAr  String?
+  photoUrl    String?
+  specialty   Specialty? @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
+  specialtyId String?
+  order       Int     @default(0)
+  active      Boolean @default(true)
+  bookings    Booking[]
+
+  @@map("doctors")
+}
+
+// ---------------------------------------------------------------------------
+// Patient booking (guest flow — no account needed)
+// ---------------------------------------------------------------------------
+
+enum BookingStatus {
+  NEW
+  CONFIRMED
+  DONE
+  CANCELLED
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  number        String        @unique // human-facing, e.g. BK-2026-0001
+  name          String
+  phone         String
+  age           Int?
+  complaint     String?       @db.Text
+  preferredDate DateTime?
+  notes         String?       @db.Text
+  consent       Boolean       @default(false)
+  status        BookingStatus @default(NEW)
+  adminNotes    String?       @db.Text
+  doctor        Doctor?       @relation(fields: [doctorId], references: [id], onDelete: SetNull)
+  doctorId      String?
+  specialty     Specialty?    @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
+  specialtyId   String?
+  uploads       BookingUpload[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([phone])
+}
+
+// Labs, scans and reports attached to a booking. Files are stored by the media
+// pipeline; this row is the link that keeps them out of the cleanup sweep.
+model BookingUpload {
+  id        String   @id @default(cuid())
+  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  bookingId String
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  mediaId   String   @unique
+  // What the patient called the file, for display only.
+  filename  String
+  mimeType  String?
+  createdAt DateTime @default(now())
+
+  @@index([bookingId])
+}
+
+// ---------------------------------------------------------------------------
+// Facility team request (the "request an anaesthesia team" sheet)
+// ---------------------------------------------------------------------------
+
+model TeamRequest {
+  id            String        @id @default(cuid())
+  number        String        @unique
+  name          String
+  phone         String
+  facility      String
+  facilityCity  String?
+  role          String?
+  fromDate      DateTime
+  toDate        DateTime?
+  casesPerDay   Int?
+  daysPerWeek   Int?
+  notes         String?       @db.Text
+  consent       Boolean       @default(false)
+  status        BookingStatus @default(NEW)
+  adminNotes    String?       @db.Text
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status, createdAt])
+}
+
+// ---------------------------------------------------------------------------
+// Site content
+// ---------------------------------------------------------------------------
+
+model ContactMessage {
+  id        String           @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  message   String           @db.Text
+  status    ContactStatus    @default(NEW)
+  createdAt DateTime         @default(now())
+
+  @@index([status, createdAt])
+}
+
+enum ContactStatus {
+  NEW
+  READ
+  REPLIED
+}
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  subscribedAt DateTime @default(now())
+}
+
+model Faq {
+  id         String  @id @default(cuid())
+  questionEn String
+  questionAr String
+  answerEn   String  @db.Text
+  answerAr   String  @db.Text
+  order      Int     @default(0)
+  active     Boolean @default(true)
+
+  @@map("faqs")
+}
+
+model Testimonial {
+  id        String  @id @default(cuid())
+  nameEn    String
+  nameAr    String
+  quoteEn   String  @db.Text
+  quoteAr   String  @db.Text
+  photoUrl  String?
+  approved  Boolean @default(false)
+  order     Int     @default(0)
+  createdAt DateTime @default(now())
+}
+
+model BlogCategory {
+  id       String     @id @default(cuid())
+  slug     String     @unique
+  nameEn   String
+  nameAr   String
+  order    Int        @default(0)
+  posts    BlogPost[]
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model BlogPost {
+  id            String      @id @default(cuid())
+  slug          String      @unique
+  titleEn       String
+  titleAr       String
+  excerptEn     String?     @db.Text
+  excerptAr     String?     @db.Text
+  bodyEn        String?     @db.Text
+  bodyAr        String?     @db.Text
+  featuredImage String?
+  ogImage       String?
+  status        BlogStatus  @default(DRAFT)
+  publishedAt   DateTime?
+  category      BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categoryId    String?
+  author        User?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId      String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+// Per-page SEO overrides, keyed by pathname (e.g. "/en", "/en/team").
+model PageSeo {
+  id             String  @id @default(cuid())
+  path           String  @unique
+  titleEn        String?
+  titleAr        String?
+  descriptionEn  String? @db.Text
+  descriptionAr  String? @db.Text
+  ogImage        String?
+}
+
+// ---------------------------------------------------------------------------
+// Global settings (single row)
+// ---------------------------------------------------------------------------
+
+model Settings {
+  id       String @id @default(cuid())
+  siteName String @default("Dr. Mohsen Mamdouh")
+  tagline  String @default("Details make the difference in anaesthesia")
+  logoUrl  String?
+
+  // SEO
+  siteDescription    String? @db.Text
+  siteKeywords       String? @db.Text
+  ogImage            String?
+  googleVerification String?
+
+  // Contact
+  whatsappEnabled Boolean @default(true)
+  whatsappNumber  String?
+  contactEmail    String?
+  contactPhone    String?
+  address         String? @db.Text
+  openingHours    String?
+
+  // Social
+  facebookUrl  String?
+  instagramUrl String?
+
+  // Homepage CMS (EN/AR pairs the storefront reads directly)
+  heroEyebrowEn  String?
+  heroEyebrowAr  String?
+  heroTitleEn    String?
+  heroTitleAr    String?
+  heroLeadEn     String? @db.Text
+  heroLeadAr     String? @db.Text
+  heroImageUrl   String?
+  heroImage2Url  String?
+  heroImage3Url  String?
+  aboutLeadEn    String? @db.Text
+  aboutLeadAr    String? @db.Text
+  aboutImageUrl  String?
+
+  // Feature toggles
+  blogEnabled       Boolean @default(true)
+  newsletterEnabled Boolean @default(true)
+  reviewsEnabled    Boolean @default(true) // testimonials
+
+  // Email (Resend) — the API key lives in the database, like zaki, so it can
+  // be rotated from the dashboard without a redeploy.
+  emailServiceEnabled Boolean @default(false)
+  emailFrom           String?
+  resendApiKey        String?
+
+  // Bookings notifications
+  bookingNotifyEmail String?
+
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Background jobs
+// ---------------------------------------------------------------------------
+
+// DB-backed lock for self-scheduled background jobs (media cleanup), safe
+// across replicas. Cloned unchanged from zaki.
+model ScheduledJobRun {
+  name      String   @id
+  lastRunAt DateTime
+  updatedAt DateTime @updatedAt
+}
