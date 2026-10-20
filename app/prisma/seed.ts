@@ -267,12 +267,12 @@ const PROCEDURES: {
 
 const FAQS: { questionEn: string; questionAr: string; answerEn: string; answerAr: string; order: number }[] = [
   {
-    questionEn: "Why are there no prices on the page?",
-    questionAr: "ليه مفيش أسعار في الصفحة؟",
+    questionEn: "How much does a procedure cost?",
+    questionAr: "العملية بتتكلف كام؟",
     answerEn:
-      "Because a price without a case is a guess. Operating time, the anaesthetic used, the hospital and your medical history all change the number — so the team reviews your file and writes the cost to you before you commit to anything.",
+      "Procedure prices start from EGP 20,000. The exact price depends on the operation, the anaesthetic, the hospital and your medical history. Message us on WhatsApp at 0103 833 1309 with the procedure and any reports you have, and we will confirm the exact cost before you commit to anything.",
     answerAr:
-      "لأن السعر من غير معرفة الحالة يبقى تخمين. مدة العملية، نوع التخدير، المستشفى، وتاريخك المرضي كلهم بيغيّروا الرقم — علشان كده الفريق يراجع ملفك ويكتبلك التكلفة قبل ما تلتزم بأي حاجة.",
+      "أسعار العمليات بتبدأ من ٢٠ ألف جنيه. السعر النهائي بيتحدد حسب العملية، نوع التخدير، المستشفى، وتاريخك المرضي. ابعتلنا على واتساب 0103 833 1309 اسم العملية وأي تقارير معاك، وهنأكدلك التكلفة بالظبط قبل ما تلتزم بأي حاجة.",
     order: 1,
   },
   {
@@ -348,13 +348,14 @@ async function main() {
     },
   });
 
-  // The single settings row. Contact details come from the environment so a
-  // deployment never ships the prototype's placeholder numbers by accident.
+  // The single settings row. Environment values win so a deployment can update
+  // contact details without a code change; the seed values are the live clinic
+  // details, never the prototype placeholders.
   const settings = await prisma.settings.findFirst();
   const contact = {
-    contactEmail: settings?.contactEmail ?? process.env.CONTACT_EMAIL ?? "info@drmohsen.example",
-    contactPhone: settings?.contactPhone ?? process.env.CONTACT_PHONE ?? "+20 123 456 7890",
-    whatsappNumber: settings?.whatsappNumber ?? process.env.WHATSAPP_NUMBER ?? "201234567890",
+    contactEmail: process.env.CONTACT_EMAIL ?? settings?.contactEmail ?? "info@drmohsen.example",
+    contactPhone: process.env.CONTACT_PHONE ?? settings?.contactPhone ?? "0103 833 1309",
+    whatsappNumber: process.env.WHATSAPP_NUMBER ?? settings?.whatsappNumber ?? "201038331309",
     openingHours: settings?.openingHours ?? "السبت للخميس، 10:00–20:00",
   };
 

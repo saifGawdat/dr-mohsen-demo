@@ -3,6 +3,7 @@
 import * as React from "react";
 import type { Procedure } from "@prisma/client";
 import { Bi } from "@/components/site/bilingual";
+import { waLink } from "@/lib/site-format";
 
 const FILTERS = [
   { slug: "all", en: "All procedures", ar: "كل العمليات" },
@@ -27,9 +28,27 @@ const TAGS: Record<string, { en: string; ar: string; teal?: boolean }> = {
   pain: { en: "Pain clinic", ar: "علاج ألم", teal: true },
 };
 
-export function ProceduresSection({ procedures }: { procedures: Procedure[] }) {
+export function ProceduresSection({
+  locale,
+  procedures,
+  whatsapp,
+  phone,
+}: {
+  locale: "ar" | "en";
+  procedures: Procedure[];
+  whatsapp: string | null;
+  phone: string | null;
+}) {
   const [filter, setFilter] = React.useState("all");
   const visibleCount = procedures.filter((item) => filter === "all" || item.category === filter).length;
+  const waHref = whatsapp
+    ? waLink(
+        whatsapp,
+        locale === "ar"
+          ? "السلام عليكم، عايز أعرف تكلفة عملية. ممكن التفاصيل؟"
+          : "Hello, I would like to know the price of a procedure. Could we discuss the details?"
+      )
+    : "#contact";
 
   return (
     <section className="m-ops sec" id="procedures">
@@ -38,13 +57,16 @@ export function ProceduresSection({ procedures }: { procedures: Procedure[] }) {
           <div>
             <span className="eyebrow"><Bi en="Procedures" ar="العمليات اللي بنقدمها" /></span>
             <h2 style={{ marginTop: 14 }}>
-              <Bi en="Every detail explained. No price tags." ar="كل التفاصيل مكتوبة.. ومن غير أسعار." />
+              <Bi
+                en="Every detail explained. Prices from EGP 20,000."
+                ar="كل التفاصيل مكتوبة.. والأسعار تبدأ من ٢٠ ألف جنيه."
+              />
             </h2>
           </div>
           <p className="lead">
             <Bi
-              en="What the procedure involves, how long it takes, the anaesthetic used and how long recovery takes. Cost is never published — it depends on your case and your hospital."
-              ar="الإجراء بيمشي إزاي، بياخد وقت قد إيه، نوع التخدير، ومدة التعافي. والتكلفة مش بننشرها — لأنها بتختلف حسب حالتك والمستشفى."
+              en="What the procedure involves, how long it takes, the anaesthetic used and how long recovery takes. Procedure prices start from EGP 20,000; the exact cost for your case is confirmed on WhatsApp."
+              ar="الإجراء بيمشي إزاي، بياخد وقت قد إيه، نوع التخدير، ومدة التعافي. أسعار العمليات بتبدأ من ٢٠ ألف جنيه، والتكلفة النهائية لحالتك بنأكدها على واتساب."
             />
           </p>
         </div>
@@ -53,18 +75,24 @@ export function ProceduresSection({ procedures }: { procedures: Procedure[] }) {
           <div className="m-price-banner__text">
             <i className="ph-light ph-tag" aria-hidden="true" />
             <div>
-              <b><Bi en="About pricing, honestly" ar="بخصوص الأسعار، وبصراحة" /></b>
+              <b><Bi en="Prices start from EGP 20,000" ar="الأسعار بتبدأ من ٢٠ ألف جنيه" /></b>
               <p>
                 <Bi
-                  en="Procedures and anaesthesia are priced per case: the operating time, the anaesthetic type, the hospital and your medical condition all change the number. So we review your file first, then tell you the cost — in writing, before you commit to anything."
-                  ar="سعر العملية والتخدير بيتحدد لكل حالة لوحدها: مدة العملية، نوع التخدير، المستشفى، وحالتك الصحية كلهم بيغيّروا الرقم. علشان كده بنراجع ملفك الأول، وبعدها نقولك التكلفة — مكتوبة، وقبل ما تلتزم بأي حاجة."
+                  en="That is the starting point for a procedure. The exact price depends on the operation, the anaesthetic, the hospital and your condition — so send us the details on WhatsApp and we will confirm the exact cost before you commit. Nothing is charged online."
+                  ar="دي نقطة البداية لأي عملية. السعر النهائي بيتحدد حسب العملية، نوع التخدير، المستشفى، وحالتك — ابعتلنا التفاصيل على واتساب وهنأكدلك التكلفة بالظبط قبل ما تلتزم بأي حاجة. ومفيش أي دفع أونلاين."
                 />
               </p>
             </div>
           </div>
-          <a className="btn btn--wa" href="#contact">
+          <a
+            className="btn btn--wa"
+            href={waHref}
+            target={whatsapp ? "_blank" : undefined}
+            rel={whatsapp ? "noopener" : undefined}
+          >
             <i className="ph-fill ph-whatsapp-logo" aria-hidden="true" />
-            <Bi en="Ask about cost" ar="اعرف التكلفة" />
+            <Bi en="WhatsApp" ar="واتساب" />
+            {phone && <span className="ltr">{phone}</span>}
           </a>
         </div>
 
@@ -126,9 +154,9 @@ export function ProceduresSection({ procedures }: { procedures: Procedure[] }) {
                       </div>
                     </dl>
                     <div className="m-op__foot">
-                      <span className="price-note">
-                        <i className="ph-light ph-warning-circle" aria-hidden="true" />
-                        <Bi en="Price on contact" ar="السعر بالتواصل" />
+                      <span className="price-note price-note--from">
+                        <i className="ph-light ph-tag" aria-hidden="true" />
+                        <Bi en="From EGP 20,000" ar="تبدأ من ٢٠ ألف جنيه" />
                       </span>
                       <a className="link" href="#booking">
                         <Bi en="Book assessment" ar="احجز تقييم" />

@@ -5,13 +5,22 @@ export function arabicDigits(value: string | number): string {
   return String(value).replace(/\d/g, (digit) => ARABIC_DIGITS[Number(digit)]);
 }
 
-/** Keeps only digits (and a leading +) for `tel:` and `wa.me` links. */
+/** Normalises an Egyptian local number (01… / 0…) to international digits (20…). */
+function egyptDigits(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.startsWith("0020")) return digits.slice(2);
+  if (digits.startsWith("0") && digits.length <= 11) return `20${digits.slice(1)}`;
+  return digits;
+}
+
+/** International dialling string for `tel:` links, even if the setting holds "010…". */
 export function phoneDigits(phone: string): string {
-  return phone.replace(/[^\d+]/g, "");
+  const digits = egyptDigits(phone);
+  return digits ? `+${digits}` : "";
 }
 
 export function waLink(number: string, text: string): string {
-  return `https://wa.me/${number.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${egyptDigits(number)}?text=${encodeURIComponent(text)}`;
 }
 
 /** Initials for the directory avatar, e.g. "د. أحمد سالم" → "أ س". */

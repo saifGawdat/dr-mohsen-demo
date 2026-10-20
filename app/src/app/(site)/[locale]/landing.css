@@ -409,6 +409,7 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 .m-op ul.includes i { color: var(--teal); flex: none; margin-top: 5px; font-size: 15px; }
 .m-op__foot { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .m-op__foot .price-note { font-size: 12.5px; color: var(--warn); display: inline-flex; align-items: center; gap: 6px; }
+.m-op__foot .price-note--from { color: var(--teal); }
 .m-ops__empty { display: none; padding: 40px 0; text-align: center; color: var(--muted); }
 .m-ops__empty.show { display: block; }
 @media (max-width: 860px) { .m-op__body { grid-template-columns: 1fr; } }

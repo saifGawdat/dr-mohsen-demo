@@ -91,7 +91,12 @@ export default async function LandingPage({ params }: Props) {
         <WhySection />
         <SpecialtiesSection specialties={specialties} />
         <DoctorsSection doctors={doctorCards} />
-        <ProceduresSection procedures={procedures} />
+        <ProceduresSection
+          locale={locale}
+          procedures={procedures}
+          whatsapp={whatsapp}
+          phone={settings.contactPhone}
+        />
 
         <section className="m-book sec" id="booking">
           <div className="wrap">

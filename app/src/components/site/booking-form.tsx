@@ -1146,7 +1146,7 @@ export function BookingForm({ locale, doctors, specialties, whatsapp, phone }: P
             </li>
             <li>
               <i className="ph-light ph-check" aria-hidden="true" />
-              <span><Bi en="Cost is discussed directly with you — nothing is charged online." ar="التكلفة بتتناقش معاك مباشرة — ومفيش أي دفع أونلاين." /></span>
+              <span><Bi en="Procedure prices start from EGP 20,000; the exact cost is confirmed with you directly — nothing is charged online." ar="أسعار العمليات بتبدأ من ٢٠ ألف جنيه، والتكلفة النهائية بتتأكد معاك مباشرة — ومفيش أي دفع أونلاين." /></span>
             </li>
           </ul>
           <div className="m-success__actions">
@@ -1179,8 +1179,8 @@ export function BookingForm({ locale, doctors, specialties, whatsapp, phone }: P
           <i className="ph-light ph-info" aria-hidden="true" />
           <span>
             <Bi
-              en="No prices are shown anywhere on this page, and nothing is charged online. The team confirms the slot, then discusses cost with you directly."
-              ar="مفيش أسعار معروضة في أي مكان في الصفحة، ومفيش دفع أونلاين. الفريق يأكد الموعد، وبعدها يتكلم معاك في التكلفة مباشرة."
+              en="Procedure prices start from EGP 20,000; the exact cost is confirmed with you on WhatsApp. Nothing is charged online."
+              ar="أسعار العمليات بتبدأ من ٢٠ ألف جنيه، والتكلفة النهائية بنأكدها معاك على واتساب. ومفيش أي دفع أونلاين."
             />
           </span>
         </p>
