@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 /**
@@ -16,12 +16,21 @@ import "./globals.css";
  * the admin group re-asserts LTR English-only chrome the same way.
  */
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
     default: "Dr. Mohsen Mamdouh — Anaesthesia & Pain Management",
     template: "%s | Dr. Mohsen Mamdouh",
   },
   description:
     "A complete anaesthesia team for any hospital, surgical centre or clinic — plus a network of doctors across every specialty. Book online and upload your labs before the visit.",
+  icons: {
+    icon: [{ url: "/brand/logo-mark-64.png", type: "image/png" }],
+    apple: "/brand/logo-mark-180.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#20438E",
 };
 
 export default function RootLayout({

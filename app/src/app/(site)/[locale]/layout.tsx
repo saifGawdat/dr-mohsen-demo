@@ -7,6 +7,10 @@ import { getSettings } from "@/lib/settings";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { WhatsappFab } from "@/components/site/whatsapp-fab";
+import "@phosphor-icons/web/light";
+import "@phosphor-icons/web/fill";
+import "./landing.css";
+import "./landing.css";
 
 interface Props {
   children: React.ReactNode;
@@ -17,22 +21,28 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const locale = raw as Locale;
-  const settings = await getSettings();
 
   const title =
     locale === "ar"
-      ? `${settings.siteName} — التخدير وعلاج الألم`
-      : `${settings.siteName} — Anaesthesia & Pain Management`;
+      ? "د. محسن ممدوح | فريق تخدير وعلاج ألم — أطباء كل التخصصات"
+      : "Dr. Mohsen Mamdouh | Anaesthesia & pain team — doctors across every specialty";
+  const description =
+    locale === "ar"
+      ? "د. محسن ممدوح، أخصائي تخدير وعلاج ألم. فريق تخدير متكامل لأي مستشفى أو مركز أو عيادة، وشبكة أطباء في كل التخصصات: أسنان، نساء وتوليد، تجميل، أنف وأذن. احجز أونلاين وارفع تحاليلك وأشعتك."
+      : "Dr. Mohsen Mamdouh, anaesthetist and pain management. A complete anaesthesia team for any hospital, centre or clinic, and a network of doctors across every specialty. Book online and upload your labs and scans.";
 
   return {
-    title,
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: `/${locale}`,
       languages: { en: "/en", ar: "/ar" },
     },
     openGraph: {
+      title,
+      description,
       locale: locale === "ar" ? "ar_EG" : "en_EG",
-      images: settings.ogImage ? [{ url: settings.ogImage }] : undefined,
+      images: [{ url: "/brand/dr-mohsen-poster.jpg" }],
     },
   };
 }
@@ -47,28 +57,35 @@ export default async function SiteLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    // `dir` has to be correct in the server-rendered HTML — the
-    // `[dir=ltr]` / `[dir=rtl]` rules in globals.css key off the attribute,
-    // and a client-side flip would repaint the whole page after paint. The
-    // root layout stays locale-blind (it is also the shell for Next's
-    // request-less /_not-found prerender), so the locale is applied here.
-    <div dir={dir} lang={locale} className="flex min-h-screen flex-col">
+    // `dir`/`lang` live on the storefront wrapper (not <html>) so the admin
+    // dashboard and Next's request-less error pages keep their own direction.
+    // The ported stylesheet scopes every language rule to `.m-site[lang]`.
+    <div dir={dir} lang={locale} className="m-site">
       <NextIntlClientProvider messages={messages}>
-        <SiteHeader locale={locale} logoUrl={settings.logoUrl} siteName={settings.siteName} phone={settings.contactPhone} whatsapp={settings.whatsappNumber} />
-        <main className="flex-1">{children}</main>
+        <SiteHeader
+          locale={locale}
+          logoUrl={settings.logoUrl}
+          siteName={settings.siteName}
+          phone={settings.contactPhone}
+          whatsapp={settings.whatsappNumber}
+        />
+
+        {children}
+
         <SiteFooter
           locale={locale}
           siteName={settings.siteName}
           phone={settings.contactPhone}
           email={settings.contactEmail}
-          address={settings.address}
-          openingHours={settings.openingHours}
-          facebookUrl={settings.facebookUrl}
-          instagramUrl={settings.instagramUrl}
-          newsletterEnabled={settings.newsletterEnabled}
+          whatsapp={settings.whatsappNumber}
         />
+
         {settings.whatsappEnabled && settings.whatsappNumber && (
-          <WhatsappFab number={settings.whatsappNumber} label={locale === "ar" ? "واتساب" : "WhatsApp"} />
+          <WhatsappFab
+            locale={locale}
+            number={settings.whatsappNumber}
+            label={locale === "ar" ? "واتساب" : "WhatsApp"}
+          />
         )}
       </NextIntlClientProvider>
     </div>

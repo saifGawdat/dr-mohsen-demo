@@ -1,12 +1,25 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
-import { Stethoscope, HeartPulse, Users, CalendarCheck, Building2 } from "lucide-react";
+import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
+import { isLocale, type Locale } from "@/i18n/config";
 import { getSettings } from "@/lib/settings";
-import type { Locale } from "@/i18n/config";
-import { BookingSheet } from "@/components/site/booking-sheet";
+import { Bi } from "@/components/site/bilingual";
+import {
+  ContactSection,
+  FaqSection,
+  Hero,
+  PainSection,
+  ProcessSection,
+  TeamSection,
+  TrustStrip,
+  TwoDoors,
+  WhySection,
+} from "@/components/site/landing-sections";
+import { SpecialtiesSection } from "@/components/site/specialties-section";
+import { DoctorsSection, type DoctorCard } from "@/components/site/doctors-section";
+import { ProceduresSection } from "@/components/site/procedures-section";
+import { BookingForm } from "@/components/site/booking-form";
 import { TeamRequestSheet } from "@/components/site/team-request-sheet";
-import { ContactSection } from "@/components/site/contact-section";
+import { SiteBehavior } from "@/components/site/site-behavior";
 
 export const dynamic = "force-dynamic";
 
@@ -16,217 +29,118 @@ interface Props {
 
 export default async function LandingPage({ params }: Props) {
   const { locale: raw } = await params;
+  if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
-  const t = await getTranslations();
-  const tBooking = await getTranslations("booking");
-  const tTeam = await getTranslations("teamRequest");
-  const tNav = await getTranslations("nav");
 
-  const [settings, specialties, doctors, faqs] = await Promise.all([
+  const [settings, specialties, doctors, procedures, faqs] = await Promise.all([
     getSettings(),
-    prisma.specialty.findMany({ where: { active: true }, orderBy: [{ order: "asc" }], include: { _count: { select: { doctors: true } } } }),
+    prisma.specialty.findMany({
+      orderBy: { order: "asc" },
+      include: { _count: { select: { doctors: true } } },
+    }),
     prisma.doctor.findMany({
       where: { active: true },
-      orderBy: [{ order: "asc" }, { nameEn: "asc" }],
-      take: 24,
-      include: { specialty: { select: { nameEn: true, nameAr: true, slug: true } } },
+      orderBy: [{ featured: "desc" }, { order: "asc" }],
+      include: { specialty: { select: { slug: true, nameEn: true, nameAr: true } } },
     }),
-    prisma.faq.findMany({ where: { active: true }, orderBy: [{ order: "asc" }] }),
+    prisma.procedure.findMany({
+      where: { active: true },
+      orderBy: { order: "asc" },
+    }),
+    prisma.faq.findMany({
+      where: { active: true },
+      orderBy: { order: "asc" },
+    }),
   ]);
 
-  // Hero copy: dashboard overrides first, message-catalog fallbacks second.
-  const heroEyebrow = (locale === "ar" ? settings.heroEyebrowAr : settings.heroEyebrowEn) || t("hero.eyebrow");
-  const heroTitle = (locale === "ar" ? settings.heroTitleAr : settings.heroTitleEn) || `${t("hero.title1")} ${t("hero.title2")}`;
-  const heroLead = (locale === "ar" ? settings.heroLeadAr : settings.heroLeadEn) || t("hero.lead");
-  const aboutLead = (locale === "ar" ? settings.aboutLeadAr : settings.aboutLeadEn) || heroLead;
-  const aboutImage = settings.aboutImageUrl || "/brand/dr-mohsen-scrubs.png";
-
-  const doctorOptions = doctors.map((d) => ({
-    id: d.id,
-    name: locale === "ar" ? d.nameAr : d.nameEn,
-    specialty: locale === "ar" ? d.specialty?.nameAr ?? "" : d.specialty?.nameEn ?? "",
+  const doctorCards: DoctorCard[] = doctors.map((doctor) => ({
+    id: doctor.id,
+    slug: doctor.slug,
+    nameEn: doctor.nameEn,
+    nameAr: doctor.nameAr,
+    titleEn: doctor.titleEn,
+    titleAr: doctor.titleAr,
+    cityEn: doctor.cityEn,
+    cityAr: doctor.cityAr,
+    experienceYears: doctor.experienceYears,
+    photoUrl: doctor.photoUrl,
+    featured: doctor.featured,
+    specialty: doctor.specialty,
   }));
 
-  const specialtyOptions = specialties.map((s) => ({ slug: s.slug, name: locale === "ar" ? s.nameAr : s.nameEn }));
+  const bookingDoctors = doctors
+    .filter((doctor) => doctor.specialty)
+    .map((doctor) => ({
+      id: doctor.id,
+      nameEn: doctor.nameEn,
+      nameAr: doctor.nameAr,
+      specialtySlug: doctor.specialty!.slug,
+    }));
+
+  const whatsapp = settings.whatsappEnabled ? settings.whatsappNumber : null;
+  const heroImage = settings.heroImageUrl || "/brand/dr-mohsen-suit.png";
+  const aboutImage = settings.aboutImageUrl || "/brand/dr-mohsen-scrubs.png";
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="bg-blue-ink text-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 lg:grid-cols-2 lg:py-24 lg:items-center">
-          <div>
-            <p className="text-sm text-teal-15 mb-4">{heroEyebrow}</p>
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-[1.15]">{heroTitle}</h1>
-            <p className="mt-5 text-white/70 leading-relaxed max-w-xl">{heroLead}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#booking" className="rounded-full bg-teal px-6 py-3 text-sm font-semibold hover:bg-teal-deep transition-colors">
-                {tNav("book")}
-              </a>
-              <a href="#team-request" className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold hover:bg-white/10 transition-colors">
-                {tNav("requestTeam")}
-              </a>
-            </div>
-          </div>
+    <>
+      <main id="top">
+        <Hero heroImage={heroImage} aboutImage={aboutImage} />
+        <TrustStrip />
+        <TwoDoors />
+        <TeamSection aboutImage={aboutImage} heroImage={heroImage} whatsapp={whatsapp} />
+        <WhySection />
+        <SpecialtiesSection specialties={specialties} />
+        <DoctorsSection doctors={doctorCards} />
+        <ProceduresSection procedures={procedures} />
 
-          <div className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-              <Image
-                src={settings.heroImageUrl || "/brand/dr-mohsen-suit.png"}
-                alt={settings.siteName}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 560px"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Value strip */}
-      <section className="border-b border-line bg-teal-08">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:grid-cols-3">
-          {[
-            { icon: Stethoscope, en: "Anaesthesia specialists", ar: "أخصائيي تخدير" },
-            { icon: HeartPulse, en: "Pain management", ar: "علاج الألم" },
-            { icon: Users, en: "A doctor for every specialty", ar: "دكتور لكل تخصص" },
-          ].map((item, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-15 text-teal-deep">
-                <item.icon className="h-5 w-5" />
-              </span>
-              <p className="font-medium">{locale === "ar" ? item.ar : item.en}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="scroll-mt-24">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image src={aboutImage} alt={settings.siteName} fill sizes="(max-width: 1024px) 100vw, 540px" className="object-cover" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold mb-4">{tNav("about")}</h2>
-            <p className="text-muted leading-relaxed">{aboutLead}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Specialties */}
-      <section id="specialties" className="scroll-mt-24 border-y border-line bg-blue-08/40">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="text-3xl font-bold mb-2">{tNav("procedures")}</h2>
-          <p className="text-sm text-muted mb-8">
-            {locale === "ar" ? "الأقسام التي يغطيها الدكتور وفريقه." : "The departments Dr. Mohsen and his team cover."}
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {specialties.length === 0 && (
-              <p className="text-sm text-muted">{locale === "ar" ? "لا توجد تخصصات بعد." : "No specialties published yet."}</p>
-            )}
-            {specialties.map((s) => (
-              <div key={s.id} className="rounded-2xl bg-white border border-line p-5 hover:border-teal transition-colors">
-                <p className="font-semibold">{locale === "ar" ? s.nameAr : s.nameEn}</p>
-                {(locale === "ar" ? s.descriptionAr : s.descriptionEn) && (
-                  <p className="mt-2 text-sm text-muted leading-relaxed line-clamp-3">
-                    {locale === "ar" ? s.descriptionAr : s.descriptionEn}
-                  </p>
-                )}
-                <p className="mt-3 text-xs text-teal-deep">{s._count.doctors} {locale === "ar" ? "طبيب" : "doctor(s)"}</p>
+        <section className="m-book sec" id="booking">
+          <div className="wrap">
+            <div className="sec-head sec-head--split">
+              <div>
+                <span className="eyebrow">
+                  <Bi en="Book online" ar="احجز أونلاين" />
+                </span>
+                <h2 style={{ marginTop: 14 }}>
+                  <Bi
+                    en="Six steps: request, specialty, time, details, your file, then confirm."
+                    ar="ست خطوات: الطلب، التخصص، الموعد، بياناتك، ملفاتك، وبعدين التأكيد."
+                  />
+                </h2>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <p className="lead">
+                <Bi
+                  en="Upload your lab results and scans here. The team reviews the file before the visit, so the appointment starts from where you actually are — not from scratch."
+                  ar="ارفع تحاليلك وأشعتك من هنا. الفريق بيراجع الملف قبل الزيارة، فالكشف يبدأ من عند حالتك الحقيقية — مش من الصفر."
+                />
+              </p>
+            </div>
 
-      {/* Doctors */}
-      <section id="doctors" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="text-3xl font-bold mb-2">{tNav("team")}</h2>
-          <p className="text-sm text-muted mb-8">
-            {locale === "ar" ? "شبكة الأطباء المتاحة للحجز." : "The doctor network, bookable online."}
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {doctors.length === 0 && (
-              <p className="text-sm text-muted">{locale === "ar" ? "لا يوجد أطباء بعد." : "No doctors published yet."}</p>
-            )}
-            {doctors.map((d) => (
-              <div key={d.id} className="rounded-3xl border border-line bg-white overflow-hidden">
-                <div className="relative aspect-[4/5] bg-blue-08">
-                  {d.photoUrl && (
-                    <Image src={d.photoUrl} alt={locale === "ar" ? d.nameAr : d.nameEn} fill sizes="(max-width: 640px) 90vw, 280px" className="object-cover" />
-                  )}
-                </div>
-                <div className="p-4">
-                  <p className="font-semibold">{locale === "ar" ? d.nameAr : d.nameEn}</p>
-                  {d.titleEn && <p className="text-xs text-muted mt-0.5">{locale === "ar" ? d.titleAr ?? d.titleEn : d.titleEn}</p>}
-                  <p className="mt-2 text-xs text-teal-deep">{locale === "ar" ? d.specialty?.nameAr ?? "" : d.specialty?.nameEn ?? ""}</p>
-                </div>
-              </div>
-            ))}
+            <BookingForm
+              locale={locale}
+              doctors={bookingDoctors}
+              specialties={specialties.map((specialty) => ({
+                slug: specialty.slug,
+                nameEn: specialty.nameEn,
+                nameAr: specialty.nameAr,
+              }))}
+              whatsapp={whatsapp}
+              phone={settings.contactPhone}
+            />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Booking */}
-      <section className="border-y border-line bg-blue-08/40">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="text-3xl font-bold mb-2">{tBooking("title")}</h2>
-          <p className="text-sm text-muted mb-8">
-            {locale === "ar"
-              ? "من غير حساب: بياناتك ورقم موبايلك بس، وارفع تحاليلك وأشعتك معانا."
-              : "No account needed: your name and phone, and upload your labs and scans with the form."}
-          </p>
-          <div className="flex justify-center">
-            <BookingSheet doctors={doctorOptions} specialties={specialtyOptions} />
-          </div>
-        </div>
-      </section>
+        <ProcessSection />
+        <PainSection whatsapp={whatsapp} />
+        <FaqSection faqs={faqs} />
+        <ContactSection
+          locale={locale}
+          phone={settings.contactPhone}
+          whatsapp={whatsapp}
+        />
+      </main>
 
-      {/* Team request */}
-      <section>
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <div className="mb-8 flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-15 text-teal-deep">
-              <Building2 className="h-5 w-5" />
-            </span>
-            <h2 className="text-3xl font-bold">{tTeam("title")}</h2>
-          </div>
-          <div className="flex justify-center">
-            <TeamRequestSheet />
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="scroll-mt-24 border-y border-line bg-blue-08/40">
-        <div className="mx-auto max-w-3xl px-4 py-16">
-          <h2 className="text-3xl font-bold mb-8">{tNav("faq")}</h2>
-          <div className="space-y-3">
-            {faqs.length === 0 && (
-              <p className="text-sm text-muted">{locale === "ar" ? "لا توجد أسئلة بعد." : "No questions published yet."}</p>
-            )}
-            {faqs.map((f) => (
-              <details key={f.id} className="group rounded-2xl border border-line bg-white p-4 open:border-teal-15">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-semibold list-none">
-                  <span>{locale === "ar" ? f.questionAr : f.questionEn}</span>
-                  <span className="text-teal transition-transform group-open:rotate-45">+</span>
-                </summary>
-                <p className="mt-3 text-sm text-muted leading-relaxed">{locale === "ar" ? f.answerAr : f.answerEn}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section>
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="text-3xl font-bold mb-8">{tNav("contact")}</h2>
-          <ContactSection />
-        </div>
-      </section>
-    </div>
+      <TeamRequestSheet locale={locale} whatsapp={whatsapp} />
+      <SiteBehavior />
+    </>
   );
 }
