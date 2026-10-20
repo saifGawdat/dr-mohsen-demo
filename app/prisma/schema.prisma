@@ -25,17 +25,17 @@ enum Role {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
+  id        String     @id @default(cuid())
+  email     String     @unique
   password  String?
   name      String?
   phone     String?
-  role      Role     @default(CUSTOMER)
+  role      Role       @default(CUSTOMER)
   image     String?
   blogPosts BlogPost[]
   sessions  Session[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 // The id is the SHA-256 digest of the cookie token — the raw token is never
@@ -70,7 +70,8 @@ model Media {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 
-  uploads BookingUpload[]
+  uploads            BookingUpload[]
+  teamRequestUploads TeamRequestUpload[]
 
   @@index([status, createdAt])
 }
@@ -85,38 +86,44 @@ enum MediaStatus {
 // ---------------------------------------------------------------------------
 
 model Specialty {
-  id           String   @id @default(cuid())
-  slug         String   @unique
-  nameEn       String
-  nameAr       String
-  descriptionEn String? @db.Text
-  descriptionAr String? @db.Text
-  order        Int      @default(0)
-  active       Boolean  @default(true)
-  doctors      Doctor[]
-  bookings     Booking[]
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  nameEn        String
+  nameAr        String
+  descriptionEn String?   @db.Text
+  descriptionAr String?   @db.Text
+  order         Int       @default(0)
+  active        Boolean   @default(true)
+  doctors       Doctor[]
+  bookings      Booking[]
 
   @@map("specialties")
 }
 
 model Doctor {
-  id          String  @id @default(cuid())
-  slug        String  @unique
-  nameEn      String
-  nameAr      String
-  titleEn     String?
-  titleAr     String?
-  bioEn       String? @db.Text
-  bioAr       String? @db.Text
+  id              String     @id @default(cuid())
+  slug            String     @unique
+  nameEn          String
+  nameAr          String
+  titleEn         String?
+  titleAr         String?
+  bioEn           String?    @db.Text
+  bioAr           String?    @db.Text
   // Hospital affiliation, e.g. "57357 Children's Cancer Hospital".
-  hospitalEn  String?
-  hospitalAr  String?
-  photoUrl    String?
-  specialty   Specialty? @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
-  specialtyId String?
-  order       Int     @default(0)
-  active      Boolean @default(true)
-  bookings    Booking[]
+  hospitalEn      String?
+  hospitalAr      String?
+  // Where the doctor sees patients, shown in the directory row.
+  cityEn          String?
+  cityAr          String?
+  experienceYears Int?
+  photoUrl        String?
+  // The lead profile at the top of the directory (Dr. Mohsen).
+  featured        Boolean    @default(false)
+  specialty       Specialty? @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
+  specialtyId     String?
+  order           Int        @default(0)
+  active          Boolean    @default(true)
+  bookings        Booking[]
 
   @@map("doctors")
 }
@@ -133,24 +140,30 @@ enum BookingStatus {
 }
 
 model Booking {
-  id            String        @id @default(cuid())
-  number        String        @unique // human-facing, e.g. BK-2026-0001
+  id            String          @id @default(cuid())
+  number        String          @unique // human-facing, e.g. BK-2026-0001
   name          String
   phone         String
   age           Int?
-  complaint     String?       @db.Text
+  complaint     String?         @db.Text
   preferredDate DateTime?
-  notes         String?       @db.Text
-  consent       Boolean       @default(false)
-  status        BookingStatus @default(NEW)
-  adminNotes    String?       @db.Text
-  doctor        Doctor?       @relation(fields: [doctorId], references: [id], onDelete: SetNull)
+  preferredTime String?
+  // clinic | surgery | team — what the patient picked in step one.
+  serviceType   String          @default("clinic")
+  clinic        String?
+  city          String?
+  conditions    String[]        @default([])
+  notes         String?         @db.Text
+  consent       Boolean         @default(false)
+  status        BookingStatus   @default(NEW)
+  adminNotes    String?         @db.Text
+  doctor        Doctor?         @relation(fields: [doctorId], references: [id], onDelete: SetNull)
   doctorId      String?
-  specialty     Specialty?    @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
+  specialty     Specialty?      @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
   specialtyId   String?
   uploads       BookingUpload[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 
   @@index([status, createdAt])
   @@index([phone])
@@ -173,29 +186,77 @@ model BookingUpload {
 }
 
 // ---------------------------------------------------------------------------
+// Procedures — the editorial accordion (duration, anaesthetic, stay, includes).
+// No price column by design: cost is discussed after the case is reviewed.
+// ---------------------------------------------------------------------------
+
+model Procedure {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  nameEn        String
+  nameAr        String
+  // Specialty slug the procedure is filtered under (dental, ent, gyn, ...).
+  category      String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  durationEn    String
+  durationAr    String
+  anaesthesiaEn String
+  anaesthesiaAr String
+  stayEn        String
+  stayAr        String
+  includesEn    String[] @default([])
+  includesAr    String[] @default([])
+  order         Int      @default(0)
+  active        Boolean  @default(true)
+
+  @@index([category, order])
+  @@map("procedures")
+}
+
+// ---------------------------------------------------------------------------
 // Facility team request (the "request an anaesthesia team" sheet)
 // ---------------------------------------------------------------------------
 
 model TeamRequest {
-  id            String        @id @default(cuid())
-  number        String        @unique
-  name          String
-  phone         String
-  facility      String
-  facilityCity  String?
-  role          String?
-  fromDate      DateTime
-  toDate        DateTime?
-  casesPerDay   Int?
-  daysPerWeek   Int?
-  notes         String?       @db.Text
-  consent       Boolean       @default(false)
-  status        BookingStatus @default(NEW)
-  adminNotes    String?       @db.Text
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id           String              @id @default(cuid())
+  number       String              @unique
+  name         String
+  phone        String
+  facility     String
+  facilityCity String?
+  role         String?
+  // full | scheduled | oncall | single
+  coverage     String?
+  caseMix      String[]            @default([])
+  fromDate     DateTime
+  toDate       DateTime?
+  casesPerDay  Int?
+  daysPerWeek  Int?
+  notes        String?             @db.Text
+  consent      Boolean             @default(false)
+  status       BookingStatus       @default(NEW)
+  adminNotes   String?             @db.Text
+  uploads      TeamRequestUpload[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
 
   @@index([status, createdAt])
+}
+
+// Schedules and case lists attached to a facility request. Same media pipeline
+// as booking uploads; this join row is what stops the cleanup sweep.
+model TeamRequestUpload {
+  id            String      @id @default(cuid())
+  teamRequest   TeamRequest @relation(fields: [teamRequestId], references: [id], onDelete: Cascade)
+  teamRequestId String
+  media         Media       @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  mediaId       String      @unique
+  filename      String
+  mimeType      String?
+  createdAt     DateTime    @default(now())
+
+  @@index([teamRequestId])
 }
 
 // ---------------------------------------------------------------------------
@@ -203,13 +264,13 @@ model TeamRequest {
 // ---------------------------------------------------------------------------
 
 model ContactMessage {
-  id        String           @id @default(cuid())
+  id        String        @id @default(cuid())
   name      String
   email     String?
   phone     String?
-  message   String           @db.Text
-  status    ContactStatus    @default(NEW)
-  createdAt DateTime         @default(now())
+  message   String        @db.Text
+  status    ContactStatus @default(NEW)
+  createdAt DateTime      @default(now())
 
   @@index([status, createdAt])
 }
@@ -239,24 +300,24 @@ model Faq {
 }
 
 model Testimonial {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   nameEn    String
   nameAr    String
-  quoteEn   String  @db.Text
-  quoteAr   String  @db.Text
+  quoteEn   String   @db.Text
+  quoteAr   String   @db.Text
   photoUrl  String?
-  approved  Boolean @default(false)
-  order     Int     @default(0)
+  approved  Boolean  @default(false)
+  order     Int      @default(0)
   createdAt DateTime @default(now())
 }
 
 model BlogCategory {
-  id       String     @id @default(cuid())
-  slug     String     @unique
-  nameEn   String
-  nameAr   String
-  order    Int        @default(0)
-  posts    BlogPost[]
+  id     String     @id @default(cuid())
+  slug   String     @unique
+  nameEn String
+  nameAr String
+  order  Int        @default(0)
+  posts  BlogPost[]
 }
 
 enum BlogStatus {
@@ -265,37 +326,37 @@ enum BlogStatus {
 }
 
 model BlogPost {
-  id            String      @id @default(cuid())
-  slug          String      @unique
+  id            String        @id @default(cuid())
+  slug          String        @unique
   titleEn       String
   titleAr       String
-  excerptEn     String?     @db.Text
-  excerptAr     String?     @db.Text
-  bodyEn        String?     @db.Text
-  bodyAr        String?     @db.Text
+  excerptEn     String?       @db.Text
+  excerptAr     String?       @db.Text
+  bodyEn        String?       @db.Text
+  bodyAr        String?       @db.Text
   featuredImage String?
   ogImage       String?
-  status        BlogStatus  @default(DRAFT)
+  status        BlogStatus    @default(DRAFT)
   publishedAt   DateTime?
   category      BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId    String?
-  author        User?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  author        User?         @relation(fields: [authorId], references: [id], onDelete: SetNull)
   authorId      String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
   @@index([status, publishedAt])
 }
 
 // Per-page SEO overrides, keyed by pathname (e.g. "/en", "/en/team").
 model PageSeo {
-  id             String  @id @default(cuid())
-  path           String  @unique
-  titleEn        String?
-  titleAr        String?
-  descriptionEn  String? @db.Text
-  descriptionAr  String? @db.Text
-  ogImage        String?
+  id            String  @id @default(cuid())
+  path          String  @unique
+  titleEn       String?
+  titleAr       String?
+  descriptionEn String? @db.Text
+  descriptionAr String? @db.Text
+  ogImage       String?
 }
 
 // ---------------------------------------------------------------------------
@@ -303,9 +364,9 @@ model PageSeo {
 // ---------------------------------------------------------------------------
 
 model Settings {
-  id       String @id @default(cuid())
-  siteName String @default("Dr. Mohsen Mamdouh")
-  tagline  String @default("Details make the difference in anaesthesia")
+  id       String  @id @default(cuid())
+  siteName String  @default("Dr. Mohsen Mamdouh")
+  tagline  String  @default("Details make the difference in anaesthesia")
   logoUrl  String?
 
   // SEO
@@ -327,18 +388,18 @@ model Settings {
   instagramUrl String?
 
   // Homepage CMS (EN/AR pairs the storefront reads directly)
-  heroEyebrowEn  String?
-  heroEyebrowAr  String?
-  heroTitleEn    String?
-  heroTitleAr    String?
-  heroLeadEn     String? @db.Text
-  heroLeadAr     String? @db.Text
-  heroImageUrl   String?
-  heroImage2Url  String?
-  heroImage3Url  String?
-  aboutLeadEn    String? @db.Text
-  aboutLeadAr    String? @db.Text
-  aboutImageUrl  String?
+  heroEyebrowEn String?
+  heroEyebrowAr String?
+  heroTitleEn   String?
+  heroTitleAr   String?
+  heroLeadEn    String? @db.Text
+  heroLeadAr    String? @db.Text
+  heroImageUrl  String?
+  heroImage2Url String?
+  heroImage3Url String?
+  aboutLeadEn   String? @db.Text
+  aboutLeadAr   String? @db.Text
+  aboutImageUrl String?
 
   // Feature toggles
   blogEnabled       Boolean @default(true)

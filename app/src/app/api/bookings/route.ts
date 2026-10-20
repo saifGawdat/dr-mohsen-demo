@@ -44,6 +44,11 @@ export async function POST(request: NextRequest) {
       age: form.get("age") || undefined,
       complaint: form.get("complaint") || "",
       preferredDate: form.get("preferredDate") || "",
+      preferredTime: form.get("preferredTime") || "",
+      serviceType: form.get("serviceType") || undefined,
+      clinic: form.get("clinic") || "",
+      city: form.get("city") || "",
+      conditions: parseStringArray(form.get("conditions")),
       doctorId: form.get("doctorId") || "",
       specialtySlug: form.get("specialtySlug") || "",
       notes: form.get("notes") || "",
@@ -117,6 +122,11 @@ export async function POST(request: NextRequest) {
         age: data.age ?? null,
         complaint: data.complaint || null,
         preferredDate: data.preferredDate ? new Date(data.preferredDate) : null,
+        preferredTime: data.preferredTime || null,
+        serviceType: data.serviceType ?? "clinic",
+        clinic: data.clinic || null,
+        city: data.city || null,
+        conditions: data.conditions ?? [],
         notes: data.notes || null,
         consent: true,
         doctorId,
@@ -196,6 +206,17 @@ async function notifyClinic(
     }
   } catch {
     // logged by sendEmail; nothing else to do
+  }
+}
+
+/** Multipart arrays arrive as a JSON string; anything else is ignored. */
+function parseStringArray(value: FormDataEntryValue | null): string[] | undefined {
+  if (typeof value !== "string" || !value.trim()) return undefined;
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : undefined;
+  } catch {
+    return undefined;
   }
 }
 
