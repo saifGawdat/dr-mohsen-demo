@@ -65,6 +65,7 @@ export const teamRequestSchema = z.object({
   fromDate: z.string().min(1, "Start date is required"),
   toDate: z.string().trim().max(40).optional().or(z.literal("")),
   casesPerDay: z.coerce.number().int().min(0).max(500).optional(),
+  casesPerWeek: z.coerce.number().int().min(0).max(500).optional(),
   daysPerWeek: z.coerce.number().int().min(0).max(7).optional(),
   notes: z.string().trim().max(2000).optional().or(z.literal("")),
   consent: z.literal(true, { message: "Consent is required" }),

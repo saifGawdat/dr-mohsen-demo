@@ -232,6 +232,7 @@ model TeamRequest {
   fromDate     DateTime
   toDate       DateTime?
   casesPerDay  Int?
+  casesPerWeek Int?
   daysPerWeek  Int?
   notes        String?             @db.Text
   consent      Boolean             @default(false)
