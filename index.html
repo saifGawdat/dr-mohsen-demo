@@ -187,20 +187,28 @@ html[dir="rtl"] .btn:hover i:not(.flip) { transform: translateX(-4px); }
   .m-nav .btn { display: none; }
 }
 
-/* mobile menu */
-.m-menu { position: fixed; inset: 0; z-index: 200; background: var(--blue-ink); color: #fff; padding: 30px var(--pad); display: flex; flex-direction: column; gap: 6px; opacity: 0; visibility: hidden; overflow-y: auto; transition: opacity .35s var(--ease), visibility .35s; }
-.m-menu.is-open { opacity: 1; visibility: visible; }
-.m-menu__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+/* side drawer */
+.m-menu { position: fixed; inset: 0; z-index: 200; visibility: hidden; pointer-events: none; }
+.m-menu.is-open { visibility: visible; pointer-events: auto; }
+.m-menu__scrim { position: absolute; inset: 0; background: rgba(12, 25, 54, .55); backdrop-filter: blur(2px); opacity: 0; transition: opacity .4s var(--ease); }
+.m-menu.is-open .m-menu__scrim { opacity: 1; }
+.m-menu__panel {
+  position: absolute; inset-block: 0; inset-inline-end: 0; width: min(420px, 100%);
+  display: flex; flex-direction: column; gap: 6px; overflow-y: auto;
+  background: var(--blue-ink); color: #fff;
+  padding: 30px clamp(22px, 4vw, 34px) 34px;
+  box-shadow: -24px 0 60px rgba(12, 25, 54, .35);
+  transform: translateX(100%);
+  transition: transform .45s var(--ease);
+}
+html[dir="rtl"] .m-menu__panel { box-shadow: 24px 0 60px rgba(12, 25, 54, .35); transform: translateX(-100%); }
+.m-menu.is-open .m-menu__panel { transform: none; }
+html[dir="rtl"] .m-menu.is-open .m-menu__panel { transform: none; }
+.m-menu__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: clamp(16px, 2.4vh, 26px); }
 .m-menu__top img { height: 40px; width: auto; }
 .m-menu__x { font-size: 28px; color: #fff; }
-.m-menu a { font-size: 22px; font-weight: 300; line-height: 1.45; padding-block: 14px; border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.m-menu a { font-size: clamp(19px, 2.2vh, 22px); font-weight: 300; line-height: 1.45; padding-block: clamp(10px, 1.4vh, 14px); border-bottom: 1px solid rgba(255, 255, 255, .12); }
 .m-menu .btn { margin-top: 26px; background: #fff; color: var(--blue-ink); }
-@media (min-width: 900px) {
-  .m-menu { padding-block: clamp(18px, 3vh, 30px); padding-inline: max(var(--pad), calc((100% - 760px) / 2)); }
-  .m-menu__top { margin-bottom: clamp(10px, 2vh, 26px); }
-  .m-menu a { font-size: clamp(22px, 2.4vh, 26px); padding-block: clamp(8px, 1.3vh, 16px); }
-  .m-menu .btn { margin-top: clamp(14px, 2.2vh, 26px); align-self: flex-start; padding-inline: 28px; }
-}
 
 /* =========================================================
    HERO
@@ -1295,19 +1303,22 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
 
 <!-- ============================= MOBILE MENU ============================= -->
 <div class="m-menu" id="site-menu" data-menu aria-hidden="true">
-  <div class="m-menu__top">
-    <img src="assets/logo-white.png" alt="د. محسن ممدوح">
-    <button class="m-menu__x" type="button" data-menu-close aria-label="إغلاق"><i class="ph-light ph-x"></i></button>
+  <button class="m-menu__scrim" type="button" tabindex="-1" aria-hidden="true" data-menu-close></button>
+  <div class="m-menu__panel" role="dialog" aria-modal="true" aria-label="القائمة">
+    <div class="m-menu__top">
+      <img src="assets/logo-white.png" alt="د. محسن ممدوح">
+      <button class="m-menu__x" type="button" data-menu-close aria-label="إغلاق"><i class="ph-light ph-x"></i></button>
+    </div>
+    <a href="#team" data-menu-close><span class="en">Anaesthesia team</span><span class="ar">فريق التخدير</span></a>
+    <a href="#specialties" data-menu-close><span class="en">Specialties</span><span class="ar">التخصصات</span></a>
+    <a href="#doctors" data-menu-close><span class="en">Doctors</span><span class="ar">الأطباء</span></a>
+    <a href="#procedures" data-menu-close><span class="en">Procedures</span><span class="ar">العمليات</span></a>
+    <a href="#booking" data-menu-close><span class="en">Online booking</span><span class="ar">الحجز أونلاين</span></a>
+    <a href="#faq" data-menu-close><span class="en">FAQ</span><span class="ar">أسئلة شائعة</span></a>
+    <a href="#contact" data-menu-close><span class="en">Contact</span><span class="ar">تواصل</span></a>
+    <button class="btn" type="button" data-team-request><span class="en">Request an anaesthesia team</span><span class="ar">اطلب فريق تخدير</span></button>
+    <a class="btn btn--wa" href="#" data-wa><i class="ph-fill ph-whatsapp-logo"></i><span class="en">Chat on WhatsApp</span><span class="ar">كلّمنا واتساب</span></a>
   </div>
-  <a href="#team" data-menu-close><span class="en">Anaesthesia team</span><span class="ar">فريق التخدير</span></a>
-  <a href="#specialties" data-menu-close><span class="en">Specialties</span><span class="ar">التخصصات</span></a>
-  <a href="#doctors" data-menu-close><span class="en">Doctors</span><span class="ar">الأطباء</span></a>
-  <a href="#procedures" data-menu-close><span class="en">Procedures</span><span class="ar">العمليات</span></a>
-  <a href="#booking" data-menu-close><span class="en">Online booking</span><span class="ar">الحجز أونلاين</span></a>
-  <a href="#faq" data-menu-close><span class="en">FAQ</span><span class="ar">أسئلة شائعة</span></a>
-  <a href="#contact" data-menu-close><span class="en">Contact</span><span class="ar">تواصل</span></a>
-  <button class="btn" type="button" data-team-request><span class="en">Request an anaesthesia team</span><span class="ar">اطلب فريق تخدير</span></button>
-  <a class="btn btn--wa" href="#" data-wa><i class="ph-fill ph-whatsapp-logo"></i><span class="en">Chat on WhatsApp</span><span class="ar">كلّمنا واتساب</span></a>
 </div>
 
 <main id="top">
