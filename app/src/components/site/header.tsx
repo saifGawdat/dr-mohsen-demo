@@ -14,15 +14,6 @@ interface Props {
   whatsapp: string | null;
 }
 
-const NAV = [
-  { href: "#team", en: "Anaesthesia team", ar: "فريق التخدير" },
-  { href: "#specialties", en: "Specialties", ar: "التخصصات" },
-  { href: "#doctors", en: "Doctors", ar: "الأطباء" },
-  { href: "#procedures", en: "Procedures", ar: "العمليات" },
-  { href: "#faq", en: "FAQ", ar: "أسئلة شائعة" },
-  { href: "#contact", en: "Contact", ar: "تواصل" },
-] as const;
-
 const MENU = [
   { href: "#team", en: "Anaesthesia team", ar: "فريق التخدير" },
   { href: "#specialties", en: "Specialties", ar: "التخصصات" },
@@ -36,6 +27,7 @@ const MENU = [
 export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props) {
   const [solid, setSolid] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const burgerRef = React.useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
   // The nav is transparent over the hero and solid after 60px, as designed.
@@ -46,13 +38,24 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock the page behind the full-screen drawer.
+  // Lock the page behind the drawer and let Escape close it.
   React.useEffect(() => {
     if (!menuOpen) return;
-    const previous = document.body.style.overflow;
+    const root = document.documentElement;
+    const previousBody = document.body.style.overflow;
+    const previousRoot = root.style.overflow;
     document.body.style.overflow = "hidden";
+    root.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      burgerRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = previous;
+      document.body.style.overflow = previousBody;
+      root.style.overflow = previousRoot;
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, [menuOpen]);
 
@@ -76,14 +79,6 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
             <img className="is-dark" src={darkLogo} alt={siteName} />
           </a>
 
-          <nav className="m-nav__links" aria-label="أقسام الموقع">
-            {NAV.map((item) => (
-              <a key={item.href} href={item.href}>
-                <Bi en={item.en} ar={item.ar} />
-              </a>
-            ))}
-          </nav>
-
           <div className="m-nav__end">
             {phone && (
               <a className="m-nav__tel" href={`tel:${phoneDigits(phone)}`}>
@@ -106,11 +101,13 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
               <Bi en="Book online" ar="احجز أونلاين" />
             </a>
             <button
+              ref={burgerRef}
               className="m-nav__burger"
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="القائمة"
               aria-expanded={menuOpen}
+              aria-controls="site-menu"
             >
               <i className="ph-light ph-list" aria-hidden="true" />
             </button>
@@ -118,7 +115,12 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
         </div>
       </header>
 
-      <div className={`m-menu${menuOpen ? " is-open" : ""}`} data-menu aria-hidden={!menuOpen}>
+      <div
+        id="site-menu"
+        className={`m-menu${menuOpen ? " is-open" : ""}`}
+        data-menu
+        aria-hidden={!menuOpen}
+      >
         <div className="m-menu__top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/logo-white.png" alt={siteName} />
