@@ -121,40 +121,54 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
         data-menu
         aria-hidden={!menuOpen}
       >
-        <div className="m-menu__top">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo-white.png" alt={siteName} />
-          <button className="m-menu__x" type="button" onClick={() => setMenuOpen(false)} aria-label="إغلاق">
-            <i className="ph-light ph-x" aria-hidden="true" />
-          </button>
-        </div>
-        {MENU.map((item) => (
-          <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
-            <Bi en={item.en} ar={item.ar} />
-          </a>
-        ))}
-        <button className="btn" type="button" data-team-request onClick={() => setMenuOpen(false)}>
-          <Bi en="Request an anaesthesia team" ar="اطلب فريق تخدير" />
-        </button>
-        <a
-          className="btn btn--wa"
-          href={
-            whatsapp
-              ? waLink(
-                  whatsapp,
-                  locale === "ar"
-                    ? "السلام عليكم، مع فريق د. محسن ممدوح. عايز أحجز موعد أو أستفسر عن حالة."
-                    : "Hello Dr. Mohsen's team, I would like to book an appointment."
-                )
-              : "#contact"
-          }
-          target={whatsapp ? "_blank" : undefined}
-          rel={whatsapp ? "noopener" : undefined}
+        <button
+          className="m-menu__scrim"
+          type="button"
+          tabIndex={-1}
+          aria-hidden="true"
           onClick={() => setMenuOpen(false)}
-        >
-          <i className="ph-fill ph-whatsapp-logo" aria-hidden="true" />
-          <Bi en="Chat on WhatsApp" ar="كلّمنا واتساب" />
-        </a>
+        />
+        <div className="m-menu__panel" role="dialog" aria-modal="true" aria-label="القائمة">
+          <div className="m-menu__top">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/logo-white.png" alt={siteName} />
+            <button
+              className="m-menu__x"
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              aria-label="إغلاق"
+            >
+              <i className="ph-light ph-x" aria-hidden="true" />
+            </button>
+          </div>
+          {MENU.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+              <Bi en={item.en} ar={item.ar} />
+            </a>
+          ))}
+          <button className="btn" type="button" data-team-request onClick={() => setMenuOpen(false)}>
+            <Bi en="Request an anaesthesia team" ar="اطلب فريق تخدير" />
+          </button>
+          <a
+            className="btn btn--wa"
+            href={
+              whatsapp
+                ? waLink(
+                    whatsapp,
+                    locale === "ar"
+                      ? "السلام عليكم، مع فريق د. محسن ممدوح. عايز أحجز موعد أو أستفسر عن حالة."
+                      : "Hello Dr. Mohsen's team, I would like to book an appointment."
+                  )
+                : "#contact"
+            }
+            target={whatsapp ? "_blank" : undefined}
+            rel={whatsapp ? "noopener" : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
+            <i className="ph-fill ph-whatsapp-logo" aria-hidden="true" />
+            <Bi en="Chat on WhatsApp" ar="كلّمنا واتساب" />
+          </a>
+        </div>
       </div>
     </>
   );
