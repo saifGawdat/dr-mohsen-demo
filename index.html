@@ -167,9 +167,6 @@ html[dir="rtl"] .btn:hover i:not(.flip) { transform: translateX(-4px); }
 .m-nav__logo .is-dark { display: none; }
 .m-nav.is-solid .m-nav__logo .is-dark { display: block; }
 .m-nav.is-solid .m-nav__logo .is-light { display: none; }
-.m-nav__links { display: flex; gap: 24px; font-size: 15px; margin-inline-start: 14px; }
-.m-nav__links a { opacity: .9; padding-block: 6px; border-bottom: 1px solid transparent; transition: border-color .3s, opacity .3s; }
-.m-nav__links a:hover { opacity: 1; border-color: var(--teal); }
 .m-nav__end { margin-inline-start: auto; display: flex; align-items: center; gap: 18px; }
 .m-nav__tel { font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
 .m-lang { display: flex; align-items: center; gap: 7px; font-size: 14px; }
@@ -180,10 +177,9 @@ html[dir="rtl"] .btn:hover i:not(.flip) { transform: translateX(-4px); }
 .m-nav:not(.is-solid) .m-nav__logo .is-light { display: block; }
 .m-nav:not(.is-solid) .m-lang button[aria-pressed="true"] { border-color: #fff; }
 .m-nav.is-solid { color: var(--ink); }
-.m-nav__burger { display: none; font-size: 27px; }
+.m-nav__burger { display: block; font-size: 27px; }
 @media (max-width: 1180px) {
-  .m-nav__links, .m-nav__tel { display: none; }
-  .m-nav__burger { display: block; }
+  .m-nav__tel { display: none; }
 }
 @media (max-width: 640px) {
   .m-nav__logo img { height: 36px; }
@@ -192,13 +188,19 @@ html[dir="rtl"] .btn:hover i:not(.flip) { transform: translateX(-4px); }
 }
 
 /* mobile menu */
-.m-menu { position: fixed; inset: 0; z-index: 200; background: var(--blue-ink); color: #fff; padding: 30px var(--pad); display: flex; flex-direction: column; gap: 6px; opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), visibility .35s; }
+.m-menu { position: fixed; inset: 0; z-index: 200; background: var(--blue-ink); color: #fff; padding: 30px var(--pad); display: flex; flex-direction: column; gap: 6px; opacity: 0; visibility: hidden; overflow-y: auto; transition: opacity .35s var(--ease), visibility .35s; }
 .m-menu.is-open { opacity: 1; visibility: visible; }
 .m-menu__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
 .m-menu__top img { height: 40px; width: auto; }
 .m-menu__x { font-size: 28px; color: #fff; }
-.m-menu a { font-size: 22px; font-weight: 300; padding-block: 14px; border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.m-menu a { font-size: 22px; font-weight: 300; line-height: 1.45; padding-block: 14px; border-bottom: 1px solid rgba(255, 255, 255, .12); }
 .m-menu .btn { margin-top: 26px; background: #fff; color: var(--blue-ink); }
+@media (min-width: 900px) {
+  .m-menu { padding-block: clamp(18px, 3vh, 30px); padding-inline: max(var(--pad), calc((100% - 760px) / 2)); }
+  .m-menu__top { margin-bottom: clamp(10px, 2vh, 26px); }
+  .m-menu a { font-size: clamp(22px, 2.4vh, 26px); padding-block: clamp(8px, 1.3vh, 16px); }
+  .m-menu .btn { margin-top: clamp(14px, 2.2vh, 26px); align-self: flex-start; padding-inline: 28px; }
+}
 
 /* =========================================================
    HERO
@@ -1186,8 +1188,29 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
     onScroll();
 
     var menu = $("[data-menu]");
-    $$("[data-menu-open]").forEach(function (b) { b.addEventListener("click", function () { menu.classList.add("is-open"); document.body.style.overflow = "hidden"; }); });
-    $$("[data-menu-close]").forEach(function (b) { b.addEventListener("click", function () { menu.classList.remove("is-open"); document.body.style.overflow = ""; }); });
+    var burger = $("[data-menu-open]");
+    function openMenu() {
+      if (!menu) return;
+      menu.classList.add("is-open");
+      menu.setAttribute("aria-hidden", "false");
+      if (burger) burger.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    }
+    function closeMenu(restoreFocus) {
+      if (!menu) return;
+      menu.classList.remove("is-open");
+      menu.setAttribute("aria-hidden", "true");
+      if (burger) burger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      if (restoreFocus && burger) burger.focus();
+    }
+    $$("[data-menu-open]").forEach(function (b) { b.addEventListener("click", openMenu); });
+    $$("[data-menu-close]").forEach(function (b) { b.addEventListener("click", function () { closeMenu(false); }); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu && menu.classList.contains("is-open")) closeMenu(true);
+    });
 
     // deep-link: quote / contact prefill for WhatsApp
     $$("[data-wa]").forEach(function (a) {
@@ -1259,27 +1282,19 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
       <img class="is-light" src="assets/logo-white.png" alt="د. محسن ممدوح">
       <img class="is-dark" src="assets/logo.png" alt="د. محسن ممدوح">
     </a>
-    <nav class="m-nav__links" aria-label="أقسام الموقع">
-      <a href="#team"><span class="en">Anaesthesia team</span><span class="ar">فريق التخدير</span></a>
-      <a href="#specialties"><span class="en">Specialties</span><span class="ar">التخصصات</span></a>
-      <a href="#doctors"><span class="en">Doctors</span><span class="ar">الأطباء</span></a>
-      <a href="#procedures"><span class="en">Procedures</span><span class="ar">العمليات</span></a>
-      <a href="#faq"><span class="en">FAQ</span><span class="ar">أسئلة شائعة</span></a>
-      <a href="#contact"><span class="en">Contact</span><span class="ar">تواصل</span></a>
-    </nav>
     <div class="m-nav__end">
       <a class="m-nav__tel" href="tel:+201234567890"><i class="ph-light ph-phone"></i><span class="ltr">+20 123 456 7890</span></a>
       <div class="m-lang" data-lang-switch>
         <button type="button" data-set-lang="ar" aria-pressed="true">عربي</button><span aria-hidden="true">/</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button>
       </div>
       <a class="btn btn--sm" href="#booking"><span class="en">Book online</span><span class="ar">احجز أونلاين</span></a>
-      <button class="m-nav__burger" type="button" data-menu-open aria-label="القائمة"><i class="ph-light ph-list"></i></button>
+      <button class="m-nav__burger" type="button" data-menu-open aria-label="القائمة" aria-expanded="false" aria-controls="site-menu"><i class="ph-light ph-list"></i></button>
     </div>
   </div>
 </header>
 
 <!-- ============================= MOBILE MENU ============================= -->
-<div class="m-menu" data-menu>
+<div class="m-menu" id="site-menu" data-menu aria-hidden="true">
   <div class="m-menu__top">
     <img src="assets/logo-white.png" alt="د. محسن ممدوح">
     <button class="m-menu__x" type="button" data-menu-close aria-label="إغلاق"><i class="ph-light ph-x"></i></button>
