@@ -253,6 +253,11 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   .m-hero__media { order: -1; justify-content: flex-start; }
   .m-hero__frame { width: min(100%, 420px); height: clamp(300px, 46vh, 420px); border-radius: 20px; clip-path: none; }
   .m-hero__frame img { object-position: 50% 12%; }
+  /* Equal insets keep the name card centred on the photo instead of running
+     flush into the far edge once the frame is narrower than 380px. */
+  .m-hero__card { inset-inline: 16px; gap: 10px; padding: 10px 14px; }
+  .m-hero__card span { min-width: 0; }
+  .m-hero__card small { display: block; line-height: 1.5; text-wrap: balance; }
   .m-hero__mark { display: none; }
 }
 

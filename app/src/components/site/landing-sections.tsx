@@ -56,20 +56,23 @@ export function Hero({ heroImage }: MediaProps) {
           <figure className="m-hero__frame" data-parallax>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={heroImage} alt="د. محسن ممدوح — أخصائي تخدير وعلاج ألم" />
+            {/* The name card rides on the photo it describes: keeping it inside
+                the frame stops it drifting off the picture when the frame is
+                narrower than its column. */}
+            <div className="m-hero__card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/dr-mohsen-headshot.png" alt="" />
+              <span>
+                <b><Bi en="Dr. Mohsen Mamdouh" ar="د. محسن ممدوح" /></b>
+                <small>
+                  <Bi
+                    en="Anaesthetist · pain management · 57357 Children's Cancer Hospital"
+                    ar="تخدير وعلاج ألم · مستشفى 57357 لسرطان الأطفال"
+                  />
+                </small>
+              </span>
+            </div>
           </figure>
-          <div className="m-hero__card">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/dr-mohsen-headshot.png" alt="" />
-            <span>
-              <b><Bi en="Dr. Mohsen Mamdouh" ar="د. محسن ممدوح" /></b>
-              <small>
-                <Bi
-                  en="Anaesthetist · pain management · 57357 Children's Cancer Hospital"
-                  ar="تخدير وعلاج ألم · مستشفى 57357 لسرطان الأطفال"
-                />
-              </small>
-            </span>
-          </div>
         </div>
       </div>
     </section>
