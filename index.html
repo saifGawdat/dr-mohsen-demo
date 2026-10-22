@@ -1113,19 +1113,30 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
     var T = function (en, ar) { return lang() === "ar" ? ar : en; };
     var out = [];
     out.push([T("Request type", "نوع الطلب"), s.service ? labelOf("service", s.service) : ""]);
-    if (s.service !== "team") {
+    if (s.service === "team") {
+      out.push([T("Facility", "المنشأة"), (s.facility || "").trim()]);
+      out.push([T("City", "المدينة"), (s.facilityCity || "").trim()]);
+      out.push([T("Case mix", "نوع العمليات"), (s.mix || []).map(function (v) { return labelOfMulti("mix", v); }).join("، ")]);
+      out.push([T("Expected cases", "عدد الحالات"), (s.cases || "").trim()]);
+      out.push([T("From", "من تاريخ"), s.from || ""]);
+      out.push([T("To", "إلى تاريخ"), s.to || ""]);
+      out.push([T("Days per week", "أيام في الأسبوع"), (s.daysPerWeek || "").trim()]);
+      out.push([T("Contact person", "مسؤول التواصل"), (s.name || "").trim()]);
+      out.push([T("Role", "الوظيفة"), (s.role || "").trim()]);
+      out.push([T("Mobile", "الموبايل"), (s.phone || "").trim()]);
+    } else {
       out.push([T("Specialty", "التخصص"), s.specialty ? labelOf("specialty", s.specialty) : ""]);
       out.push([T("Doctor", "الطبيب"), s.doctor ? labelOf("doctor", s.doctor) : (s.specialty ? T("Team will assign", "يحدده الفريق") : "")]);
       out.push([T("Clinic / hospital", "العيادة / المستشفى"), s.clinic ? labelOf("clinic", s.clinic) : ""]);
       out.push([T("Preferred time", "الموعد المفضل"), s.date ? fmtDate(new Date(s.date + "T00:00"), { weekday: "long", day: "numeric", month: "long" }) + (s.time ? " — " + fmtTime(s.time) : "") : ""]);
+      out.push([T("Name", "الاسم"), (s.name || "").trim()]);
+      out.push([T("Mobile", "الموبايل"), (s.phone || "").trim()]);
+      out.push([T("Age", "السن"), (s.age || "").trim()]);
+      out.push([T("City", "المدينة"), (s.city || "").trim()]);
+      out.push([T("Chief complaint", "الشكوى الحالية"), (s.complaint || "").trim()]);
+      out.push([T("Chronic conditions", "أمراض مزمنة"), (s.conds || []).map(function (v) { return labelOfMulti("conds", v); }).join("، ")]);
+      out.push([T("Uploaded files", "الملفات المرفوعة"), s.files.length ? String(s.files.length) : ""]);
     }
-    out.push([T("Name", "الاسم"), (s.name || "").trim()]);
-    out.push([T("Mobile", "الموبايل"), (s.phone || "").trim()]);
-    out.push([T("Age", "السن"), (s.age || "").trim()]);
-    out.push([T("City", "المدينة"), (s.city || "").trim()]);
-    out.push([T("Chief complaint", "الشكوى الحالية"), (s.complaint || "").trim()]);
-    out.push([T("Chronic conditions", "أمراض مزمنة"), (s.conds || []).map(function (v) { return labelOfMulti("conds", v); }).join("، ")]);
-    out.push([T("Uploaded files", "الملفات المرفوعة"), s.files.length ? String(s.files.length) : ""]);
     out.push([T("Notes", "ملاحظات"), (s.notes || "").trim()]);
     return out;
   }
