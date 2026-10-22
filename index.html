@@ -255,6 +255,11 @@ html[dir="rtl"] .m-menu.is-open .m-menu__panel { transform: none; }
   .m-hero__media { order: -1; justify-content: flex-start; }
   .m-hero__frame { width: min(100%, 420px); height: clamp(300px, 46vh, 420px); border-radius: 20px; clip-path: none; }
   .m-hero__frame img { object-position: 50% 12%; }
+  /* Equal insets keep the name card centred on the photo instead of running
+     flush into the far edge once the frame is narrower than 380px. */
+  .m-hero__card { inset-inline: 16px; gap: 10px; padding: 10px 14px; }
+  .m-hero__card span { min-width: 0; }
+  .m-hero__card small { display: block; line-height: 1.5; text-wrap: balance; }
   .m-hero__mark { display: none; }
 }
 
@@ -1344,14 +1349,14 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
     <div class="m-hero__media">
       <figure class="m-hero__frame" data-parallax>
         <img src="assets/dr-mohsen-suit.png" alt="د. محسن ممدوح — أخصائي تخدير وعلاج ألم">
+        <div class="m-hero__card">
+          <img src="assets/dr-mohsen-headshot.png" alt="">
+          <span>
+            <b><span class="en">Dr. Mohsen Mamdouh</span><span class="ar">د. محسن ممدوح</span></b>
+            <small><span class="en">Anaesthetist · pain management · 57357 Children's Cancer Hospital</span><span class="ar">تخدير وعلاج ألم · مستشفى 57357 لسرطان الأطفال</span></small>
+          </span>
+        </div>
       </figure>
-      <div class="m-hero__card">
-        <img src="assets/dr-mohsen-headshot.png" alt="">
-        <span>
-          <b><span class="en">Dr. Mohsen Mamdouh</span><span class="ar">د. محسن ممدوح</span></b>
-          <small><span class="en">Anaesthetist · pain management · 57357 Children's Cancer Hospital</span><span class="ar">تخدير وعلاج ألم · مستشفى 57357 لسرطان الأطفال</span></small>
-        </span>
-      </div>
     </div>
   </div>
 </section>
