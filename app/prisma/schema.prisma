@@ -117,6 +117,9 @@ model Doctor {
   cityAr          String?
   experienceYears Int?
   photoUrl        String?
+  phone           String?
+  // Public editorial content only; never patient records or identifiable cases.
+  profile         Json       @default("{}")
   // The lead profile at the top of the directory (Dr. Mohsen).
   featured        Boolean    @default(false)
   specialty       Specialty? @relation(fields: [specialtyId], references: [id], onDelete: SetNull)

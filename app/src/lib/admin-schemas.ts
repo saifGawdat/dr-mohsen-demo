@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { doctorProfileSchema } from "./doctor-profile";
 
 /**
  * Shared admin form schemas. They live here — not in the route files —
@@ -8,6 +9,8 @@ import { z } from "zod";
  */
 
 export const doctorSchema = z.object({
+  phone: z.string().trim().max(40).regex(/^[+0-9() \-]*$/, "Enter a valid phone number").optional(),
+  profile: doctorProfileSchema.optional(),
   nameEn: z.string().trim().min(2).max(160),
   nameAr: z.string().trim().min(2).max(160),
   titleEn: z.string().trim().max(200).optional().or(z.literal("")),

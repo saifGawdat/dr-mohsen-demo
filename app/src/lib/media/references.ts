@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { doctorProfileImages, readDoctorProfile } from "@/lib/doctor-profile";
 import { OUTPUT_EXT } from "./config";
 
 /**
@@ -49,6 +50,10 @@ const REFERENCE_URL_SOURCES: {
   {
     label: "User.image",
     load: () => prisma.user.findMany({ where: { image: { not: null } }, select: { image: true } }).then((r) => r.map((x) => x.image)),
+  },
+  {
+    label: "Doctor.profile",
+    load: () => prisma.doctor.findMany({ select: { profile: true } }).then((rows) => rows.flatMap((row) => doctorProfileImages(readDoctorProfile(row.profile)))),
   },
   {
     label: "Doctor.photoUrl",

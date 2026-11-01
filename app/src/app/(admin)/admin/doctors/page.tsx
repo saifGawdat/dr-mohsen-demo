@@ -4,11 +4,15 @@ import * as React from "react";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Pencil, Plus } from "lucide-react";
+import { DoctorProfileEditor } from "@/components/admin/doctor-profile-editor";
+import { readDoctorProfile, type DoctorProfile } from "@/lib/doctor-profile";
 import { MediaPicker } from "@/components/admin/media-picker";
 import { EmptyRow, PageHeader, Td, Th } from "@/components/admin/ui";
 
 interface Doctor {
   id: string;
+  phone: string | null;
+  profile: DoctorProfile;
   nameEn: string;
   nameAr: string;
   titleEn: string | null;
@@ -31,6 +35,8 @@ interface Specialty {
 }
 
 interface FormState {
+  phone: string;
+  profile: DoctorProfile;
   nameEn: string;
   nameAr: string;
   titleEn: string;
@@ -46,6 +52,8 @@ interface FormState {
 }
 
 const EMPTY: FormState = {
+  phone: "",
+  profile: readDoctorProfile({}),
   nameEn: "",
   nameAr: "",
   titleEn: "",
@@ -91,6 +99,8 @@ export default function DoctorsPage() {
       setEditing("new");
     } else {
       setForm({
+        phone: doctor.phone ?? "",
+        profile: readDoctorProfile(doctor.profile),
         nameEn: doctor.nameEn,
         nameAr: doctor.nameAr,
         titleEn: doctor.titleEn ?? "",
@@ -164,6 +174,8 @@ export default function DoctorsPage() {
 
   function toForm(d: Doctor): FormState {
     return {
+      phone: d.phone ?? "",
+      profile: readDoctorProfile(d.profile),
       nameEn: d.nameEn,
       nameAr: d.nameAr,
       titleEn: d.titleEn ?? "",
@@ -336,6 +348,12 @@ export default function DoctorsPage() {
               <input type="checkbox" checked={form.active} onChange={(e) => set("active")(e.target.checked)} />
               Visible on the storefront
             </label>
+
+            <label className="block">
+              <span className="block text-sm font-medium mb-1">Public phone number</span>
+              <input type="tel" value={form.phone} onChange={(e) => set("phone")(e.target.value)} className={input} />
+            </label>
+            <DoctorProfileEditor value={form.profile} onChange={(profile) => setForm((f) => ({ ...f, profile }))} />
 
             <MediaPicker
               label="Photo"

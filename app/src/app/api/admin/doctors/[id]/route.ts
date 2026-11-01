@@ -24,6 +24,8 @@ export async function PATCH(
   const doctor = await prisma.doctor.update({
     where: { id },
     data: {
+      phone: d.phone || null,
+      profile: d.profile,
       nameEn: d.nameEn,
       nameAr: d.nameAr,
       titleEn: d.titleEn || null,

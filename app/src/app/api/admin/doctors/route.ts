@@ -34,6 +34,8 @@ export async function POST(request: NextRequest) {
   const doctor = await prisma.doctor.create({
     data: {
       slug: `dr-${nano()}`,
+      phone: d.phone || null,
+      profile: d.profile,
       nameEn: d.nameEn,
       nameAr: d.nameAr,
       titleEn: d.titleEn || null,
