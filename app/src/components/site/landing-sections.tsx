@@ -13,70 +13,25 @@ const WA_TEXT: Record<Locale, string> = {
   en: "Hello Dr. Mohsen's team, I would like to book an appointment.",
 };
 
-export function Hero({ heroImage }: MediaProps) {
-  return (
-    <section className="m-hero">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="m-hero__mark" src="/brand/pca-logo-mark-white.png" alt="" aria-hidden="true" />
-      <div className="wrap m-hero__inner">
-        <div className="m-hero__text">
-          <span className="eyebrow m-hero__eyebrow">
-            <Bi
-              en="Dr. Mohsen Mamdouh — Anaesthetist &amp; pain management"
-              ar="د. محسن ممدوح — أخصائي تخدير وعلاج ألم"
-            />
-          </span>
-          <h1>
-            <span><Bi en="Details make" ar="التفاصيل.." /></span>
-            <span>
-              <Bi
-                en={<>the difference in <em>anaesthesia</em></>}
-                ar={<>بتفرق في <em>التخدير</em></>}
-              />
-            </span>
-          </h1>
-          <p className="m-hero__lead">
-            <Bi
-              en="A complete anaesthesia team for any hospital, surgical centre or clinic that needs one at the highest level — plus a network of doctors across every specialty: dentistry, gynaecology, aesthetics, ENT and more. Book online and upload your labs and scans before the visit."
-              ar="فريق تخدير متكامل لأي مستشفى أو مركز جراحي أو عيادة محتاجة فريق بأعلى مستوى — ومعاه شبكة أطباء في كل التخصصات: أسنان، نساء وتوليد، تجميل، أنف وأذن وغيرها. احجز أونلاين وارفع تحاليلك وأشعتك قبل الكشف."
-            />
-          </p>
-          <div className="m-hero__cta" data-fade>
-            <a className="btn btn--light" href="#booking">
-              <Bi en="Book online" ar="احجز أونلاين" />
-              <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
-            </a>
-            <button className="link" type="button" data-team-request>
-              <Bi en="Request an anaesthesia team" ar="اطلب فريق تخدير" />
-              <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-        <div className="m-hero__media">
-          <figure className="m-hero__frame" data-parallax>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={heroImage} alt="د. محسن ممدوح — أخصائي تخدير وعلاج ألم" />
-            {/* The name card rides on the photo it describes: keeping it inside
-                the frame stops it drifting off the picture when the frame is
-                narrower than its column. */}
-            <div className="m-hero__card">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/dr-mohsen-headshot.png" alt="" />
-              <span>
-                <b><Bi en="Dr. Mohsen Mamdouh" ar="د. محسن ممدوح" /></b>
-                <small>
-                  <Bi
-                    en="Anaesthetist · pain management · 57357 Children's Cancer Hospital"
-                    ar="تخدير وعلاج ألم · مستشفى 57357 لسرطان الأطفال"
-                  />
-                </small>
-              </span>
-            </div>
-          </figure>
+export function Hero() {
+  return <section className="m-hero m-clinic-hero">
+    <div className="wrap m-hero__inner">
+      <div className="m-hero__text">
+        <span className="eyebrow"><Bi en="Welcome to PCA Clinic" ar="أهلاً بيك في عيادة PCA" /></span>
+        <h1><Bi en="Care that starts with understanding you." ar="رعاية بتبدأ بفهم حالتك." /></h1>
+        <p className="m-hero__lead"><Bi en="Consultant doctors, pain management and an anaesthesia team. Get to know your doctor and request an appointment with PCA Clinic." ar="دكاترة استشاريين، وعلاج ألم، وفريق تخدير. اعرف دكتورك واطلب ميعادك مع عيادة PCA." /></p>
+        <div className="m-hero__cta">
+          <a className="btn btn--light" href="#doctors"><Bi en="Meet our doctors" ar="اعرف دكاترتنا" /></a>
+          <a className="link" href="#team"><Bi en="Dr. Mohsen & the team" ar="د. محسن وفريق التخدير" /></a>
         </div>
       </div>
-    </section>
-  );
+      <div className="m-clinic-hero__brand">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/pca-logo-white.png" alt="PCA Clinic" />
+        <p><Bi en="Pain care · Consultant doctors · Anaesthesia" ar="علاج ألم · دكاترة استشاريين · تخدير" /></p>
+      </div>
+    </div>
+  </section>;
 }
 
 export function TrustStrip() {

@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { Bi } from "@/components/site/bilingual";
 import { phoneDigits, waLink } from "@/lib/site-format";
@@ -29,6 +30,7 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
   const [menuOpen, setMenuOpen] = React.useState(false);
   const burgerRef = React.useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   // The nav is transparent over the hero and solid after 60px, as designed.
   React.useEffect(() => {
@@ -63,7 +65,7 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
     setMenuOpen(false);
     if (next === locale) return;
     const hash = typeof window === "undefined" ? "" : window.location.hash;
-    router.push(`/${next}${hash}`);
+    router.push(`${pathname.replace(/^\/(ar|en)(?=\/|$)/, `/${next}`)}${hash}`);
   };
 
   const darkLogo = logoUrl || "/brand/pca-logo-full.png";
@@ -72,12 +74,12 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
     <>
       <header className={`m-nav${solid ? " is-solid" : ""}`}>
         <div className="wrap">
-          <a className="m-nav__logo" href="#top" aria-label={siteName}>
+          <Link className="m-nav__logo" href={`/${locale}#top`} aria-label={siteName}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="is-light" src="/brand/pca-logo-white.png" alt={siteName} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="is-dark" src={darkLogo} alt={siteName} />
-          </a>
+          </Link>
 
           <div className="m-nav__end">
             {phone && (
@@ -142,9 +144,9 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
             </button>
           </div>
           {MENU.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+            <Link key={item.href} href={item.href === "#booking" ? "#booking" : `/${locale}${item.href}`} onClick={() => setMenuOpen(false)}>
               <Bi en={item.en} ar={item.ar} />
-            </a>
+            </Link>
           ))}
           <button className="btn" type="button" data-team-request onClick={() => setMenuOpen(false)}>
             <Bi en="Request an anaesthesia team" ar="اطلب فريق تخدير" />

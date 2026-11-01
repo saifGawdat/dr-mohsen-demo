@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { Bi } from "@/components/site/bilingual";
 import { phoneDigits, waLink } from "@/lib/site-format";
@@ -57,7 +58,7 @@ export function SiteFooter({ locale, siteName, phone, email, whatsapp }: Props) 
             <ul>
               {EXPLORE.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href}><Bi en={item.en} ar={item.ar} /></a>
+                  <Link href={`/${locale}${item.href}`}><Bi en={item.en} ar={item.ar} /></Link>
                 </li>
               ))}
             </ul>
@@ -68,7 +69,7 @@ export function SiteFooter({ locale, siteName, phone, email, whatsapp }: Props) 
             <ul>
               {SPECIALTIES.map((item) => (
                 <li key={item.slug}>
-                  <a href="#doctors" data-goto-spec={item.slug}>
+                  <a href={`/${locale}#doctors`} data-goto-spec={item.slug}>
                     <Bi en={item.en} ar={item.ar} />
                   </a>
                 </li>

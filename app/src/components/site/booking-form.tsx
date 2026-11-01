@@ -31,6 +31,8 @@ interface Props {
   specialties: BookingSpecialty[];
   whatsapp: string | null;
   phone: string | null;
+  initialDoctorId?: string;
+  clinics?: { value: string; en: string; ar: string }[];
 }
 
 type Service = "clinic" | "surgery" | "team";
@@ -136,9 +138,11 @@ function fileSize(bytes: number): string {
     : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
-export function BookingForm({ locale, doctors, specialties, whatsapp, phone }: Props) {
-  const [state, setState] = React.useState<BookingState>({ files: [] });
-  const [step, setStep] = React.useState(1);
+export function BookingForm({ locale, doctors, specialties, whatsapp, phone, initialDoctorId, clinics }: Props) {
+  const clinicOptions = clinics?.length ? clinics : CLINICS;
+  const initialDoctor = doctors.find((doctor) => doctor.id === initialDoctorId);
+  const [state, setState] = React.useState<BookingState>({ files: [], ...(initialDoctor ? { service: "clinic", doctor: initialDoctor.id, specialty: initialDoctor.specialtySlug } : {}) });
+  const [step, setStep] = React.useState(initialDoctor ? 2 : 1);
   const [errors, setErrors] = React.useState<Record<string, string>>({});
   const [stepError, setStepError] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
@@ -247,7 +251,7 @@ export function BookingForm({ locale, doctors, specialties, whatsapp, phone }: P
       return found ? t(found.nameEn, found.nameAr) : "";
     }
     if (key === "clinic") {
-      const found = CLINICS.find((item) => item.value === value);
+      const found = clinicOptions.find((item) => item.value === value);
       return found ? t(found.en, found.ar) : value;
     }
     return value;
@@ -615,7 +619,7 @@ export function BookingForm({ locale, doctors, specialties, whatsapp, phone }: P
                 <div className="m-sub">
                   <span className="m-sub__label"><Bi en="Preferred clinic or hospital" ar="العيادة أو المستشفى المفضل" /></span>
                   <div className="m-chips">
-                    {CLINICS.map((clinic) => (
+                    {clinicOptions.map((clinic) => (
                       <button
                         className="m-chip"
                         type="button"

@@ -15,7 +15,7 @@ import {
   WhySection,
 } from "@/components/site/landing-sections";
 import { SpecialtiesSection } from "@/components/site/specialties-section";
-import { DoctorsSection, type DoctorCard } from "@/components/site/doctors-section";
+import { DoctorsSection, LeadDoctor, type DoctorCard } from "@/components/site/doctors-section";
 import { ProceduresSection } from "@/components/site/procedures-section";
 import { BookingForm } from "@/components/site/booking-form";
 import { TeamRequestSheet } from "@/components/site/team-request-sheet";
@@ -84,13 +84,14 @@ export default async function LandingPage({ params }: Props) {
   return (
     <>
       <main id="top">
-        <Hero heroImage={heroImage} aboutImage={aboutImage} />
+        <Hero />
+        <LeadDoctor doctor={doctorCards.find((doctor) => doctor.featured)} />
+        <TeamSection aboutImage={aboutImage} heroImage={heroImage} whatsapp={whatsapp} />
+        <DoctorsSection doctors={doctorCards} />
         <TrustStrip />
         <TwoDoors />
-        <TeamSection aboutImage={aboutImage} heroImage={heroImage} whatsapp={whatsapp} />
         <WhySection />
         <SpecialtiesSection specialties={specialties} />
-        <DoctorsSection doctors={doctorCards} />
         <ProceduresSection
           locale={locale}
           procedures={procedures}

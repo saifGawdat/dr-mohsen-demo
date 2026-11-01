@@ -75,7 +75,7 @@ export function SiteBehavior() {
       }
 
       const specialtyTrigger = target.closest<HTMLElement>("[data-goto-spec]");
-      if (specialtyTrigger) {
+      if (specialtyTrigger && document.getElementById("doctors")) {
         event.preventDefault();
         window.dispatchEvent(
           new CustomEvent("mm:filter-doctors", {

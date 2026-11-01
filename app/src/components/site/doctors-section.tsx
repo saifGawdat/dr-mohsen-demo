@@ -1,8 +1,12 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- Library images are already optimized by the upload pipeline. */
+
 import * as React from "react";
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Bi } from "@/components/site/bilingual";
-import { doctorInitials, experienceLabel } from "@/lib/site-format";
+import { doctorInitials } from "@/lib/site-format";
 
 export interface DoctorCard {
   id: string;
@@ -19,24 +23,40 @@ export interface DoctorCard {
   specialty: { slug: string; nameEn: string; nameAr: string } | null;
 }
 
-const FILTERS = [
-  { slug: "all", en: "All specialties", ar: "كل التخصصات" },
-  { slug: "peds", en: "Paediatrics", ar: "أطفال" },
-  { slug: "pediatric-surgery", en: "Paediatric surgery", ar: "جراحة أطفال" },
-  { slug: "pain", en: "Pain clinic", ar: "علاج الألم" },
-  { slug: "dental", en: "Dentistry", ar: "أسنان" },
-  { slug: "gyn", en: "Gynaecology", ar: "نساء وتوليد" },
-  { slug: "aesthetic", en: "Aesthetics", ar: "تجميل" },
-  { slug: "ent", en: "ENT", ar: "أنف وأذن" },
-  { slug: "general", en: "General surgery", ar: "جراحة عامة" },
-  { slug: "ortho", en: "Orthopaedics", ar: "عظام" },
-  { slug: "gastro", en: "Endoscopy", ar: "مناظير" },
-] as const;
+export function LeadDoctor({ doctor }: { doctor?: DoctorCard }) {
+  const locale = useLocale();
+  if (!doctor) return null;
+  return <section className="m-lead sec" id="lead-doctor">
+    <div className="wrap">
+      <article className="m-docfeat">
+        <div className="m-docfeat__media">
+          <img src={doctor.photoUrl || "/brand/dr-mohsen-suit.png"} alt={locale === "ar" ? doctor.nameAr : doctor.nameEn} />
+        </div>
+        <div className="m-docfeat__body">
+          <span className="eyebrow"><Bi en="Dr. Mohsen & the anaesthesia team" ar="د. محسن وفريق التخدير" /></span>
+          <h2><Bi en={doctor.nameEn} ar={doctor.nameAr} /></h2>
+          <p><Bi en={doctor.titleEn || "Anaesthesia & pain management"} ar={doctor.titleAr || "تخدير وعلاج ألم"} /></p>
+          <p><Bi en="From assessment before the procedure to recovery and pain follow-up, the team plans care around each case." ar="من التقييم قبل الإجراء لحد الإفاقة ومتابعة الألم، الفريق بيحط خطة الرعاية حسب كل حالة." /></p>
+          <div className="m-docfeat__cta">
+            <Link className="btn btn--light btn--sm" href={`/${doctor.id}`}><Bi en="Meet the doctor" ar="اعرف دكتورك" /></Link>
+            <a className="link" href="#team"><Bi en="Explore the team" ar="اعرف فريق التخدير" /></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>;
+}
 
 export function DoctorsSection({ doctors }: { doctors: DoctorCard[] }) {
-  const [filter, setFilter] = React.useState<string>("all");
+  const locale = useLocale();
+  const [filter, setFilter] = React.useState("all");
+  const [bounds, setBounds] = React.useState({ start: true, end: true });
+  const track = React.useRef<HTMLDivElement>(null);
+  const lead = doctors.find((doctor) => doctor.featured);
+  const consultants = doctors.filter((doctor) => doctor.id !== lead?.id);
+  const specialties = Array.from(new Map(doctors.flatMap((doctor) => doctor.specialty ? [[doctor.specialty.slug, doctor.specialty] as const] : [])).values());
+  const visible = consultants.filter((doctor) => filter === "all" || doctor.specialty?.slug === filter);
 
-  // A specialty row (or footer link) asks this directory to narrow down.
   React.useEffect(() => {
     const onFilter = (event: Event) => {
       const detail = (event as CustomEvent<{ specialty?: string }>).detail;
@@ -46,177 +66,63 @@ export function DoctorsSection({ doctors }: { doctors: DoctorCard[] }) {
     return () => window.removeEventListener("mm:filter-doctors", onFilter);
   }, []);
 
-  const featured = doctors.find((doctor) => doctor.featured);
-  const rows = doctors.filter((doctor) => !doctor.featured);
+  const onScroll = React.useCallback(() => {
+    const container = track.current;
+    if (!container) return;
+    const offset = Math.abs(container.scrollLeft);
+    setBounds({ start: offset < 2, end: offset >= container.scrollWidth - container.clientWidth - 2 });
+  }, []);
+  React.useEffect(() => {
+    const container = track.current;
+    if (!container) return;
+    const observer = new ResizeObserver(onScroll);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [filter, visible.length, onScroll]);
 
-  const matches = (doctor: DoctorCard) => filter === "all" || doctor.specialty?.slug === filter;
-  const visibleCount = doctors.filter(matches).length;
+  function move(delta: number) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const container = track.current;
+    if (!container) return;
+    const width = container.firstElementChild?.getBoundingClientRect().width ?? container.clientWidth;
+    container.scrollBy({ left: delta * (width + 24) * (locale === "ar" ? -1 : 1), behavior: reduced ? "instant" : "smooth" });
+  }
 
-  return (
-    <section className="m-docs sec" id="doctors">
-      <div className="wrap">
-        <div className="sec-head sec-head--split">
-          <div>
-            <span className="eyebrow"><Bi en="The doctors" ar="الأطباء" /></span>
-            <h2 style={{ marginTop: 14 }}>
-              <Bi en="Filter by specialty and book." ar="فلتر بالتخصص واحجز." />
-            </h2>
-          </div>
-          <p className="lead">
-            <Bi
-              en="More than one doctor in the same specialty, so you get the earliest slot rather than the only one available."
-              ar="أكثر من دكتور في نفس التخصص، يعني بتاخد أقرب ميعاد مش الميعاد الوحيد المتاح."
-            />
-          </p>
+  return <section className="m-docs sec" id="doctors">
+    <div className="wrap">
+      <div className="sec-head sec-head--split">
+        <div><span className="eyebrow"><Bi en="Our consultants" ar="دكاترة العيادة" /></span>
+          <h2 style={{ marginTop: 14 }}><Bi en="Get to know your doctor." ar="اعرف دكتورك قبل ما تحجز." /></h2>
         </div>
-
-        <div
-          className="m-docs__bar"
-          data-filter-group="docs"
-          role="group"
-          aria-label="فلتر التخصصات"
-        >
-          {FILTERS.map((item) => (
-            <button
-              className="chip"
-              type="button"
-              key={item.slug}
-              data-filter={item.slug}
-              aria-pressed={filter === item.slug}
-              onClick={() => setFilter(item.slug)}
-            >
-              <Bi en={item.en} ar={item.ar} />
-            </button>
-          ))}
-        </div>
-
-        <div className="m-docs__grid" id="docs-list" data-stagger>
-          {featured && (
-            <article className="m-docfeat" data-cat={featured.specialty?.slug ?? "pain"} hidden={!matches(featured)}>
-              <div className="m-docfeat__media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={featured.photoUrl || "/brand/dr-mohsen-suit.png"} alt={featured.nameAr} />
-              </div>
-              <div className="m-docfeat__body">
-                <span className="m-docfeat__role">
-                  <Bi
-                    en={featured.titleEn || "Team lead · Anaesthesia & pain management"}
-                    ar={featured.titleAr || "قائد الفريق · تخدير وعلاج ألم"}
-                  />
-                </span>
-                <h3><Bi en={featured.nameEn} ar={featured.nameAr} /></h3>
-                <p>
-                  <Bi
-                    en="Leads the team, and runs the pain clinic himself — chronic pain, back pain and post-surgical pain."
-                    ar="قائد الفريق، وبيشرف على عيادة علاج الألم بنفسه — الألم المزمن، الظهر، وألم بعد الجراحة."
-                  />
-                </p>
-                <div className="m-docfeat__cta">
-                  <button
-                    className="btn btn--light btn--sm"
-                    type="button"
-                    data-book-doc
-                    data-doc-spec={featured.specialty?.slug ?? "pain"}
-                    data-doc-id={featured.id}
-                  >
-                    <Bi en="Book online" ar="احجز أونلاين" />
-                    <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
-                  </button>
-                  <a className="link" href="#team" style={{ color: "#fff" }}>
-                    <Bi en="The anaesthesia team" ar="فريق التخدير" />
-                  </a>
-                </div>
-              </div>
-            </article>
-          )}
-
-          {rows.map((doctor) => (
-            <article
-              className="m-docrow"
-              key={doctor.id}
-              data-cat={doctor.specialty?.slug ?? ""}
-              hidden={!matches(doctor)}
-            >
-              <span className="m-docrow__ava">
-                {doctor.photoUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={doctor.photoUrl} alt="" />
-                ) : (
-                  doctorInitials(doctor.nameAr)
-                )}
-              </span>
-              <span className="m-docrow__id">
-                <b><Bi en={doctor.nameEn} ar={doctor.nameAr} /></b>
-                <span><Bi en={doctor.titleEn ?? ""} ar={doctor.titleAr ?? ""} /></span>
-              </span>
-              <span className="m-docrow__meta">
-                <b><Bi en={doctor.cityEn ?? ""} ar={doctor.cityAr ?? ""} /></b>
-                <span>
-                  <Bi
-                    en={experienceLabel("en", doctor.experienceYears)}
-                    ar={experienceLabel("ar", doctor.experienceYears)}
-                  />
-                </span>
-              </span>
-              <span className="m-docrow__foot">
-                <button
-                  className="link"
-                  type="button"
-                  data-book-doc
-                  data-doc-spec={doctor.specialty?.slug ?? ""}
-                  data-doc-id={doctor.id}
-                >
-                  <Bi en="Book online" ar="احجز أونلاين" />
-                  <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
-                </button>
-              </span>
-            </article>
-          ))}
-
-          {/* The reserved third-doctor slot: the client is adding one more
-              consultant; until the real profile lands, the clinic answers
-              bookings itself. Shows only in the unfiltered view. */}
-          {filter === "all" && (
-            <article className="m-docrow m-docrow--reserved">
-              <span className="m-docrow__ava m-docrow__ava--soon" aria-hidden="true">
-                <i className="ph-light ph-user-plus" />
-              </span>
-              <span className="m-docrow__id">
-                <b><Bi en="A new consultant is joining soon" ar="استشاري جديد ينضم قريباً" /></b>
-                <span>
-                  <Bi
-                    en="The next consultant's profile is being prepared — bookings go to the clinic itself meanwhile."
-                    ar="بيانات استشاري تاني بتتجهز — واللي عندك حاجة، حجزك مع العيادة في الميعاد ده بدلاً منه."
-                  />
-                </span>
-              </span>
-              <span className="m-docrow__meta">
-                <b><Bi en="PCA Clinic" ar="عيادة PCA" /></b>
-              </span>
-              <span className="m-docrow__foot">
-                <button className="link" type="button" data-book-doc>
-                  <Bi en="Book at the clinic" ar="احجز بالعيادة" />
-                  <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
-                </button>
-              </span>
-            </article>
-          )}
-        </div>
-
-        <p className={`m-docs__empty${visibleCount === 0 ? " show" : ""}`} id="docs-empty">
-          <Bi
-            en="No doctors listed in this specialty yet — message us and we will arrange it."
-            ar="لسه مفيش أطباء مسجلين في التخصص ده — كلمنا ونرتبها."
-          />
-        </p>
-        <p className="note m-flag" style={{ marginTop: 22 }}>
-          <i className="ph-light ph-info" aria-hidden="true" />
-          <Bi
-            en="Sample data for this review round: doctor names, cities and availability are placeholders and will be replaced with the real team."
-            ar="بيانات توضيحية للمراجعة: أسماء الأطباء والمدن والمواعيد مبدئية، وبينتحدّث ببيانات الفريق الفعلي."
-          />
-        </p>
+        <p className="lead"><Bi en="Browse the doctors, then explore their specialties, clinic locations and published articles." ar="تصفح الدكاترة، واعرف تخصص كل دكتور وأماكن عياداته ومقالاته المنشورة." /></p>
       </div>
-    </section>
-  );
+      <div className="m-docs__bar" role="group" aria-label={locale === "ar" ? "فلتر التخصصات" : "Filter specialties"}>
+        <button type="button" className="chip" aria-pressed={filter === "all"} onClick={() => setFilter("all")}><Bi en="All specialties" ar="كل التخصصات" /></button>
+        {specialties.map((specialty) => <button key={specialty.slug} type="button" className="chip" aria-pressed={filter === specialty.slug} onClick={() => setFilter(specialty.slug)}><Bi en={specialty.nameEn} ar={specialty.nameAr} /></button>)}
+      </div>
+      {visible.length > 0 ? <>
+        <div className="m-doctor-slider" ref={track} key={filter} onScroll={onScroll} role="region" aria-roledescription={locale === "ar" ? "عارض شرائح" : "carousel"} aria-label={locale === "ar" ? "صور الأطباء" : "Doctor portraits"} tabIndex={0}>
+          {visible.map((doctor) => <article className="m-doctor-card" key={doctor.id}>
+            <Link href={`/${doctor.id}`} className="m-doctor-card__link">
+              <div className="m-doctor-card__portrait">
+                {doctor.photoUrl ? <img src={doctor.photoUrl} alt={locale === "ar" ? doctor.nameAr : doctor.nameEn} loading="lazy" /> : <span aria-hidden="true">{doctorInitials(locale === "ar" ? doctor.nameAr : doctor.nameEn)}</span>}
+              </div>
+              <div className="m-doctor-card__body">
+                {doctor.specialty && <span className="eyebrow"><Bi en={doctor.specialty.nameEn} ar={doctor.specialty.nameAr} /></span>}
+                <h3><Bi en={doctor.nameEn} ar={doctor.nameAr} /></h3>
+                <p><Bi en={doctor.titleEn ?? ""} ar={doctor.titleAr ?? ""} /></p>
+                <span className="link"><Bi en="View doctor profile" ar="شوف ملف الدكتور" /><i className="ph-light ph-arrow-right flip" aria-hidden="true" /></span>
+              </div>
+            </Link>
+          </article>)}
+        </div>
+        <div className="m-doctor-slider__controls">
+          <button type="button" className="btn btn--ghost btn--sm" disabled={bounds.start} onClick={() => move(-1)}><Bi en="Previous" ar="السابق" /></button>
+          <span className="small" aria-live="polite">{visible.length} <Bi en="doctors" ar="دكاترة" /></span>
+          <button type="button" className="btn btn--ghost btn--sm" disabled={bounds.end} onClick={() => move(1)}><Bi en="Next" ar="التالي" /></button>
+        </div>
+      </> : <p className="note"><Bi en="No other doctors are listed in this specialty yet. Contact the clinic to discuss your request." ar="لسه مفيش دكاترة تانيين مسجلين في التخصص ده. كلم العيادة علشان نرتب طلبك." /></p>}
+      {lead && filter === lead.specialty?.slug && <p className="note"><Link href={`/${lead.id}`}><Bi en={`View ${lead.nameEn}'s profile`} ar={`شوف ملف ${lead.nameAr}`} /></Link></p>}
+    </div>
+  </section>;
 }

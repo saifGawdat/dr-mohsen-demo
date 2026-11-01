@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 import prisma from "@/lib/prisma";
 
 /**
- * The storefront sitemap: home, the journal index and every published
- * article, in both locales with hreflang alternates. Rendered per request.
+ * The storefront sitemap: home, doctor profiles, the journal index and every
+ * published article, in both locales with hreflang alternates. Rendered per request.
  *
  * The DB read is wrapped so a build/deploy without a reachable database
  * still ships the sitemap with the static routes rather than failing —
@@ -39,6 +39,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     articles = [];
   }
 
+  const doctors = await prisma.doctor.findMany({
+    where: { active: true }, select: { id: true },
+  }).catch(() => []);
+
   for (const locale of locales) {
     for (const page of staticPath(locale)) {
       entries.push({
@@ -49,6 +53,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: {
           languages: locale === "ar" ? { en: `${root}/en${page.path ? `/${page.path}` : ""}` } : { ar: `${root}/ar${page.path ? `/${page.path}` : ""}` },
         },
+      });
+    }
+    for (const doctor of doctors) {
+      entries.push({
+        url: `${root}/${locale}/${doctor.id}`,
+        changeFrequency: "monthly",
+        priority: priority(locale),
+        alternates: { languages: { ar: `${root}/ar/${doctor.id}`, en: `${root}/en/${doctor.id}` } },
       });
     }
     for (const article of articles) {
