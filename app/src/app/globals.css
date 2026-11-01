@@ -50,26 +50,28 @@
 }
 
 /* ============================================================================
-   Brand palette — lifted verbatim from the prototype's :root so the Next
-   storefront can be styled with the same tokens the approved design uses.
+   Brand palette — the PCA Clinic colours, keyed to the same token names the
+   storefront stylesheet uses so the Tailwind admin kit (@theme --color-*)
+   keeps working. --blue carries the PCA primary teal (#195869) and --teal the
+   copper accent (#C2895F); see design.md §3.
    ========================================================================= */
 
 :root {
-  --blue: #20438e;
-  --teal: #007d77;
-  --blue-ink: #0c1936;
-  --blue-deep: #162f63;
-  --blue-70: rgba(32, 67, 142, 0.7);
-  --blue-15: #dee3ee;
-  --blue-08: #edf0f6;
-  --teal-deep: #005853;
-  --teal-ink: #002f2d;
-  --teal-15: #d9ecea;
-  --teal-08: #ebf6f5;
+  --blue: #195869;
+  --teal: #c2895f;
+  --blue-ink: #13262d;
+  --blue-deep: #10414f;
+  --blue-70: rgba(25, 88, 105, 0.7);
+  --blue-15: #dce6ea;
+  --blue-08: #ecf3f5;
+  --teal-deep: #a37040;
+  --teal-ink: #6e4a2b;
+  --teal-15: #f1e4d8;
+  --teal-08: #f8f1ea;
   --paper: #ffffff;
-  --ink: #0c1936;
-  --muted: #5a6480;
-  --line: #e3e7f0;
+  --ink: #13262d;
+  --muted: #55666c;
+  --line: #e2e7e9;
   --err: #c0392b;
 }
 

@@ -1,8 +1,9 @@
 /* ============================================================================
-   Dr. Mohsen Mamdouh — storefront stylesheet
+   PCA Clinic — storefront stylesheet
    Ported verbatim from the approved prototype (index.html), with the language
    and direction selectors re-pointed at the .m-site wrapper instead of <html>
-   so the admin dashboard is untouched.
+   so the admin dashboard is untouched. Brand colours re-pointed to the PCA
+   palette (see the token block below and design.md §3).
    ========================================================================= */
 
 html { overflow-x: hidden; }
@@ -16,8 +17,12 @@ html { overflow-x: hidden; }
 @font-face { font-family: "Lama Sans"; src: url("/fonts/LamaSans-ExtraBold.woff") format("woff");font-weight: 800; font-style: normal; font-display: swap; }
 
 /* =========================================================
-   Dr. Mohsen Mamdouh — design tokens
-   See design.md. Two brand hues only: #20438E and #007D77.
+   PCA Clinic — design tokens
+   See design.md. Values sampled off the supplied artwork.
+   The legacy --blue/--teal token names stay so the Tailwind
+   admin theme (@theme --color-*) and the ~190 rule references
+   keep working: --blue carries the PCA primary teal and
+   --teal the copper accent.
    ========================================================= */
 
 
@@ -26,30 +31,33 @@ html { overflow-x: hidden; }
 
 
 
+
 :root {
-  /* core */
-  --blue: #20438E;
-  --teal: #007D77;
+  /* core — PCA palette: swirl ink #13262D, wordmark teal #195869,
+     wave sky #85BDD6, copper ribbon #C2895F */
+  --blue: #195869;
+  --teal: #C2895F;
   --paper: #FFFFFF;
-  --mist: #F4F7FC;
-  --ink: #0C1936;
-  --muted: rgba(12, 25, 54, .62);
-  --line: #E1E7F0;
-  --blue-ink: #0C1936;
-  --blue-deep: #162F63;
-  --blue-70: rgba(32, 67, 142, .70);
-  --blue-15: #DEE3EE;
-  --blue-08: #EDF0F6;
-  --teal-deep: #005853;
-  --teal-ink: #002F2D;
-  --teal-15: #D9ECEA;
-  --teal-08: #EBF6F5;
+  --mist: #F6F5F0;
+  --ink: #13262D;
+  --muted: rgba(19, 38, 45, .66);
+  --line: #E2E7E9;
+  --blue-ink: #13262D;
+  --blue-deep: #10414F;
+  --blue-70: rgba(25, 88, 105, .70);
+  --blue-15: #DCE6EA;
+  --blue-08: #ECF3F5;
+  --teal-deep: #A37040;
+  --teal-ink: #6E4A2B;
+  --teal-15: #F1E4D8;
+  --teal-08: #F8F1EA;
   --ok: #12855C;
   --warn: #B4761A;
   --err: #B3261E;
   --wa: #25D366;
-  --brand-diagonal: linear-gradient(118deg, #20438E 0%, #007D77 100%);
-  --shadow: 0 18px 45px -28px rgba(32, 67, 142, .45);
+  --sky: #85BDD6;
+  --brand-diagonal: linear-gradient(118deg, #13262D 0%, #195869 100%);
+  --shadow: 0 18px 45px -28px rgba(19, 38, 45, .45);
 
   --font: "Lama Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --ease: cubic-bezier(.16, 1, .3, 1);
