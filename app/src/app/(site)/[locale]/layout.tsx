@@ -10,7 +10,6 @@ import { WhatsappFab } from "@/components/site/whatsapp-fab";
 import "@phosphor-icons/web/light";
 import "@phosphor-icons/web/fill";
 import "./landing.css";
-import "./landing.css";
 
 interface Props {
   children: React.ReactNode;
