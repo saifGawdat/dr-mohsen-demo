@@ -38,7 +38,7 @@ export function SiteFooter({ locale, siteName, phone, email, whatsapp }: Props) 
         <div className="m-foot__top">
           <div className="m-foot__brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo-white.png" alt={siteName} />
+            <img src="/brand/pca-logo-white.png" alt={siteName} />
             <p>
               <Bi
                 en="A complete anaesthesia team for any hospital, centre or clinic — and a network of doctors across every specialty, with one file, one booking and one standard of care."
@@ -115,7 +115,7 @@ export function SiteFooter({ locale, siteName, phone, email, whatsapp }: Props) 
 
         <div className="m-foot__bottom">
           <span>
-            © 2026 <Bi en="Dr. Mohsen Mamdouh. All rights reserved." ar="د. محسن ممدوح. جميع الحقوق محفوظة." />
+            © 2026 <Bi en="PCA Clinic. All rights reserved." ar="عيادة PCA. جميع الحقوق محفوظة." />
           </span>
           <nav aria-label="تذييل">
             <a href="#top"><Bi en="Back to top" ar="لأعلى الصفحة" /></a>

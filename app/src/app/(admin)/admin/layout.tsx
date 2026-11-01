@@ -95,8 +95,8 @@ export default function AdminLayout({
         <div className="h-16 flex-shrink-0 flex items-center justify-between px-6 border-b border-white/10">
           <Link href="/admin" className="flex items-center gap-2">
             <Image
-              src="/brand/logo-white.png"
-              alt="Dr. Mohsen Mamdouh"
+              src="/brand/pca-logo-white.png"
+              alt="PCA Clinic"
               width={120}
               height={40}
               className="h-8 w-auto"
@@ -177,7 +177,7 @@ export default function AdminLayout({
           <button onClick={() => setSidebarOpen(true)} aria-label="Open menu">
             <Menu className="w-6 h-6" />
           </button>
-          <Image src="/brand/logo-white.png" alt="Dr. Mohsen Mamdouh" width={100} height={32} className="h-7 w-auto" />
+          <Image src="/brand/pca-logo-white.png" alt="PCA Clinic" width={100} height={32} className="h-7 w-auto" />
           <div className="w-6" />
         </header>
 

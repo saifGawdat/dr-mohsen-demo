@@ -186,6 +186,33 @@ async function main() {
   await sharp(SUIT).trim().resize({ width: 1600, withoutEnlargement: true }).webp({ quality: 85 })
     .toFile(path.join(out, "dr-ahmed-mleha-suit.webp"));
   console.log("dr-ahmed-mleha-coat.webp + dr-ahmed-mleha-suit.webp written");
+
+  // --- Social preview (OG) ----------------------------------------------------
+  // White lockup on the 118° ink→teal diagonal, cut at 1200×630.
+  const ogSvg = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+       <defs>
+         <linearGradient id="g" x1="0" y1="0" x2="1" y2="0.72">
+           <stop offset="0" stop-color="#13262D"/>
+           <stop offset="1" stop-color="#195869"/>
+         </linearGradient>
+       </defs>
+       <rect width="1200" height="630" fill="url(#g)"/>
+     </svg>`
+  );
+  const whiteMark = await sharp(path.join(out, "pca-logo-white.png"))
+    .resize(760, null, { fit: "inside" })
+    .png().toBuffer();
+  const whiteMarkMeta = await sharp(whiteMark).metadata();
+  await sharp(ogSvg)
+    .composite([{
+      input: whiteMark,
+      left: Math.round((1200 - whiteMarkMeta.width) / 2),
+      top: Math.round((630 - whiteMarkMeta.height) / 2),
+    }])
+    .png({ quality: 90 })
+    .toFile(path.join(out, "pca-og.png"));
+  console.log("pca-og.png written");
 }
 
 main().catch((error) => {

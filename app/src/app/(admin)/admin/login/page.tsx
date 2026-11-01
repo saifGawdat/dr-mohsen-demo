@@ -33,10 +33,10 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center gap-3 mb-8">
           <Image
-            src="/brand/logo.png"
-            alt="Dr. Mohsen Mamdouh"
+            src="/brand/pca-logo-full.png"
+            alt="PCA Clinic"
             width={160}
-            height={48}
+            height={60}
             className="h-12 w-auto"
             priority
           />

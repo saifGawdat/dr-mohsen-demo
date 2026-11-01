@@ -18,19 +18,19 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Dr. Mohsen Mamdouh — Anaesthesia & Pain Management",
-    template: "%s | Dr. Mohsen Mamdouh",
+    default: "PCA Clinic — Pain Comfort Assessment Clinic",
+    template: "%s | PCA Clinic",
   },
   description:
-    "A complete anaesthesia team for any hospital, surgical centre or clinic — plus a network of doctors across every specialty. Book online and upload your labs before the visit.",
+    "PCA Clinic — Care Beyond Relief. Led by Dr. Mohsen Mamdouh (anaesthesia & pain management) with consultant doctors across specialties. Review-first booking: upload your labs and scans before the visit.",
   icons: {
-    icon: [{ url: "/brand/logo-mark-64.png", type: "image/png" }],
-    apple: "/brand/logo-mark-180.png",
+    icon: [{ url: "/brand/pca-logo-mark-64.png", type: "image/png" }],
+    apple: "/brand/pca-logo-mark-180.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#20438E",
+  themeColor: "#195869",
 };
 
 export default function RootLayout({

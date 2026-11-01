@@ -366,8 +366,8 @@ model PageSeo {
 
 model Settings {
   id       String  @id @default(cuid())
-  siteName String  @default("Dr. Mohsen Mamdouh")
-  tagline  String  @default("Details make the difference in anaesthesia")
+  siteName String  @default("PCA Clinic")
+  tagline  String  @default("Care Beyond Relief")
   logoUrl  String?
 
   // SEO

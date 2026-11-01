@@ -362,6 +362,10 @@ async function main() {
   if (!settings) {
     await prisma.settings.create({
       data: {
+        // Brand identity for a fresh deployment; admins can still edit the
+        // row from the dashboard afterwards without a re-seed stomping it.
+        siteName: "PCA Clinic",
+        tagline: "Care Beyond Relief",
         heroImageUrl: "/brand/dr-mohsen-suit.png",
         aboutImageUrl: "/brand/dr-mohsen-scrubs.png",
         ...contact,

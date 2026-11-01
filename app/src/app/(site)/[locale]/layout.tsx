@@ -24,12 +24,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const title =
     locale === "ar"
-      ? "د. محسن ممدوح | فريق تخدير وعلاج ألم — أطباء كل التخصصات"
-      : "Dr. Mohsen Mamdouh | Anaesthesia & pain team — doctors across every specialty";
+      ? "عيادة PCA | تقييم وعلاج الألم وفريق تخدير — ودكاترة استشاريين"
+      : "PCA Clinic | Pain comfort & assessment — anaesthesia team and consultant doctors";
   const description =
     locale === "ar"
-      ? "د. محسن ممدوح، أخصائي تخدير وعلاج ألم. فريق تخدير متكامل لأي مستشفى أو مركز أو عيادة، وشبكة أطباء في كل التخصصات: أسنان، نساء وتوليد، تجميل، أنف وأذن. احجز أونلاين وارفع تحاليلك وأشعتك."
-      : "Dr. Mohsen Mamdouh, anaesthetist and pain management. A complete anaesthesia team for any hospital, centre or clinic, and a network of doctors across every specialty. Book online and upload your labs and scans.";
+      ? "عيادة PCA — Care Beyond Relief، بقيادة د. محسن ممدوح (تخدير وعلاج ألم) وبدكاترة استشاريين في بقية التخصصات. احجز أونلاين وارفع تحاليلك وأشعتك قبل الكشف."
+      : "PCA Clinic — Care Beyond Relief. Led by Dr. Mohsen Mamdouh (anaesthesia & pain management) with consultant doctors across specialties. Book online and upload your labs and scans before the visit.";
 
   return {
     title: { absolute: title },
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title,
       description,
       locale: locale === "ar" ? "ar_EG" : "en_EG",
-      images: [{ url: "/brand/dr-mohsen-poster.jpg" }],
+      images: [{ url: "/brand/pca-og.png" }],
     },
   };
 }

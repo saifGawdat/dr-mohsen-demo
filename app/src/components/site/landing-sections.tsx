@@ -17,7 +17,7 @@ export function Hero({ heroImage }: MediaProps) {
   return (
     <section className="m-hero">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="m-hero__mark" src="/brand/logo-mark-white.png" alt="" aria-hidden="true" />
+      <img className="m-hero__mark" src="/brand/pca-logo-mark-white.png" alt="" aria-hidden="true" />
       <div className="wrap m-hero__inner">
         <div className="m-hero__text">
           <span className="eyebrow m-hero__eyebrow">

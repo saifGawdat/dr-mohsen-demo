@@ -66,7 +66,7 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
     router.push(`/${next}${hash}`);
   };
 
-  const darkLogo = logoUrl || "/brand/logo.png";
+  const darkLogo = logoUrl || "/brand/pca-logo-full.png";
 
   return (
     <>
@@ -74,7 +74,7 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
         <div className="wrap">
           <a className="m-nav__logo" href="#top" aria-label={siteName}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="is-light" src="/brand/logo-white.png" alt={siteName} />
+            <img className="is-light" src="/brand/pca-logo-white.png" alt={siteName} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="is-dark" src={darkLogo} alt={siteName} />
           </a>
@@ -131,7 +131,7 @@ export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props
         <div className="m-menu__panel" role="dialog" aria-modal="true" aria-label="القائمة">
           <div className="m-menu__top">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo-white.png" alt={siteName} />
+            <img src="/brand/pca-logo-white.png" alt={siteName} />
             <button
               className="m-menu__x"
               type="button"
