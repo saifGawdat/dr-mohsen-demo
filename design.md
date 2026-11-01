@@ -16,7 +16,7 @@ storefront follows it.
 | | |
 |---|---|
 | **Subject** | PCA Clinic — Pain Comfort Assessment Clinic ("Care Beyond Relief") |
-| **Leader** | Dr. Mohsen Mamdouh — anaesthetist & pain management specialist (أخصائي تخدير وعلاج ألم). His name leads; the clinic site carries him as the featured doctor and the other consultants sit beneath him |
+| **Leader** | Dr. Mohsen Mamdouh — anaesthetist & pain management specialist (أخصائي تخدير وعلاج ألم). The clinic introduces the practice first, followed by his featured profile and team, then the other consultants |
 | **Business model** | Two doors: **(A)** an anaesthesia team supplied to any hospital, centre or clinic that needs one at the highest level; **(B)** a network of consultant doctors across specialties (pain, paediatric surgery, and more), working with his team |
 | **Core service** | Review-first online booking: the patient uploads their data, lab results and scans, the team sets the appointment online, then the examination happens |
 | **Tagline** | "Care Beyond Relief" (English, from the logo lockup). Arabic mirror: «رعاية تتجاوز التسكين» — pending client confirmation |
@@ -244,6 +244,32 @@ result or a guarantee. (And no identifiable child photo anywhere — see §10.)
 
 ## 11. Page architecture (the "تقسيمه")
 
+### Production storefront — Excalidraw structure, 2026-11-01
+
+The supplied `dr-mohsen-struvture.excalidraw` updates the Next storefront order:
+
+1. **PCA Clinic** — clinic identity, care introduction and links to the doctors
+   and anaesthesia team.
+2. **Dr. Mohsen and the anaesthesia team** — the lead doctor's featured portrait
+   and profile link, followed by team coverage and safety information.
+3. **Other doctors** — an admin-controlled portrait slider, filtered by specialty,
+   with swipe/scroll and labelled previous/next controls. No automatic playback.
+   Only active records appear; names, portraits and order come from the dashboard.
+4. **The remaining website** — trust strip, two doors, team comparison,
+   specialties, procedures, booking, process, pain care, FAQ and contact.
+
+Each doctor links to `/{locale}/{id}` (`/ar/{id}` by default). Profiles show name,
+specialty, biography, clinic locations, public phone, gallery, consent-confirmed
+before-and-after pairs, anonymized case studies and articles. Empty editorial
+sections are omitted. The profile booking form selects that doctor and specialty
+and offers their configured clinics. No specialty → arrange through the clinic.
+All public editorial content is bilingual and managed under `/admin/doctors`.
+No patient case content is supplied by this implementation; image pairs require
+explicit admin confirmation of documented publication consent. Results vary by
+case; the gallery must never imply a guarantee or show an identifiable child.
+
+### Root prototype — retained reference layout
+
 `index.html` — one page, Arabic-first with EN toggle:
 
 1. **Nav** — logo, sections, language, "احجز أونلاين"
@@ -262,4 +288,4 @@ result or a guarantee. (And no identifiable child photo anywhere — see §10.)
 
 ### Deliberately not included (yet)
 
-Prices (policy), live slot availability from a real calendar, payments, patient portal login, results gallery (needs consented material), blog/journal, Arabic SEO pages per specialty.
+Prices (policy), live slot availability from a real calendar, payments, patient portal login, a populated results gallery (needs approved, consented material), Arabic SEO pages per specialty. The production app supports doctor editorial content and the existing journal.
