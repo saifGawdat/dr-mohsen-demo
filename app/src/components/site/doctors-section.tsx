@@ -21,14 +21,16 @@ export interface DoctorCard {
 
 const FILTERS = [
   { slug: "all", en: "All specialties", ar: "كل التخصصات" },
+  { slug: "peds", en: "Paediatrics", ar: "أطفال" },
+  { slug: "pediatric-surgery", en: "Paediatric surgery", ar: "جراحة أطفال" },
+  { slug: "pain", en: "Pain clinic", ar: "علاج الألم" },
   { slug: "dental", en: "Dentistry", ar: "أسنان" },
   { slug: "gyn", en: "Gynaecology", ar: "نساء وتوليد" },
   { slug: "aesthetic", en: "Aesthetics", ar: "تجميل" },
   { slug: "ent", en: "ENT", ar: "أنف وأذن" },
   { slug: "general", en: "General surgery", ar: "جراحة عامة" },
+  { slug: "ortho", en: "Orthopaedics", ar: "عظام" },
   { slug: "gastro", en: "Endoscopy", ar: "مناظير" },
-  { slug: "peds", en: "Paediatrics", ar: "أطفال" },
-  { slug: "pain", en: "Pain clinic", ar: "علاج الألم" },
 ] as const;
 
 export function DoctorsSection({ doctors }: { doctors: DoctorCard[] }) {
@@ -170,6 +172,35 @@ export function DoctorsSection({ doctors }: { doctors: DoctorCard[] }) {
               </span>
             </article>
           ))}
+
+          {/* The reserved third-doctor slot: the client is adding one more
+              consultant; until the real profile lands, the clinic answers
+              bookings itself. Shows only in the unfiltered view. */}
+          {filter === "all" && (
+            <article className="m-docrow m-docrow--reserved">
+              <span className="m-docrow__ava m-docrow__ava--soon" aria-hidden="true">
+                <i className="ph-light ph-user-plus" />
+              </span>
+              <span className="m-docrow__id">
+                <b><Bi en="A new consultant is joining soon" ar="استشاري جديد ينضم قريباً" /></b>
+                <span>
+                  <Bi
+                    en="The next consultant's profile is being prepared — bookings go to the clinic itself meanwhile."
+                    ar="بيانات استشاري تاني بتتجهز — واللي عندك حاجة، حجزك مع العيادة في الميعاد ده بدلاً منه."
+                  />
+                </span>
+              </span>
+              <span className="m-docrow__meta">
+                <b><Bi en="PCA Clinic" ar="عيادة PCA" /></b>
+              </span>
+              <span className="m-docrow__foot">
+                <button className="link" type="button" data-book-doc>
+                  <Bi en="Book at the clinic" ar="احجز بالعيادة" />
+                  <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
+                </button>
+              </span>
+            </article>
+          )}
         </div>
 
         <p className={`m-docs__empty${visibleCount === 0 ? " show" : ""}`} id="docs-empty">

@@ -395,6 +395,9 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 .m-docrow__meta { font-size: 13.5px; color: var(--muted); }
 .m-docrow__meta b { display: block; font-weight: 500; color: var(--blue); }
 .m-docrow__foot { justify-self: end; }
+/* The reserved third-doctor slot stays visually quieter than real rows. */
+.m-docrow--reserved { opacity: .75; border-bottom-style: dashed; }
+.m-docrow__ava--soon { background: var(--blue-08); color: var(--teal-deep); font-size: 22px; border: 1px dashed var(--teal); }
 @media (max-width: 900px) {
   .m-docrow { grid-template-columns: 56px 1fr; row-gap: 10px; }
   .m-docrow__meta, .m-docrow__foot { grid-column: 2; }

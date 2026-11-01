@@ -26,6 +26,7 @@ const SPECIALTIES: {
   { slug: "ophthal", nameEn: "Ophthalmology", nameAr: "عيون", descriptionEn: "Ophthalmology", descriptionAr: "طب العيون" },
   { slug: "derma", nameEn: "Dermatology", nameAr: "جلدية وليزر", descriptionEn: "Dermatology & laser", descriptionAr: "جلدية وليزر" },
   { slug: "peds", nameEn: "Paediatrics", nameAr: "أطفال", descriptionEn: "Paediatrics & neonatology", descriptionAr: "أطفال وحديثي الولادة" },
+  { slug: "pediatric-surgery", nameEn: "Paediatric surgery", nameAr: "جراحة أطفال", descriptionEn: "Paediatric, neonatal & laparoscopic surgery", descriptionAr: "جراحة الأطفال وحديثي الولادة والمناظير" },
   { slug: "urology", nameEn: "Urology", nameAr: "مسالك بولية", descriptionEn: "Urology & lithotripsy", descriptionAr: "مسالك بولية وتفتيت حصوات" },
   { slug: "gastro", nameEn: "Endoscopy", nameAr: "مناظير وجهاز هضمي", descriptionEn: "Gastroenterology & endoscopy", descriptionAr: "جهاز هضمي ومناظير" },
   { slug: "pain", nameEn: "Pain clinic", nameAr: "عيادة علاج الألم", descriptionEn: "Pain management clinic", descriptionAr: "عيادة علاج الألم" },
@@ -37,10 +38,15 @@ const DOCTORS: {
   nameAr: string;
   titleEn: string;
   titleAr: string;
+  bioEn?: string;
+  bioAr?: string;
+  hospitalEn?: string;
+  hospitalAr?: string;
   specialty: string;
   cityEn?: string;
   cityAr?: string;
   experienceYears?: number;
+  photoUrl?: string;
   featured?: boolean;
   active?: boolean;
   order: number;
@@ -49,31 +55,48 @@ const DOCTORS: {
     slug: "dr-mohsen",
     nameEn: "Dr. Mohsen Mamdouh",
     nameAr: "د. محسن ممدوح",
-    titleEn: "Team lead · Anaesthesia & pain management",
-    titleAr: "قائد الفريق · تخدير وعلاج ألم",
+    titleEn: "Clinic lead · Anaesthesia & pain management",
+    titleAr: "قائد العيادة · تخدير وعلاج ألم",
     specialty: "pain",
     featured: true,
     order: 0,
   },
-  { slug: "ahmed-salem", nameEn: "Dr. Ahmed Salem", nameAr: "د. أحمد سالم", titleEn: "Oral & maxillofacial surgery", titleAr: "جراحة الفم والوجه والفكين", specialty: "dental", cityEn: "Surgical centre, Mansoura", cityAr: "مركز جراحي، المنصورة", experienceYears: 10, order: 1 },
-  { slug: "heba-mansour", nameEn: "Dr. Heba Mansour", nameAr: "د. هبة منصور", titleEn: "Dentistry & orthodontics", titleAr: "أسنان وتقويم", specialty: "dental", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 7, order: 2 },
-  { slug: "karim-fouad", nameEn: "Dr. Karim Fouad", nameAr: "د. كريم فؤاد", titleEn: "Implantology", titleAr: "زراعة أسنان", specialty: "dental", cityEn: "Zagazig", cityAr: "الزقازيق", experienceYears: 9, order: 3 },
-  { slug: "nourhan-ali", nameEn: "Dr. Nourhan Ali", nameAr: "د. نورهان علي", titleEn: "Gynaecology & obstetrics", titleAr: "نساء وتوليد", specialty: "gyn", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 12, order: 4 },
-  { slug: "maha-selim", nameEn: "Dr. Maha Selim", nameAr: "د. مها سليم", titleEn: "IVF & fertility", titleAr: "حقن مجهري وخصوبة", specialty: "gyn", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 8, order: 5 },
-  { slug: "sara-abdullah", nameEn: "Dr. Sara Abdullah", nameAr: "د. سارة عبد الله", titleEn: "Non-surgical aesthetics", titleAr: "تجميل غير جراحي", specialty: "aesthetic", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 6, order: 6 },
-  { slug: "omar-roshdy", nameEn: "Dr. Omar Roshdy", nameAr: "د. عمر رشدي", titleEn: "Plastic surgery", titleAr: "جراحة تجميل", specialty: "aesthetic", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 11, order: 7 },
-  { slug: "mostafa-kamel", nameEn: "Dr. Mostafa Kamel", nameAr: "د. مصطفى كامل", titleEn: "Rhinology & sinus surgery", titleAr: "أنف وجيوب أنفية", specialty: "ent", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 14, order: 8 },
-  { slug: "rania-fathy", nameEn: "Dr. Rania Fathy", nameAr: "د. رانيا فتحي", titleEn: "Paediatric ENT", titleAr: "أنف وأذن للأطفال", specialty: "ent", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 7, order: 9 },
-  { slug: "khaled-ibrahim", nameEn: "Dr. Khaled Ibrahim", nameAr: "د. خالد إبراهيم", titleEn: "General & laparoscopic surgery", titleAr: "جراحة عامة ومناظير", specialty: "general", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 15, order: 10 },
-  { slug: "yasser-nabil", nameEn: "Dr. Yasser Nabil", nameAr: "د. ياسر نبيل", titleEn: "Gastroenterology & endoscopy", titleAr: "جهاز هضمي ومناظير", specialty: "gastro", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 9, order: 11 },
-  { slug: "mona-hassan", nameEn: "Dr. Mona Hassan", nameAr: "د. منى حسن", titleEn: "Paediatrics", titleAr: "طب الأطفال", specialty: "peds", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 10, order: 12 },
+  {
+    // Real consultant, joining the clinic under the leader. Profile facts from
+    // his site (content-source/pages/about.txt), rewritten into clinic voice.
+    slug: "ahmad-meleha",
+    nameEn: "Dr. Ahmad Saeed Meliha",
+    nameAr: "د. أحمد سعيد مليحه",
+    titleEn: "Consultant paediatric, neonatal & laparoscopic surgery",
+    titleAr: "استشاري جراحة الأطفال وحديثي الولادة والمناظير",
+    bioEn: "Head of paediatric surgery at Suez Medical Complex, with over ten years of practice plus the Egyptian Board and a general-surgery master's from Ain Shams University. Special focus on hypospadias repair, advanced paediatric and neonatal laparoscopy, and ultrasound-guided central venous access — with calm, clear explanation that reassures the family at every step.",
+    bioAr: "رئيس قسم جراحة الأطفال بمجمع السويس الطبي، بخبرة تزيد على عشر سنوات كجرّاح أطفال متخصص. البورد المصري لجراحة الأطفال، وماجستير الجراحة العامة من كلية الطب جامعة عين شمس. اهتمام خاص بإصلاح الإحليل السفلي، وجراحات المناظير المتقدمة للأطفال وحديثي الولادة، وتركيب القساطر الوريدية المركزية بالموجات فوق الصوتية — وشرح واضح وهادئ يطمئن الأسرة في كل خطوة.",
+    hospitalEn: "Suez Medical Complex",
+    hospitalAr: "مجمع السويس الطبي",
+    specialty: "pediatric-surgery",
+    experienceYears: 10,
+    photoUrl: "/brand/dr-ahmed-mleha-coat.webp",
+    order: 1,
+  },
+  { slug: "ahmed-salem", nameEn: "Dr. Ahmed Salem", nameAr: "د. أحمد سالم", titleEn: "Oral & maxillofacial surgery", titleAr: "جراحة الفم والوجه والفكين", specialty: "dental", cityEn: "Surgical centre, Mansoura", cityAr: "مركز جراحي، المنصورة", experienceYears: 10, active: false, order: 2 },
+  { slug: "heba-mansour", nameEn: "Dr. Heba Mansour", nameAr: "د. هبة منصور", titleEn: "Dentistry & orthodontics", titleAr: "أسنان وتقويم", specialty: "dental", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 7, active: false, order: 3 },
+  { slug: "karim-fouad", nameEn: "Dr. Karim Fouad", nameAr: "د. كريم فؤاد", titleEn: "Implantology", titleAr: "زراعة أسنان", specialty: "dental", cityEn: "Zagazig", cityAr: "الزقازيق", experienceYears: 9, active: false, order: 4 },
+  { slug: "nourhan-ali", nameEn: "Dr. Nourhan Ali", nameAr: "د. نورهان علي", titleEn: "Gynaecology & obstetrics", titleAr: "نساء وتوليد", specialty: "gyn", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 12, active: false, order: 5 },
+  { slug: "maha-selim", nameEn: "Dr. Maha Selim", nameAr: "د. مها سليم", titleEn: "IVF & fertility", titleAr: "حقن مجهري وخصوبة", specialty: "gyn", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 8, active: false, order: 6 },
+  { slug: "sara-abdullah", nameEn: "Dr. Sara Abdullah", nameAr: "د. سارة عبد الله", titleEn: "Non-surgical aesthetics", titleAr: "تجميل غير جراحي", specialty: "aesthetic", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 6, active: false, order: 7 },
+  { slug: "omar-roshdy", nameEn: "Dr. Omar Roshdy", nameAr: "د. عمر رشدي", titleEn: "Plastic surgery", titleAr: "جراحة تجميل", specialty: "aesthetic", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 11, active: false, order: 8 },
+  { slug: "mostafa-kamel", nameEn: "Dr. Mostafa Kamel", nameAr: "د. مصطفى كامل", titleEn: "Rhinology & sinus surgery", titleAr: "أنف وجيوب أنفية", specialty: "ent", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 14, active: false, order: 9 },
+  { slug: "rania-fathy", nameEn: "Dr. Rania Fathy", nameAr: "د. رانيا فتحي", titleEn: "Paediatric ENT", titleAr: "أنف وأذن للأطفال", specialty: "ent", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 7, active: false, order: 10 },
+  { slug: "khaled-ibrahim", nameEn: "Dr. Khaled Ibrahim", nameAr: "د. خالد إبراهيم", titleEn: "General & laparoscopic surgery", titleAr: "جراحة عامة ومناظير", specialty: "general", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 15, active: false, order: 11 },
+  { slug: "yasser-nabil", nameEn: "Dr. Yasser Nabil", nameAr: "د. ياسر نبيل", titleEn: "Gastroenterology & endoscopy", titleAr: "جهاز هضمي ومناظير", specialty: "gastro", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 9, active: false, order: 12 },
+  { slug: "mona-hassan", nameEn: "Dr. Mona Hassan", nameAr: "د. منى حسن", titleEn: "Paediatrics", titleAr: "طب الأطفال", specialty: "peds", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 10, active: false, order: 13 },
   // The prototype's specialty index counts one doctor in each of these four;
   // their profiles are staged until the real names are confirmed, so they
   // contribute to the count without appearing in the public directory.
-  { slug: "tarek-adel", nameEn: "Dr. Tarek Adel", nameAr: "د. طارق عادل", titleEn: "Joint replacement", titleAr: "استبدال المفاصل", specialty: "ortho", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 13, active: false, order: 13 },
-  { slug: "hany-sameh", nameEn: "Dr. Hany Sameh", nameAr: "د. هاني سامح", titleEn: "Cataract & retina", titleAr: "الكاتاراكت والشبكية", specialty: "ophthal", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 16, active: false, order: 14 },
-  { slug: "dina-magdy", nameEn: "Dr. Dina Magdy", nameAr: "د. دينا مجدي", titleEn: "Dermatology & laser", titleAr: "جلدية وليزر", specialty: "derma", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 8, active: false, order: 15 },
-  { slug: "sherif-gamal", nameEn: "Dr. Sherif Gamal", nameAr: "د. شريف جمال", titleEn: "Urology & lithotripsy", titleAr: "مسالك بولية وتفتيت حصوات", specialty: "urology", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 12, active: false, order: 16 },
+  { slug: "tarek-adel", nameEn: "Dr. Tarek Adel", nameAr: "د. طارق عادل", titleEn: "Joint replacement", titleAr: "استبدال المفاصل", specialty: "ortho", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 13, active: false, order: 14 },
+  { slug: "hany-sameh", nameEn: "Dr. Hany Sameh", nameAr: "د. هاني سامح", titleEn: "Cataract & retina", titleAr: "الكاتاراكت والشبكية", specialty: "ophthal", cityEn: "Tanta", cityAr: "طنطا", experienceYears: 16, active: false, order: 15 },
+  { slug: "dina-magdy", nameEn: "Dr. Dina Magdy", nameAr: "د. دينا مجدي", titleEn: "Dermatology & laser", titleAr: "جلدية وليزر", specialty: "derma", cityEn: "Cairo", cityAr: "القاهرة", experienceYears: 8, active: false, order: 16 },
+  { slug: "sherif-gamal", nameEn: "Dr. Sherif Gamal", nameAr: "د. شريف جمال", titleEn: "Urology & lithotripsy", titleAr: "مسالك بولية وتفتيت حصوات", specialty: "urology", cityEn: "Mansoura", cityAr: "المنصورة", experienceYears: 12, active: false, order: 17 },
 ];
 
 const PROCEDURES: {
@@ -393,9 +416,14 @@ async function main() {
       nameAr: d.nameAr,
       titleEn: d.titleEn,
       titleAr: d.titleAr,
+      bioEn: d.bioEn ?? null,
+      bioAr: d.bioAr ?? null,
+      hospitalEn: d.hospitalEn ?? null,
+      hospitalAr: d.hospitalAr ?? null,
       cityEn: d.cityEn ?? null,
       cityAr: d.cityAr ?? null,
       experienceYears: d.experienceYears ?? null,
+      photoUrl: d.photoUrl ?? null,
       featured: d.featured ?? false,
       active: d.active ?? true,
       order: d.order,
@@ -437,7 +465,7 @@ async function main() {
   }
   await prisma.faq.deleteMany({ where: { questionAr: { notIn: FAQS.map((f) => f.questionAr) } } });
 
-  console.log("Seed complete: admin, settings, 12 specialties, doctors, procedures, FAQs.");
+  console.log("Seed complete: admin, settings, specialties, doctors, procedures, FAQs.");
 }
 
 main()
