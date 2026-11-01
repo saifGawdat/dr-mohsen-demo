@@ -1,7 +1,13 @@
-# Design System — Dr. Mohsen Mamdouh
+# Design System — PCA Clinic
 
-Brand and UI foundation for the Dr. Mohsen Mamdouh digital presence (anaesthesia team + multi-specialty doctors + online booking).
-This file is the single source of truth for colour, type, logo, imagery, components and page structure. Everything in `index.html` follows it.
+Brand and UI foundation for the **PCA Clinic — Pain Comfort Assessment Clinic**
+digital presence (الرئيس **د. محسن ممدوح** — pain management — plus a team of
+consultant doctors joining under the clinic: currently **د. أحمد سعيد مليحه**,
+consultant paediatric, neonatal & laparoscopic surgery, and a reserved slot for
+one more).
+This file is the single source of truth for colour, type, logo, imagery,
+components and page structure. Everything in `index.html` and the Next
+storefront follows it.
 
 ---
 
@@ -9,10 +15,11 @@ This file is the single source of truth for colour, type, logo, imagery, compone
 
 | | |
 |---|---|
-| **Subject** | Dr. Mohsen Mamdouh — Anaesthetist & pain management specialist (أخصائي تخدير وعلاج ألم) |
-| **Business model** | Two doors: **(A)** an anaesthesia team supplied to any hospital, centre or clinic that needs one at the highest level; **(B)** a network of doctors across every specialty (dentistry, gynaecology, aesthetics, ENT, and more), working with his team |
-| **Core service** | Online booking: the patient uploads their data, lab results and scans, the team sets the appointment online, then the examination happens |
-| **Signature line** | «التفاصيل.. بتفرق في التخدير» / *Details make the difference in anaesthesia* (taken from his own poster artwork) |
+| **Subject** | PCA Clinic — Pain Comfort Assessment Clinic ("Care Beyond Relief") |
+| **Leader** | Dr. Mohsen Mamdouh — anaesthetist & pain management specialist (أخصائي تخدير وعلاج ألم). His name leads; the clinic site carries him as the featured doctor and the other consultants sit beneath him |
+| **Business model** | Two doors: **(A)** an anaesthesia team supplied to any hospital, centre or clinic that needs one at the highest level; **(B)** a network of consultant doctors across specialties (pain, paediatric surgery, and more), working with his team |
+| **Core service** | Review-first online booking: the patient uploads their data, lab results and scans, the team sets the appointment online, then the examination happens |
+| **Tagline** | "Care Beyond Relief" (English, from the logo lockup). Arabic mirror: «رعاية تتجاوز التسكين» — pending client confirmation |
 | **Voice** | Arabic-first, Egyptian, plain-spoken, safety-first, never salesy. Prices are **never** published — cost is discussed after the case is reviewed |
 
 ---
@@ -21,53 +28,68 @@ This file is the single source of truth for colour, type, logo, imagery, compone
 
 | File | What it is | Where it ended up |
 |---|---|---|
-| `dr.mohsen-mamdouh-logo.png` | 1080×1080 transparent wordmark (blue + teal) | `assets/logo.png`, `assets/logo-white.png`, `assets/logo-mark*.png` |
-| `1.jpg` | 1080×1350 social poster, scrubs | `assets/dr-mohsen-scrubs.jpg`, `assets/dr-mohsen-poster.jpg`, `assets/dr-mohsen-avatar.jpg` |
-| `5.jpg` | 1080×1350 social poster, suit | `assets/dr-mohsen-suit.jpg` |
-| `color-palette.txt` | `#20438e` (blue), `#007d77` (deep teal) | §3 |
-| `font.txt` | `Lama Sans` | §4 — downloaded and self-hosted |
+| `clinic-logo.jpeg` | PCA lockup on a cream card (wave mark + serif wordmark + tagline) | `app/public/brand/pca-logo-{full,mark,white,mark-white}*.png`, keys out via `app/scripts/process-brand-assets.mjs` |
+| `ahmed-mleha-png.png` | Dr. Ahmad Meliha, white-coat portrait, transparent | `app/public/brand/dr-ahmed-mleha-coat.webp` |
+| `ahmed-mleha2025-09-20T14-10-36 copy.jpg.jpeg` | Dr. Ahmad Meliha, suit portrait | `app/public/brand/dr-ahmed-mleha-suit.webp` |
+| `dr.mohsen-mamdouh-logo.png` | 1080×1080 transparent Dr. Mohsen wordmark (old brand) | kept for reference; no longer shipped in the Next app |
+| `1.jpg` / `5.jpg` | 1080×1350 social posters, scrubs / suit | `app/public/brand/dr-mohsen-*.jpg|png` — Dr. Mohsen's portraits remain in use |
+| `color-palette.txt` / `font.txt` | old palette note; Lama Sans | palette superseded by §3; font unchanged |
 
 Originals stay untouched in the project root.
 
-> **Note on the logo file:** the supplied PNG is a true transparent asset — the alpha channel carries the silhouette while RGB keeps the brand colour even where alpha = 0. Never re-key it against white, and never flatten it. Use `logo-white` / `logo-mark-white` for dark backgrounds instead.
+> **Note on the logo file:** the supplied lockup is a JPEG flattened on a cream
+> card, so the shipped PNGs are colour-distance key-outs (feathered alpha).
+> `pca-logo-white.png` / `pca-logo-mark-white.png` are solid-white companion
+> exports for dark surfaces. Never re-key again by hand; rerun the script
+> instead (`node scripts/process-brand-assets.mjs` from `app/`).
 
 ---
 
 ## 3. Colour
 
-### 3.1 Core palette
+### 3.1 Core palette (sampled off the artwork)
 
-| Token | Hex | Role |
-|---|---|---|
-| `--blue` | `#20438E` | Primary. Trust, medicine, headings, dark sections, primary buttons |
-| `--teal` | `#007D77` | Secondary. Precision, care, accents, eyebrows, links, teal planes |
-| `--paper` | `#FFFFFF` | Cards, panels, form surfaces |
-| `--mist` | `#F4F7FC` | Page background (blue-tinted off-white) |
-| `--ink` | `#0C1936` | Body copy on light surfaces |
-| `--muted` | `rgba(12,25,54,.62)` | Secondary copy, captions |
-| `--line` | `#E1E7F0` | 1px hairlines, dividers, inputs |
+| Actual colour | Hex | Stored in | Role |
+|---|---|---|---|
+| Swirl ink | `#13262D` | `--blue-ink`, `--ink` | Dark sections, footer, body copy on light surfaces |
+| Wordmark teal | `#195869` | `--blue` | Primary. Headings, buttons, links, dark planes |
+| Wave sky | `#85BDD6` | `--sky` | Secondary. Soft wave tint in the mark; light accents |
+| Copper ribbon | `#C2895F` | `--teal` | Accent. Eyebrows, retracting links, small marks |
 
-### 3.2 Derived scale (tints / shades of the two brand colours only)
+> **Token naming:** the stylesheet keeps the legacy `--blue`/`--teal` names so
+> the Tailwind admin theme (`@theme --color-*` in `globals.css`) and the ~190
+> rule references keep working. Semantically: `--blue` = PCA primary teal,
+> `--teal` = copper accent. New code can use either pair; match the file you
+> are editing.
+
+### 3.2 Derived scale (tints / shades of the PCA hues only)
 
 | Token | Hex | Use |
 |---|---|---|
-| `--blue-ink` | `#0C1936` | Darkest section background |
-| `--blue-deep` | `#162F63` | Dark section background, hover on primary |
-| `--blue-70` | `rgba(32,67,142,.70)` | Muted blue text |
-| `--blue-15` | `#DEE3EE` | Fills, active chips, table striping |
-| `--blue-08` | `#EDF0F6` | Soft fills, hover rows |
-| `--teal-deep` | `#005853` | Teal hover / dark teal plane |
-| `--teal-ink` | `#002F2D` | Darkest teal |
-| `--teal-15` | `#D9ECEA` | Teal fills, badges |
-| `--teal-08` | `#EBF6F5` | Teal wash on white |
+| `--blue-deep` | `#10414F` | Hover on primary, dark teal plane |
+| `--blue-70` | `rgba(25,88,105,.70)` | Muted primary text |
+| `--blue-15` | `#DCE6EA` | Fills, active chips, table striping |
+| `--blue-08` | `#ECF3F5` | Soft fills, hover rows |
+| `--teal-deep` | `#A37040` | Copper hover |
+| `--teal-ink` | `#6E4A2B` | Darkest copper |
+| `--teal-15` | `#F1E4D8` | Copper fills, badges |
+| `--teal-08` | `#F8F1EA` | Copper wash on white |
+| `--mist` | `#F6F5F0` | Page background (the logo's cream field) |
+| `--line` | `#E2E7E9` | 1px hairlines, dividers, inputs |
+| `--muted` | `rgba(19,38,45,.66)` | Secondary copy, captions |
 
 ### 3.3 Signature gradient — the brand's visual DNA
 
 ```css
---brand-diagonal: linear-gradient(118deg, #20438E 0%, #007D77 100%);
+--brand-diagonal: linear-gradient(118deg, #13262D 0%, #195869 100%);
 ```
 
-The two brand planes meet on a **diagonal**, exactly like the "M" monogram and the poster artwork. This is the one recurring graphic device: hero backgrounds, section dividers, button hovers, image masks. The two-door split is the exception — it is an even straight half-and-half so the two offers read as equal. Never use a third hue; never use purple/violet blends outside the two stops.
+The two ink-bearing stops of the mark (swirl ink → wordmark teal) meet on the
+same **diagonal** as before; this is still the one recurring graphic device:
+hero backgrounds, section dividers, button hovers, image masks. **Copper is
+the sanctioned third hue — accents only** (eyebrows, links, small marks),
+the same privilege WhatsApp green holds; never a large copper plane, never a
+copper gradient stop.
 
 ### 3.4 Semantic (feedback only)
 
@@ -82,7 +104,9 @@ The two brand planes meet on a **diagonal**, exactly like the "M" monogram and t
 
 ## 4. Typography — Lama Sans
 
-Supplied in `font.txt`; it is the real Baianat "Lama Sans" (weights 100–900, **Arabic + Latin in one family**), self-hosted from `assets/fonts/`.
+Unchanged by the rebrand: the real Baianat "Lama Sans" (weights 100–900,
+**Arabic + Latin in one family**), self-hosted from `assets/fonts/` and
+`app/public/fonts/`.
 
 ```css
 @font-face { font-family: "Lama Sans"; src: url("assets/fonts/LamaSans-Light.woff")   format("woff"); font-weight: 300; font-display: swap; }
@@ -100,7 +124,7 @@ Fallback stack: `"Lama Sans", "Segoe UI", system-ui, -apple-system, sans-serif`.
 - **Arabic is the default language** (`<html lang="ar" dir="rtl">`). Latin is a secondary toggle, never the fallback.
 - Display headings use **weight 300–500** — clinical, calm, expensive. Weight 700–800 is reserved for numbers, badges and short labels.
 - Arabic runs looser than Latin: +0.55 line-height on display sizes, `letter-spacing: 0`, no italics anywhere.
-- Eyebrows/labels: 12–13px, `letter-spacing: .18em`, uppercase for Latin, weight 600, teal.
+- Eyebrows/labels: 12–13px, `letter-spacing: .18em`, uppercase for Latin, weight 600, copper.
 - Numbers use Latin digits in both languages (`٠١` only for decorative step counters in Arabic).
 - Bold inside a heading is written with `<strong>`, not a colour change.
 
@@ -113,7 +137,7 @@ Fallback stack: `"Lama Sans", "Segoe UI", system-ui, -apple-system, sans-serif`.
 | Lead paragraph | `clamp(17px, 1.35vw, 21px)` | 300 | line-height 1.75 |
 | Body | `16–17px` | 400 | line-height 1.8 |
 | Small / meta | `13–14px` | 400 | `--muted` |
-| Eyebrow | `13px` | 600 | `.18em` tracking, teal |
+| Eyebrow | `13px` | 600 | `.18em` tracking, copper |
 
 ---
 
@@ -121,15 +145,19 @@ Fallback stack: `"Lama Sans", "Segoe UI", system-ui, -apple-system, sans-serif`.
 
 | Asset | Use |
 |---|---|
-| `assets/logo.png` | Full wordmark on light surfaces (nav on scroll, footer, invoices) |
-| `assets/logo-white.png` | Full wordmark on `--blue`, `--teal`, or photography |
-| `assets/logo-mark.png` / `logo-mark-white.png` | Monogram only: favicon, watermarks, avatar fallback, section marks |
-| `assets/logo-mark-{64,180,512}.png` | Pre-sized favicon / app-icon / social-avatar exports |
+| `pca-logo-full.png` | Full lockup on light surfaces (nav on scroll, footer, invoices) |
+| `pca-logo-white.png` | Full lockup on dark ink/primary planes or photography |
+| `pca-logo-mark.png` / `pca-logo-mark-white.png` | Mark only: watermarks, section marks, avatar fallback |
+| `pca-logo-mark-{64,180,512}.png` | Pre-sized favicon / app-icon / social-avatar exports |
 
-**Clear space:** ≥ 0.5× the height of the "M" on every side.
-**Minimum size:** wordmark 120px wide; monogram 24px.
-**Backgrounds:** light → `logo.png`; dark blue/teal/photos → `logo-white.png`. Never place the blue wordmark on a mid-tone blue or on the diagonal gradient.
-**Don'ts:** no recolouring, no outline, no drop shadow, no stretching, no rotating, no placing over busy areas of a photo, no re-typing "Dr. Mohsen Mamdouh" as a substitute for the wordmark.
+**Clear space:** ≥ 0.5× the height of the wave mark on every side.
+**Minimum size:** full lockup 120px wide; mark 24px. The wordmark carries a
+serif display face — never re-typeset "PCA Clinic" as live text in its place.
+**Backgrounds:** light → `pca-logo-full.png` (on white or `--mist`); dark
+ink/primary/photos → `pca-logo-white.png`. Never place the coloured lockup on
+the diagonal gradient or on mid-tone planes of either brand colour.
+**Don'ts:** no recolouring, no outline, no drop shadow, no stretching, no
+rotating, no placing over busy areas of a photo.
 
 ---
 
@@ -138,7 +166,7 @@ Fallback stack: `"Lama Sans", "Segoe UI", system-ui, -apple-system, sans-serif`.
 - **Phosphor Icons** (CDN, `regular` + `light` weights) — thin, neutral, clinical.
 - 1.25–1.5px optical stroke weight; size 18–22px inline, 26–32px in feature cards.
 - Icons are always paired with a text label; never the only carrier of meaning.
-- Brand-specific shapes: monogram "M", diagonal planes, hairline grids. No emoji in production UI.
+- Brand-specific shapes: the wave mark, diagonal planes, hairline grids. No emoji in production UI.
 
 ---
 
@@ -157,16 +185,25 @@ Fallback stack: `"Lama Sans", "Segoe UI", system-ui, -apple-system, sans-serif`.
 
 ## 8. Photography
 
-Supplied imagery is social-media artwork with baked-in Arabic copy and the logo, so it is cropped to the subject before use.
+Dr. Mohsen's supplied imagery is social-media artwork with baked-in Arabic
+copy and the old logo, so it is cropped to the subject before use. Dr.
+Ahmad's portraits arrive clean.
 
-| Asset | Crop | Use |
-|---|---|---|
-| `dr-mohsen-suit.jpg` | 540×1350 (right of the baked text) | Hero portrait, "about the doctor", booking panel |
-| `dr-mohsen-scrubs.jpg` | 350×1350 (right of the baked text) | Anaesthesia-team section |
-| `dr-mohsen-avatar.jpg` | 560×560 head crop | Signature block, doctor cards, testimonial avatars |
-| `dr-mohsen-poster.jpg` | full poster | Social/marketing previews only |
+| Asset | Use |
+|---|---|
+| `dr-mohsen-suit.png` | Leader hero, "about the doctor", booking panel |
+| `dr-mohsen-scrubs.png` | Anaesthesia-team section |
+| `dr-mohsen-avatar.jpg` | Signature block, doctor cards, testimonial avatars |
+| `dr-ahmed-mleha-coat.webp` | White-coat portrait — doctor card, team grid, About |
+| `dr-ahmed-mleha-suit.webp` | Suit portrait — profile page, section spreads |
+| `dr-ahmed-mleha-coat.webp` on a brand plane | banner portraits |
 
-Rules: always crop to the subject, never stretch, `object-fit: cover` with a 45–60% vertical focal point so the face stays in frame. Keep brand planes behind portraits so the blue/teal of the artwork blends into the page. Photography is never used to imply a price, a result or a guarantee.
+Rules: always crop to the subject, never stretch, `object-fit: cover` with a
+45–60% vertical focal point so the face stays in frame. Keep brand planes
+behind portraits so their colours blend into the page. Patient-family photos
+before an approved, consented case-study workflow are **never** substituted
+for clinical photography. Photography is never used to imply a price, a
+result or a guarantee. (And no identifiable child photo anywhere — see §10.)
 
 ---
 
@@ -196,9 +233,12 @@ Rules: always crop to the subject, never stretch, `object-fit: cover` with a 45�
 
 ## 10. Content & data status
 
-- **Real:** brand, palette, typography, logo, photography, tagline, specialty list, service descriptions, safety messaging, "no prices published" policy.
-- **Placeholder (must be confirmed before launch):** doctor names and counts, clinic addresses and opening hours, phone/WhatsApp numbers, social handles, e-mail, exact appointment slots, review/testimonial text, statistical claims.
+- **Real:** PCA brand, palette, typography, logo, both doctors' photography, the service catalogue structure, safety messaging, "no prices published" policy.
+- **Dr. Ahmad Meliha's profile data** (credentials, positions, skills, memberships, clinic catalogue, FAQ clusters) comes from drahmadmeleha.com and is rewritten into the clinic voice before publishing — the site never links back-to-back to his own site's copy as verbatim text, to keep the SEO surface clean.
+- **Pending client confirmation:** the Arabic mirror of "Care Beyond Relief", Dr. Mohsen's published bio/credentials copy, phone/WhatsApp/email values, social handles, opening hours, and any review/testimonial text (unchanged rule: none publishes unapproved).
+- **Placeholder (must be confirmed before launch):** the third doctor's identity, clinic addresses and opening hours, exact appointment slots, statistical claims.
 - All placeholder blocks are flagged in the UI with a light "بيانات توضيحية" note so the client can review copy and structure without mistaking it for final data.
+- **No prices anywhere**, and **no identifiable patient photo/metadata** may enter a case study: each case publishes only anonymized clinical narrative until documented parental consent exists.
 
 ---
 
