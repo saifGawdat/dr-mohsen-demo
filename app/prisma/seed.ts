@@ -7,6 +7,7 @@
  */
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { seedArticles } from "./seed-articles";
 
 const prisma = new PrismaClient();
 
@@ -465,7 +466,9 @@ async function main() {
   }
   await prisma.faq.deleteMany({ where: { questionAr: { notIn: FAQS.map((f) => f.questionAr) } } });
 
-  console.log("Seed complete: admin, settings, specialties, doctors, procedures, FAQs.");
+  await seedArticles();
+
+  console.log("Seed complete: admin, settings, specialties, doctors, procedures, FAQs, articles.");
 }
 
 main()
