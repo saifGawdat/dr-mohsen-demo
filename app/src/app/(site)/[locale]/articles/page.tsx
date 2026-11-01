@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -103,7 +104,7 @@ export default async function ArticlesPage({ params }: Props) {
 
         <div className="m-art__grid" data-stagger>
           {posts.map((post) => (
-            <a
+            <Link
               className="m-art__card"
               key={post.id}
               href={`/${locale}/articles/${post.slug}`}
@@ -118,17 +119,10 @@ export default async function ArticlesPage({ params }: Props) {
                 <Bi en={post.excerptEn ?? ""} ar={post.excerptAr ?? ""} />
               </p>
               <span className="m-art__meta">
-                {(() => {
-                  const minutes = readingMinutes(locale === "ar" ? post.bodyAr ?? "" : post.bodyEn ?? "");
-                  return (
-                    <span>
-                      {minuteLabel(locale, minutes)}
-                    </span>
-                  );
-                })()}
+                <span>{minuteLabel(locale, readingMinutes(locale === "ar" ? post.bodyAr ?? "" : post.bodyEn ?? ""))}</span>
                 <i className="ph-light ph-arrow-right flip" aria-hidden="true" />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
