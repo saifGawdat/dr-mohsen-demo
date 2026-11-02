@@ -9,6 +9,10 @@ const intlMiddleware = createIntlMiddleware({
   locales,
   defaultLocale,
   localePrefix: "always",
+  // Arabic is the landing locale for every first visit: without this the
+  // middleware honours the browser's accept-language header and would send
+  // an English browser to /en instead of the Arabic storefront.
+  localeDetection: false,
 });
 
 /**
