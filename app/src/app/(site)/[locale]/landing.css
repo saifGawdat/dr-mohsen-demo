@@ -803,10 +803,20 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 /* The clinic introduces the practice before its lead and consultant portraits. */
 .m-site .m-clinic-hero { background: var(--brand-diagonal); }
 .m-site .m-clinic-hero::before { background: var(--blue-deep); }
+/* A copper hairline rides the plane's clipped top edge, tying the ribbon accent in. */
+.m-site .m-clinic-hero::before {
+  background: var(--blue-deep);
+  filter: drop-shadow(0 -1px 0 rgba(194, 137, 95, .35));
+}
 .m-site .m-clinic-hero .m-hero__inner { min-height: clamp(600px, 80svh, 800px); }
-.m-site .m-clinic-hero__brand { display: grid; place-items: center; gap: 24px; padding: 48px; border: 1px solid rgba(255,255,255,.2); border-radius: 20px; }
+.m-site .m-clinic-hero__brand { display: grid; place-items: center; gap: 24px; padding: 48px; border: 1px solid rgba(255,255,255,.2); border-radius: 20px;
+  /* The 118° split plays inside the card as a two-tone veil with a sky seam. */
+  background:
+    linear-gradient(118deg, transparent calc(55% - 1px), rgba(133,189,214,.4) 0 calc(55% + 1px), transparent 0),
+    linear-gradient(118deg, rgba(255,255,255,.055) 55%, rgba(255,255,255,.015) 55%);
+}
 .m-site .m-clinic-hero__brand img { width: min(100%, 380px); height: auto; }
-.m-site .m-clinic-hero__brand p { color: rgba(255,255,255,.8); text-align: center; }
+.m-site .m-clinic-hero__brand p { color: rgba(255,255,255,.8); text-align: center; border-top: 1px solid rgba(194,137,95,.4); padding-top: 18px; width: 100%; }
 .m-site .m-lead { padding-bottom: 0; }
 .m-site .m-lead .m-docfeat { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
 .m-site .m-lead .m-docfeat__body h2 { color: white; }

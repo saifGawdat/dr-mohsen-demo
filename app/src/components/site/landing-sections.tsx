@@ -15,9 +15,12 @@ const WA_TEXT: Record<Locale, string> = {
 
 export function Hero() {
   return <section className="m-hero m-clinic-hero">
+    {/* Ghosted mark behind the brand card — the same watermark device the hero frame uses. */}
+    {/* eslint-disable-next-line @next/next/no-img-element -- brand PNGs are pre-optimized in public/brand. */}
+    <img aria-hidden className="m-hero__mark" src="/brand/pca-logo-mark-white.png" alt="" />
     <div className="wrap m-hero__inner">
       <div className="m-hero__text">
-        <span className="eyebrow"><Bi en="Welcome to PCA Clinic" ar="أهلاً بيك في عيادة PCA" /></span>
+        <span className="eyebrow m-hero__eyebrow"><Bi en="Welcome to PCA Clinic" ar="أهلاً بيك في عيادة PCA" /></span>
         <h1><Bi en="Care that starts with understanding you." ar="رعاية بتبدأ بفهم حالتك." /></h1>
         <p className="m-hero__lead"><Bi en="Consultant doctors, pain management and an anaesthesia team. Get to know your doctor and request an appointment with PCA Clinic." ar="دكاترة استشاريين، وعلاج ألم، وفريق تخدير. اعرف دكتورك واطلب ميعادك مع عيادة PCA." /></p>
         <div className="m-hero__cta">
