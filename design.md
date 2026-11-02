@@ -181,6 +181,7 @@ rotating, no placing over busy areas of a photo.
 - **Borders > shadows.** One soft elevation only: `0 18px 45px -28px rgba(32,67,142,.45)`.
 - **Diagonal device:** `clip-path: polygon(...)` planes and `--brand-diagonal` fills; used for section breaks and image masks. (The two-door split deliberately uses a straight 50/50 seam instead.)
 - **Motion:** the app and its HTML mirror use CSS hero entrances, intersection-based reveals and a manually controlled doctor slider. All motion collapses under `prefers-reduced-motion: reduce`.
+- **Static preview resilience:** prototype sections and photos remain visible until reveal observers attach successfully. A script failure must not leave content hidden.
 - **Focus:** `:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px }`.
 
 ---
