@@ -76,7 +76,7 @@ const DOCTORS: {
     hospitalAr: "مجمع السويس الطبي",
     specialty: "pediatric-surgery",
     experienceYears: 10,
-    photoUrl: "/brand/dr-ahmed-mleha-coat.webp",
+    photoUrl: "/brand/dr-ahmed-mleha-suit.webp",
     order: 1,
   },
   { slug: "ahmed-salem", nameEn: "Dr. Ahmed Salem", nameAr: "د. أحمد سالم", titleEn: "Oral & maxillofacial surgery", titleAr: "جراحة الفم والوجه والفكين", specialty: "dental", cityEn: "Surgical centre, Mansoura", cityAr: "مركز جراحي، المنصورة", experienceYears: 10, active: false, order: 2 },
