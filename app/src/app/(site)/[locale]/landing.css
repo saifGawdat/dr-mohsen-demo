@@ -826,7 +826,8 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 .m-site .m-profile-hero h1 { color: white; font-size: clamp(34px, 4.5vw, 64px); font-weight: 400; line-height: 1.4; margin: 20px 0; }
 .m-site .m-profile-hero .link { color: white; }
 .m-site .m-profile-hero .eyebrow { margin-top: 32px; }
-.m-site .m-profile-hero__portrait { width: 100%; max-height: 520px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; border-radius: 20px; }
+/* The doctor's photo is shown as supplied — no forced ratio, so it is never cropped. */
+.m-site .m-profile-hero__portrait { width: 100%; height: auto; object-fit: contain; border-radius: 20px; }
 .m-site .m-profile-hero__mark { object-fit: contain; padding: 48px; }
 .m-site .m-profile-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 32px; }
 .m-site .m-profile-nav { display: flex; flex-wrap: wrap; gap: 24px; padding-block: 28px; border-bottom: 1px solid var(--line); }
@@ -855,7 +856,6 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   .m-site .m-doctor-card { flex-basis: 88%; }
   .m-site .m-profile-hero { padding-top: 130px; }
   .m-site .m-profile-hero__grid { gap: 32px; }
-  .m-site .m-profile-hero__portrait { max-height: 420px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .m-site .m-doctor-slider { scroll-behavior: auto; }
