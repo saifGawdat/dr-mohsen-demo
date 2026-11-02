@@ -50,6 +50,8 @@ export default async function DoctorPage({ params }: Props) {
   return <>
     <main id="top" className="m-doctor-profile">
       <section className="m-profile-hero sec">
+        {/* Decorative hero background: the clinic mark, ghosted behind the copy. */}
+        <img aria-hidden className="m-profile-hero__glyph" src="/brand/pca-logo-mark.png" alt="" />
         <div className="wrap m-profile-hero__grid">
           <div>
             <Link href="/#doctors" className="link"><Bi en="All doctors" ar="كل الدكاترة" /></Link>
@@ -58,11 +60,11 @@ export default async function DoctorPage({ params }: Props) {
             <p className="lead"><Bi en={doctor.titleEn ?? ""} ar={doctor.titleAr ?? ""} /></p>
             {(doctor.hospitalEn || doctor.hospitalAr) && <p><Bi en={doctor.hospitalEn ?? ""} ar={doctor.hospitalAr ?? ""} /></p>}
             <div className="m-profile-actions">
-              <a href="#booking" className="btn btn--light"><Bi en="Request an appointment" ar="اطلب ميعاد" /></a>
+              <a href="#booking" className="btn"><Bi en="Request an appointment" ar="اطلب ميعاد" /></a>
               {doctor.phone && <a href={`tel:${phoneDigits(doctor.phone)}`} className="link"><Bi en="Call the doctor" ar="اتصل بالدكتور" /> <span dir="ltr">{doctor.phone}</span></a>}
             </div>
           </div>
-          {doctor.photoUrl ? <img className="m-profile-hero__portrait" src={doctor.photoUrl} alt={name} /> : <img className="m-profile-hero__portrait m-profile-hero__mark" src="/brand/pca-logo-mark-white.png" alt="PCA Clinic" />}
+          {doctor.photoUrl ? <img className="m-profile-hero__portrait" src={doctor.photoUrl} alt={name} /> : <img className="m-profile-hero__portrait m-profile-hero__mark" src="/brand/pca-logo-mark.png" alt="PCA Clinic" />}
         </div>
       </section>
       <nav className="m-profile-nav wrap" aria-label={locale === "ar" ? "أقسام ملف الدكتور" : "Doctor profile sections"}>
