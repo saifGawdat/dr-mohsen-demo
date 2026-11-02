@@ -8,6 +8,8 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { seedArticles } from "./seed-articles";
+import doctorSeedContent from "./seed-content/doctors.json";
+import { seedProduction } from "../scripts/seed-production.mjs";
 
 const prisma = new PrismaClient();
 
@@ -438,11 +440,14 @@ async function main() {
     });
   }
 
-  const doctorSlugs = DOCTORS.map((d) => d.slug);
+  const doctorSlugs = [...DOCTORS.map((d) => d.slug), ...doctorSeedContent.map(({ doctor }) => doctor.slug)];
   await prisma.doctor.deleteMany({ where: { slug: { notIn: doctorSlugs } } });
 
   const specialtySlugs = SPECIALTIES.map((s) => s.slug);
   await prisma.specialty.deleteMany({ where: { slug: { notIn: specialtySlugs } } });
+
+  // Share approved additions with production instead of duplicating profiles.
+  await seedProduction(prisma, doctorSeedContent);
 
   // Procedures (natural key: slug).
   for (const p of PROCEDURES) {

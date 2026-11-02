@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "specialty": {
+      "slug": "ortho",
+      "nameAr": "عظام",
+      "nameEn": "Orthopaedics"
+    },
+    "doctor": {
+      "slug": "ahmed-ibrahim-helmy",
+      "nameAr": "د. أحمد إبراهيم حلمي",
+      "nameEn": "Dr. Ahmed Ibrahim Helmy",
+      "titleAr": "عظام — تخصص دقيق جراحة اليد",
+      "titleEn": "Orthopaedics — subspecialty in hand surgery",
+      "photoUrl": "/brand/dr-ahmed-ibrahim-helmy-suit.webp",
+      "order": 2,
+      "active": true,
+      "featured": false,
+      "profile": {
+        "images": [
+          "/brand/dr-ahmed-ibrahim-helmy-conference.webp",
+          "/brand/dr-ahmed-ibrahim-helmy-conference-2.webp"
+        ]
+      }
+    }
+  }
+]
