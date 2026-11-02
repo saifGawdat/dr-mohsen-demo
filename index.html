@@ -389,6 +389,21 @@ html[lang="ar"] .m-compare__col h3 { text-transform: none; letter-spacing: 0; fo
 .m-docrow__meta { font-size: 13.5px; color: var(--muted); }
 .m-docrow__meta b { display: block; font-weight: 500; color: var(--blue); }
 .m-docrow__foot { justify-self: end; }
+.m-docprofile { border-bottom: 1px solid var(--line); }
+.m-docprofile > .m-docrow { border-bottom: 0; }
+.m-docprofile__details { padding: 0 6px 22px; }
+.m-docprofile__details > summary { cursor: pointer; color: var(--blue); font-size: 15px; font-weight: 500; width: fit-content; padding-block: 8px; }
+.m-docprofile__details[open] > summary { margin-bottom: 20px; }
+.m-docprofile__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: center; padding-bottom: 24px; }
+.m-docprofile__portrait { width: 100%; max-height: 580px; object-fit: cover; object-position: 50% 20%; border-radius: 20px; }
+.m-docprofile__copy h3 { margin-block: 12px 18px; font-size: clamp(24px, 3vw, 36px); }
+.m-docprofile__copy p { color: var(--muted); margin-bottom: 24px; }
+.m-docprofile__gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.m-docprofile__gallery img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 20px; }
+.m-docprofile__gallery figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; }
+@media (max-width: 640px) {
+  .m-docprofile__body, .m-docprofile__gallery { grid-template-columns: 1fr; }
+}
 @media (max-width: 900px) {
   .m-docrow { grid-template-columns: 56px 1fr; row-gap: 10px; }
   .m-docrow__meta, .m-docrow__foot { grid-column: 2; }
@@ -1556,6 +1571,7 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
       <button class="chip" type="button" data-filter="aesthetic" aria-pressed="false"><span class="en">Aesthetics</span><span class="ar">تجميل</span></button>
       <button class="chip" type="button" data-filter="ent" aria-pressed="false"><span class="en">ENT</span><span class="ar">أنف وأذن</span></button>
       <button class="chip" type="button" data-filter="general" aria-pressed="false"><span class="en">General surgery</span><span class="ar">جراحة عامة</span></button>
+      <button class="chip" type="button" data-filter="ortho" aria-pressed="false"><span class="en">Orthopaedics</span><span class="ar">عظام</span></button>
       <button class="chip" type="button" data-filter="gastro" aria-pressed="false"><span class="en">Endoscopy</span><span class="ar">مناظير</span></button>
       <button class="chip" type="button" data-filter="peds" aria-pressed="false"><span class="en">Paediatrics</span><span class="ar">أطفال</span></button>
       <button class="chip" type="button" data-filter="pain" aria-pressed="false"><span class="en">Pain clinic</span><span class="ar">علاج الألم</span></button>
@@ -1573,6 +1589,37 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
             <a class="link" href="#team" style="color:#fff"><span class="en">The anaesthesia team</span><span class="ar">فريق التخدير</span></a>
           </div>
         </div>
+      </article>
+
+      <article class="m-docprofile" data-cat="ortho" id="ahmed-ibrahim-helmy">
+        <div class="m-docrow">
+          <span class="m-docrow__ava"><img src="assets/dr-ahmed-ibrahim-helmy-suit.webp" alt="د. أحمد إبراهيم حلمي / Dr. Ahmed Ibrahim Helmy" width="56" height="56" loading="lazy"></span>
+          <span class="m-docrow__id"><b><span class="en">Dr. Ahmed Ibrahim Helmy</span><span class="ar">د. أحمد إبراهيم حلمي</span></b><span><span class="en">Orthopaedics — subspecialty in hand surgery</span><span class="ar">عظام — تخصص دقيق جراحة اليد</span></span></span>
+          <span class="m-docrow__meta"><b><span class="en">Hand surgery</span><span class="ar">جراحة اليد</span></b><span><span class="en">Contact the clinic to arrange a visit</span><span class="ar">كلم العيادة لترتيب الكشف</span></span></span>
+          <span class="m-docrow__foot"><button class="link" type="button" data-book-doc data-doc-spec="ortho" data-doc-id="ahmed-ibrahim-helmy"><span class="en">Book online</span><span class="ar">احجز أونلاين</span><i class="ph-light ph-arrow-right flip"></i></button></span>
+        </div>
+        <details class="m-docprofile__details">
+          <summary><span class="en">View profile &amp; photos</span><span class="ar">شوف ملف الدكتور وصوره</span></summary>
+          <div class="m-docprofile__body">
+            <img class="m-docprofile__portrait" src="assets/dr-ahmed-ibrahim-helmy-suit.webp" alt="د. أحمد إبراهيم حلمي / Dr. Ahmed Ibrahim Helmy" width="1016" height="1015" loading="lazy">
+            <div class="m-docprofile__copy">
+              <span class="eyebrow"><span class="en">Orthopaedics</span><span class="ar">عظام</span></span>
+              <h3><span class="en">Dr. Ahmed Ibrahim Helmy</span><span class="ar">د. أحمد إبراهيم حلمي</span></h3>
+              <p><span class="en">Orthopaedics with a subspecialty in hand surgery. Contact the clinic for more information and to arrange an appointment.</span><span class="ar">تخصص عظام، والتخصص الدقيق جراحة اليد. كلم العيادة لو محتاج معلومات أكتر أو لترتيب ميعاد.</span></p>
+              <button class="btn btn--sm" type="button" data-book-doc data-doc-spec="ortho" data-doc-id="ahmed-ibrahim-helmy"><span class="en">Request an appointment</span><span class="ar">اطلب ميعاد</span><i class="ph-light ph-arrow-right flip"></i></button>
+            </div>
+          </div>
+          <div class="m-docprofile__gallery">
+            <figure>
+              <img src="assets/dr-ahmed-ibrahim-helmy-conference.webp" alt="د. أحمد إبراهيم حلمي في مؤتمر طبي / Dr. Ahmed Ibrahim Helmy at a medical conference" width="900" height="1200" loading="lazy">
+              <figcaption><span class="en">Dr. Ahmed Ibrahim Helmy at a medical conference</span><span class="ar">د. أحمد إبراهيم حلمي في مؤتمر طبي</span></figcaption>
+            </figure>
+            <figure>
+              <img src="assets/dr-ahmed-ibrahim-helmy-conference-2.webp" alt="د. أحمد إبراهيم حلمي أثناء عرض في مؤتمر طبي / Dr. Ahmed Ibrahim Helmy presenting at a medical conference" width="800" height="1200" loading="lazy">
+              <figcaption><span class="en">A presentation at a medical conference</span><span class="ar">عرض أثناء مؤتمر طبي</span></figcaption>
+            </figure>
+          </div>
+        </details>
       </article>
 
       <article class="m-docrow" data-cat="dental">
@@ -1661,7 +1708,7 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
     </div>
 
     <p class="m-docs__empty" id="docs-empty"><span class="en">No doctors listed in this specialty yet — message us and we will arrange it.</span><span class="ar">لسه مفيش أطباء مسجلين في التخصص ده — كلمنا ونرتبها.</span></p>
-    <p class="note m-flag" style="margin-top:22px"><i class="ph-light ph-info"></i><span class="en">Sample data for this review round: doctor names, cities and availability are placeholders and will be replaced with the real team.</span><span class="ar">بيانات توضيحية للمراجعة: أسماء الأطباء والمدن والمواعيد مبدئية، وبينتحدّث ببيانات الفريق الفعلي.</span></p>
+    <p class="note m-flag" style="margin-top:22px"><i class="ph-light ph-info"></i><span class="en">Dr. Ahmed Ibrahim Helmy’s name, specialty and photos were supplied for this review. The other directory names, cities and availability remain sample data.</span><span class="ar">اسم د. أحمد إبراهيم حلمي وتخصصه وصوره مقدّمة للمراجعة. باقي بيانات الدليل من أسماء ومدن ومواعيد بيانات توضيحية.</span></p>
   </div>
 </section>
 <!-- ============================= PROCEDURES ============================= -->
@@ -2012,6 +2059,7 @@ html[dir="rtl"] .m-step.is-on { background: linear-gradient(-90deg, var(--blue-0
               <span class="m-sub__label"><span class="en">Doctor — optional</span><span class="ar">الطبيب — اختياري</span></span>
               <div class="m-chips">
                 <button class="m-chip" type="button" data-pick="doctor" data-value="any" aria-pressed="false"><span class="en">Any available doctor</span><span class="ar">أي طبيب متاح</span></button>
+                <button class="m-chip" type="button" data-pick="doctor" data-value="ahmed-ibrahim-helmy" data-doc-spec="ortho" aria-pressed="false"><span class="en">Dr. Ahmed Ibrahim Helmy</span><span class="ar">د. أحمد إبراهيم حلمي</span></button>
                 <button class="m-chip" type="button" data-pick="doctor" data-value="ahmed" data-doc-spec="dental" aria-pressed="false"><span class="en">Dr. Ahmed Salem</span><span class="ar">د. أحمد سالم</span></button>
                 <button class="m-chip" type="button" data-pick="doctor" data-value="heba" data-doc-spec="dental" aria-pressed="false"><span class="en">Dr. Heba Mansour</span><span class="ar">د. هبة منصور</span></button>
                 <button class="m-chip" type="button" data-pick="doctor" data-value="karim" data-doc-spec="dental" aria-pressed="false"><span class="en">Dr. Karim Fouad</span><span class="ar">د. كريم فؤاد</span></button>
