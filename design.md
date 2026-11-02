@@ -3,8 +3,8 @@
 Brand and UI foundation for the **PCA Clinic — Pain Comfort Assessment Clinic**
 digital presence (الرئيس **د. محسن ممدوح** — pain management — plus a team of
 consultant doctors joining under the clinic: currently **د. أحمد سعيد مليحه**,
-consultant paediatric, neonatal & laparoscopic surgery, and a reserved slot for
-one more).
+consultant paediatric, neonatal & laparoscopic surgery, and **د. أحمد إبراهيم
+حلمي**, orthopaedics with a subspecialty in hand surgery).
 This file is the single source of truth for colour, type, logo, imagery,
 components and page structure. Everything in `index.html` and the Next
 storefront follows it.
@@ -31,6 +31,8 @@ storefront follows it.
 | `clinic-logo.jpeg` | PCA lockup on a cream card (wave mark + serif wordmark + tagline) | `app/public/brand/pca-logo-{full,mark,white,mark-white}*.png`, keys out via `app/scripts/process-brand-assets.mjs` |
 | `ahmed-mleha-png.png` | Dr. Ahmad Meliha, white-coat portrait, transparent | `app/public/brand/dr-ahmed-mleha-coat.webp` |
 | `ahmed-mleha2025-09-20T14-10-36 copy.jpg.jpeg` | Dr. Ahmad Meliha, suit portrait | `app/public/brand/dr-ahmed-mleha-suit.webp` |
+| `ahmed-ibrahim-helmy-suit.jpg` | Dr. Ahmed Ibrahim Helmy, portrait | `app/public/brand/dr-ahmed-ibrahim-helmy-suit.webp` |
+| `ahmed-ibrahim-helmy.jpeg` / `ahmed-ibrahim-helmy2.jpeg` | Supplied conference photos | `app/public/brand/dr-ahmed-ibrahim-helmy-conference*.webp` |
 | `dr.mohsen-mamdouh-logo.png` | 1080×1080 transparent Dr. Mohsen wordmark (old brand) | kept for reference; no longer shipped in the Next app |
 | `1.jpg` / `5.jpg` | 1080×1350 social posters, scrubs / suit | `app/public/brand/dr-mohsen-*.jpg|png` — Dr. Mohsen's portraits remain in use |
 | `color-palette.txt` / `font.txt` | old palette note; Lama Sans | palette superseded by §3; font unchanged |
@@ -236,7 +238,8 @@ result or a guarantee. (And no identifiable child photo anywhere — see §10.)
 - **Real:** PCA brand, palette, typography, logo, both doctors' photography, the service catalogue structure, safety messaging, "no prices published" policy.
 - **Dr. Ahmad Meliha's profile data** (credentials, positions, skills, memberships, clinic catalogue, FAQ clusters) comes from drahmadmeleha.com and is rewritten into the clinic voice before publishing — the site never links back-to-back to his own site's copy as verbatim text, to keep the SEO surface clean.
 - **Pending client confirmation:** the Arabic mirror of "Care Beyond Relief", Dr. Mohsen's published bio/credentials copy, phone/WhatsApp/email values, social handles, opening hours, and any review/testimonial text (unchanged rule: none publishes unapproved).
-- **Placeholder (must be confirmed before launch):** the third doctor's identity, clinic addresses and opening hours, exact appointment slots, statistical claims.
+- **Dr. Ahmed Ibrahim Helmy:** name follows the supplied filenames; orthopaedics and the hand-surgery subspecialty were supplied by the client. Only the portrait and conference photos publish. The supplied Facebook share link could not be fetched; no credentials, affiliation, clinic address, phone or experience claims were imported. The operation photo remains unpublished pending patient consent. Seed data lives in `app/prisma/seed-content/doctors.json`.
+- **Placeholder (must be confirmed before launch):** clinic addresses and opening hours, exact appointment slots, statistical claims.
 - All placeholder blocks are flagged in the UI with a light "بيانات توضيحية" note so the client can review copy and structure without mistaking it for final data.
 - **No prices anywhere**, and **no identifiable patient photo/metadata** may enter a case study: each case publishes only anonymized clinical narrative until documented parental consent exists.
 
