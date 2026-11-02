@@ -908,6 +908,13 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body { margin: 0; }
 .m-site .m-clinic-hero { height: 100%; }
+
+/* Content stays visible until reveal observers are successfully attached. */
+.m-site:not([data-reveals-ready]) [data-fade],
+.m-site:not([data-reveals-ready]) [data-stagger] > * {
+  opacity: 1;
+  transform: none;
+}
 </style></head>
 <body data-profile="true" data-title-en="Dr. Ahmed Ibrahim Helmy | PCA Clinic" data-title-ar="د. أحمد إبراهيم حلمي | عيادة PCA">
 

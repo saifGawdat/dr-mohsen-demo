@@ -64,6 +64,8 @@
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
     }, { rootMargin: "0px 0px -12% 0px", threshold: .08 });
     targets.forEach(function (t) { io.observe(t); });
+    var site = $(".m-site");
+    if (site) site.setAttribute("data-reveals-ready", "");
   }
 
   /* ---------- generic filter groups (doctors, procedures) ---------- */
@@ -131,7 +133,7 @@
       track.hidden = !visible;
       if (controls) controls.hidden = !visible;
       if (empty) empty.hidden = !!visible;
-      if (count) count.textContent = visible + " " + T("doctors", "دكاترة");
+      if (count) count.textContent = visible + " " + tr("doctors", "دكاترة");
       leadNote.hidden = value !== "pain";
       track.scrollLeft = 0;
       bounds();
@@ -572,6 +574,7 @@
 
   /* ---------- boot ---------- */
   document.addEventListener("DOMContentLoaded", function () {
+    initReveal();
     var saved = null;
     try { saved = localStorage.getItem("mm-lang"); } catch (e) {}
     $$("[data-set-lang]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.setLang); }); });
@@ -599,8 +602,6 @@
     if (team) App.teamBooking = Booking(team, { steps: 4, rows: teamRows });
 
     App.initializing = false;
-
-    initReveal();
 
     // "Book online" on a doctor card → prefill the main booking and jump to it
     $$("[data-book-doc]").forEach(function (b) {
