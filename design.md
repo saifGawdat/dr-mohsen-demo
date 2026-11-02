@@ -180,7 +180,7 @@ rotating, no placing over busy areas of a photo.
 - **Radii:** `2px` (buttons, inputs), `10px` (cards), `20px` (media frames), `999px` (pills, avatars).
 - **Borders > shadows.** One soft elevation only: `0 18px 45px -28px rgba(32,67,142,.45)`.
 - **Diagonal device:** `clip-path: polygon(...)` planes and `--brand-diagonal` fills; used for section breaks and image masks. (The two-door split deliberately uses a straight 50/50 seam instead.)
-- **Motion:** GSAP + ScrollTrigger. Fade/rise reveals (`y: 26px, 0.9s, expo.out`), staggered lists, sticky process rail, parallax on portraits only. All motion collapses under `prefers-reduced-motion: reduce`.
+- **Motion:** the app and its HTML mirror use CSS hero entrances, intersection-based reveals and a manually controlled doctor slider. All motion collapses under `prefers-reduced-motion: reduce`.
 - **Focus:** `:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px }`.
 
 ---
@@ -271,23 +271,30 @@ No patient case content is supplied by this implementation; image pairs require
 explicit admin confirmation of documented publication consent. Results vary by
 case; the gallery must never imply a guarantee or show an identifiable child.
 
-### Root prototype — retained reference layout
+### Root prototype — app-aligned review snapshot, 2026-11-02
 
-`index.html` — one page, Arabic-first with EN toggle:
+At the client's explicit request, `index.html` now mirrors the current app:
 
-1. **Nav** — logo, sections, language, "احجز أونلاين"
-2. **Hero** — tagline, two-service promise, primary + secondary CTA, trust strip
-3. **Two doors** — (A) اطلب فريق تخدير · (B) تصفح الأطباء والتخصصات — an even half-and-half split (teal | blue)
-4. **فريق التخدير** — what we cover, where we work, safety standards, how the team joins your hospital
-5. **ليه فريق كامل** — comparison for decision-makers (hospital without a dedicated team vs with Dr. Mohsen's team)
-6. **التخصصات** — a 12-row editorial index (number, name, doctor count) → clicking a row filters the directory
-7. **الأطباء** — the lead doctor as a featured panel, then a filterable hairline directory (multiple doctors per specialty) with a book CTA. Dr. Ahmed Ibrahim Helmy has an orthopaedics entry, a native expandable bilingual profile, portrait and two conference photos under `assets/`. His booking CTA preselects orthopaedics and his doctor entry; the other demonstration entries remain flagged.
-8. **العمليات** — an accordion of procedures with full detail (duration, anaesthesia type, recovery, what's included) and **no prices** + "اعرف التكلفة" contact CTA
-9. **الحجز أونلاين** — 6 steps: type → specialty/doctor (+ place or facility) → date & time → your details → upload labs & scans → review & confirm, with a live sticky summary and a WhatsApp hand-off (the anaesthesia-team request reuses the same engine as a 4-step sheet)
-10. **رحلة الحالة** — sticky numbered process (request → upload → file review → examination / anaesthetic → follow-up & pain plan)
-11. **علاج الألم** — the pain-clinic highlight band
-12. **الأسئلة الشائعة** — pricing policy, referrals, uploads, confirmation time, team cover, child sedation, rescheduling
-13. **التواصل + الفوتر** — WhatsApp, phone, coverage, social, legal
+1. **PCA navigation and clinic hero** — local PCA logos, the ink/teal/sky/copper palette, clinic introduction and doctor/team links.
+2. **Dr. Mohsen** — the lead portrait panel and profile link.
+3. **Anaesthesia team** — coverage, protocols and request sheet.
+4. **Consultant slider** — Dr. Ahmad Meliha and Dr. Ahmed Ibrahim Helmy, specialty filters, portrait cards and labelled previous/next controls. No automatic playback.
+5. **Remaining app sections** — trust strip, two doors, team comparison, specialty index, procedures, six-step booking, process, pain care, FAQ, contact and footer, in the same order as the app.
+
+The three `doctor-*.html` pages reproduce the app's profile layouts and public
+content, with local page links and doctor/specialty preselection in their demo
+booking forms. Dr. Helmy's two conference photographs appear in his gallery.
+The supplied operation photograph stays unpublished.
+
+Each page embeds the app's storefront stylesheet with local font URLs;
+`assets/prototype.js` supplies standalone interactions. All photos, PCA marks
+and Phosphor light/fill fonts live under `assets/`. Arabic remains the default
+and the language toggle switches the whole page. Open `index.html` directly
+or serve the repository root; neither Next nor a database is required.
+Forms retain the prototype's local demonstration flow and WhatsApp hand-off;
+they do not persist bookings or upload medical documents. Numeric prices
+present in the current app copy are replaced by review-first wording to
+comply with §10. `concepts.html` remains the earlier design reference.
 
 ### Deliberately not included (yet)
 
