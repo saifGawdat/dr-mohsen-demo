@@ -817,6 +817,17 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 }
 .m-site .m-clinic-hero__brand img { width: min(100%, 380px); height: auto; }
 .m-site .m-clinic-hero__brand p { color: rgba(255,255,255,.8); text-align: center; border-top: 1px solid rgba(194,137,95,.4); padding-top: 18px; width: 100%; }
+
+/* Hero entrance: each column slides in from its own screen edge while fading
+   — on the Arabic (RTL) storefront that is text from the right, brand card
+   from the left, mirrored for English so the composition stays symmetric. */
+@keyframes m-hero-in-right { from { opacity: 0; transform: translateX(42px); } }
+@keyframes m-hero-in-left { from { opacity: 0; transform: translateX(-42px); } }
+[dir="rtl"] .m-clinic-hero .m-hero__text,
+[dir="ltr"] .m-clinic-hero .m-clinic-hero__brand { animation: m-hero-in-right .8s var(--ease) .08s both; }
+[dir="ltr"] .m-clinic-hero .m-hero__text,
+[dir="rtl"] .m-clinic-hero .m-clinic-hero__brand { animation: m-hero-in-left .8s var(--ease) .26s both; }
+
 .m-site .m-lead { padding-bottom: 0; }
 .m-site .m-lead .m-docfeat { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
 .m-site .m-lead .m-docfeat__body h2 { color: white; }
