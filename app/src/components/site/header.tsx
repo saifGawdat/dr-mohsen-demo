@@ -26,19 +26,22 @@ const MENU = [
 ] as const;
 
 export function SiteHeader({ locale, logoUrl, siteName, phone, whatsapp }: Props) {
-  const [solid, setSolid] = React.useState(false);
-  const [menuOpen, setMenuOpen] = React.useState(false);
   const burgerRef = React.useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const pathname = usePathname();
+  // Only the storefront front page keeps a dark band under a transparent nav;
+  // doctor profiles and articles open on white, so the nav boots solid there.
+  const onHome = /^\/(ar|en)\/?$/.test(pathname);
+  const [solid, setSolid] = React.useState(!onHome);
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   // The nav is transparent over the hero and solid after 60px, as designed.
   React.useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 60);
+    const onScroll = () => setSolid(onHome ? window.scrollY > 60 : true);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [onHome]);
 
   // Lock the page behind the drawer and let Escape close it.
   React.useEffect(() => {
