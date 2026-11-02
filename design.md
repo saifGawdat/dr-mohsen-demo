@@ -281,7 +281,7 @@ case; the gallery must never imply a guarantee or show an identifiable child.
 4. **فريق التخدير** — what we cover, where we work, safety standards, how the team joins your hospital
 5. **ليه فريق كامل** — comparison for decision-makers (hospital without a dedicated team vs with Dr. Mohsen's team)
 6. **التخصصات** — a 12-row editorial index (number, name, doctor count) → clicking a row filters the directory
-7. **الأطباء** — the lead doctor as a featured panel, then a filterable hairline directory (multiple doctors per specialty) with a book CTA
+7. **الأطباء** — the lead doctor as a featured panel, then a filterable hairline directory (multiple doctors per specialty) with a book CTA. Dr. Ahmed Ibrahim Helmy has an orthopaedics entry, a native expandable bilingual profile, portrait and two conference photos under `assets/`. His booking CTA preselects orthopaedics and his doctor entry; the other demonstration entries remain flagged.
 8. **العمليات** — an accordion of procedures with full detail (duration, anaesthesia type, recovery, what's included) and **no prices** + "اعرف التكلفة" contact CTA
 9. **الحجز أونلاين** — 6 steps: type → specialty/doctor (+ place or facility) → date & time → your details → upload labs & scans → review & confirm, with a live sticky summary and a WhatsApp hand-off (the anaesthesia-team request reuses the same engine as a 4-step sheet)
 10. **رحلة الحالة** — sticky numbered process (request → upload → file review → examination / anaesthetic → follow-up & pain plan)
