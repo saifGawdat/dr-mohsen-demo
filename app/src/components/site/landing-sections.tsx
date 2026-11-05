@@ -14,7 +14,7 @@ const WA_TEXT: Record<Locale, string> = {
 };
 
 export function Hero() {
-  return <section className="m-hero m-clinic-hero">
+  return <section className="m-hero m-clinic-hero h-full">
     {/* Ghosted mark behind the brand card — the same watermark device the hero frame uses. */}
     {/* eslint-disable-next-line @next/next/no-img-element -- brand PNGs are pre-optimized in public/brand. */}
     <img aria-hidden className="m-hero__mark" src="/brand/pca-logo-mark-white.png" alt="" />
